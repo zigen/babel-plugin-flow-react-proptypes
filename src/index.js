@@ -29,6 +29,7 @@ export default function ({types}) {
         ClassDeclaration(path) {
           if (!matchedPropTypes) {
             $debug('at ClassDeclaration no prop TypeAlias was found');
+            return;
           }
 
           var {superClass} = path.node;
