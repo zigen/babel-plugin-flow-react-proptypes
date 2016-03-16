@@ -92,6 +92,6 @@ To save some bytes in production, you can also only enable it in development mod
     "development": {
       "plugins": ["flow-react-proptypes"]
     }
-    }
+  }
 }
 ```
