@@ -1,0 +1,9 @@
+#!/bin/bash
+
+fixtures="src/__test__/fixtures/"
+
+for input_file in $fixtures/*.input.js; do
+  output_file="$(echo "$input_file" | sed 's/\.input\./.output./')"
+  ./node_modules/.bin/babel --plugins syntax-flow,flow-react-proptypes "$input_file" > "$output_file"
+done
+
