@@ -4,7 +4,7 @@
   "description": "converts flow types to react proptypes",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./scripts/test",
     "build": "babel src/index.js --out-file lib/index.js --presets es2015,stage-1,react"
   },
   "repository": {
