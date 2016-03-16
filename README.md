@@ -1,4 +1,6 @@
-A babel plugin to generate React PropTypes definitions from Flow type declarations.
+A babel plugin to generate React PropTypes definitions from Flow type declarations. Try it out on [astexplorer][astexp]!
+
+[astexp]: http://astexplorer.net/#/YzN9Yq2vLH/4
 
 ## Example
 
