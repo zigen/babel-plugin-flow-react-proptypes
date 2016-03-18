@@ -1,5 +1,6 @@
 // var $debug = console.log.bind(console);
 var $debug = () => {};
+const PLUGIN_NAME = 'babel-plugin-flow-react-proptypes';
 
 var t;
 
@@ -88,6 +89,7 @@ function convertToPropTypes(node) {
   else if (node.type === 'AnyTypeAnnotation') resultPropType = {type: 'any'};
   else if (node.type === 'NumberTypeAnnotation') resultPropType = {type: 'number'};
   else if (node.type === 'StringTypeAnnotation') resultPropType = {type: 'string'};
+  else if (node.type === 'BooleanTypeAnnotation') resultPropType = {type: 'bool'};
   else if (node.type === 'GenericTypeAnnotation') {
     if (node.id.name === 'Array') {
       resultPropType = {type: 'arrayOf', of: convertToPropTypes(node.typeParameters.params[0])};
@@ -116,7 +118,8 @@ function convertToPropTypes(node) {
     return resultPropType;
   }
   else {
-    $debug('No match for ' + node.type);
+    console.error(PLUGIN_NAME + ': Encountered an unknown node in the type definition', node);
+    throw new Error(PLUGIN_NAME + ' processing error');
   }
 }
 
@@ -126,7 +129,7 @@ function makePropTypesAST(t, propTypeData) {
 
     var node = t.memberExpression(t.identifier('React'), t.identifier('PropTypes'))
 
-      if (method === 'any' || method === 'string' || method === 'number' || method === 'object' || method === 'array') {
+      if (method === 'any' || method === 'string' || method === 'number' || method === 'bool' || method === 'object' || method === 'array') {
         node = t.memberExpression(node, t.identifier(method));
       }
       else if (method === 'shape') {
@@ -160,9 +163,10 @@ function makePropTypesAST(t, propTypeData) {
             [t.arrayExpression(data.options.map(makePropType))]
             )
       }
-
       else {
+        console.error(PLUGIN_NAME + ': This is an internal error that should never happen. Report it immediately with the source file and babel config.', data);
         $debug('Unknown node ' + JSON.stringify(data, null, 2));
+        throw new Error(PLUGIN_NAME + ' processing error');
       }
 
     if (data.isRequired) {

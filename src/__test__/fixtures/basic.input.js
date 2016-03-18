@@ -3,6 +3,7 @@ var React = require('react');
 type FooProps = {
   an_optional_string?: string,
   a_number: number,
+  a_boolean: boolean,
   a_generic_object: object,
   array_of_strings: Array<string>,
   instance_of_Bar: Bar,
