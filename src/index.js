@@ -1,5 +1,5 @@
-// var $debug = console.log.bind(console);
 var $debug = () => {};
+//var $debug = console.error.bind(console);
 const PLUGIN_NAME = 'babel-plugin-flow-react-proptypes';
 
 var t;
@@ -14,6 +14,7 @@ export default function ({types}) {
         matchedPropTypes = null;
       },
       TypeAlias(path) {
+        $debug('TypeAlias found');
         if (!/Props$/.test(path.node.id.name)) {
           $debug(`TypeAlias ${path.node.id.name} is not a Props type`);
           return;
@@ -31,6 +32,9 @@ export default function ({types}) {
           if (!matchedPropTypes) {
             $debug('at ClassDeclaration no prop TypeAlias was found');
             return;
+          }
+          else {
+            $debug('Found ClassDeclaration for the TypeAlias');
           }
 
           var {superClass} = path.node;
@@ -62,6 +66,7 @@ export default function ({types}) {
 }
 
 function convertToPropTypes(node) {
+  $debug('convertToPropTypes', node);
   var resultPropType;
 
   if (node.type === 'ObjectTypeAnnotation' && node.properties.length === 0) {
@@ -188,9 +193,10 @@ function makePropTypesAST(t, propTypeData) {
 function makeLiteral(value) {
   if (typeof value === 'string') return t.stringLiteral(value);
   else if (typeof value === 'number') return t.numericLiteral(value)
+  else if (typeof value === 'boolean') return t.booleanLiteral(value)
   else {
-    $debug('Encountered invalid literal ' + value);
-    throw new TypeError('Invalid type supplied, see debug log');
+    $debug('Encountered invalid literal', value);
+    throw new TypeError(`Invalid type supplied, this is a bug in ${PLUGIN_NAME}, typeof is ${typeof value} with value ${value}`);
   }
 }
 
