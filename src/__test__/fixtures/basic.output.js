@@ -12,25 +12,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = require('react');
 
-type IFooProps = {
-  id?: string;
-  count: number;
-  anObject: object;
-  friends: Array<string>;
-  foo: Bar;
-  randomJunk: any;
-  sound: 'QUACK' | 'BARK' | 5;
-  numOrString: number | string;
-  user: {
-    id: string;
-    createdAt: Date;
-  };
-};
-
 var Foo = function (_React$Component) {
   _inherits(Foo, _React$Component);
 
-  function Foo<IFooProps>() {
+  function Foo() {
     _classCallCheck(this, Foo);
 
     return _possibleConstructorReturn(this, Object.getPrototypeOf(Foo).apply(this, arguments));
@@ -40,17 +25,22 @@ var Foo = function (_React$Component) {
 }(React.Component);
 
 Foo.propTypes = {
-  id: React.PropTypes.string,
-  count: React.PropTypes.number.isRequired,
-  anObject: React.PropTypes.any.isRequired,
-  friends: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-  foo: React.PropTypes.any.isRequired,
-  randomJunk: React.PropTypes.any.isRequired,
-  sound: React.PropTypes.oneOf(['QUACK', 'BARK', 5]).isRequired,
-  numOrString: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
-  user: React.PropTypes.shape({
-    id: React.PropTypes.string.isRequired,
-    createdAt: React.PropTypes.any.isRequired
+  an_optional_string: React.PropTypes.string,
+  a_number: React.PropTypes.number.isRequired,
+  a_generic_object: React.PropTypes.any.isRequired,
+  array_of_strings: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  instance_of_Bar: React.PropTypes.any.isRequired,
+  anything: React.PropTypes.any.isRequired,
+  one_of: React.PropTypes.oneOf(['QUACK', 'BARK', 5]).isRequired,
+  onw_of_type: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
+  nested_object_level_1: React.PropTypes.shape({
+    string_property_1: React.PropTypes.string.isRequired,
+    nested_object_level_2: React.PropTypes.shape({
+      nested_object_level_3: React.PropTypes.shape({
+        string_property_3: React.PropTypes.string.isRequired
+      }).isRequired,
+      string_property_2: React.PropTypes.string.isRequired
+    }).isRequired
   }).isRequired
 };
 exports.default = Foo;
