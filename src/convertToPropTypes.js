@@ -1,6 +1,6 @@
 var {$debug, PLUGIN_NAME} = require('./util');
 
-module.exports = function convertToPropTypes(node) {
+module.exports = function convertToPropTypes(node, typesToIdentifiers) {
   $debug('convertToPropTypes', node);
   var resultPropType;
 
@@ -14,7 +14,7 @@ module.exports = function convertToPropTypes(node) {
       var value = subnode.value;
 
       // recurse
-      value = convertToPropTypes(value);
+      value = convertToPropTypes(value, typesToIdentifiers);
 
       // handles id?: string
       if (value) {
@@ -32,10 +32,11 @@ module.exports = function convertToPropTypes(node) {
   else if (node.type === 'BooleanTypeAnnotation') resultPropType = {type: 'bool'};
   else if (node.type === 'GenericTypeAnnotation') {
     if (node.id.name === 'Array') {
-      resultPropType = {type: 'arrayOf', of: convertToPropTypes(node.typeParameters.params[0])};
+      resultPropType = {type: 'arrayOf', of: convertToPropTypes(node.typeParameters.params[0], typesToIdentifiers)};
     }
-    // FIXME: I'm not sure what to do here. We don't want to attempt to reference a constructor that's not
-    // in scope. One option would be to do PropTypes.shape({constructor: PropTypes.shape({name: 'Bar'})}).
+    else if (node.id && node.id.name && typesToIdentifiers[node.id.name]) {
+      resultPropType = {type: 'raw', value: typesToIdentifiers[node.id.name]};
+    }
     else {
       resultPropType = {type: 'any'};
     }
@@ -50,7 +51,7 @@ module.exports = function convertToPropTypes(node) {
     }
     // e.g. string | number
     else {
-      resultPropType = {type: 'oneOfType', options: types.map(convertToPropTypes)};
+      resultPropType = {type: 'oneOfType', options: types.map((node) => convertToPropTypes(node, typesToIdentifiers))};
     }
   }
 

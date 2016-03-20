@@ -1,14 +1,20 @@
 var {$debug, makeLiteral, PLUGIN_NAME} = require('./util');
+var t = require('babel-types');
 
 module.exports =
-function makePropTypesAST(t, propTypeData) {
+function makePropTypesAst(propTypeData) {
   var makePropType = (data) => {
     var method = data.type;
 
     var node = t.memberExpression(t.identifier('React'), t.identifier('PropTypes'));
+    var isRequired = true;
 
     if (method === 'any' || method === 'string' || method === 'number' || method === 'bool' || method === 'object' || method === 'array') {
       node = t.memberExpression(node, t.identifier(method));
+    }
+    else if (method === 'raw') {
+      node = t.identifier(data.value);
+      isRequired = false;
     }
     else if (method === 'shape') {
       var shapeObjectProperties = data.properties.map(({key, value}) => {
@@ -47,7 +53,7 @@ function makePropTypesAST(t, propTypeData) {
       throw new Error(PLUGIN_NAME + ' processing error');
     }
 
-    if (data.isRequired) {
+    if (isRequired && data.isRequired) {
       node = t.memberExpression(node, t.identifier('isRequired'));
     }
 
