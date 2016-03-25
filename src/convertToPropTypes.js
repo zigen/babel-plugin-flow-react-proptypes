@@ -26,6 +26,7 @@ module.exports = function convertToPropTypes(node, typesToIdentifiers) {
 
     resultPropType = {type: 'shape', properties: ret};
   }
+  else if (node.type === 'FunctionTypeAnnotation') resultPropType = {type: 'func'};
   else if (node.type === 'AnyTypeAnnotation') resultPropType = {type: 'any'};
   else if (node.type === 'NumberTypeAnnotation') resultPropType = {type: 'number'};
   else if (node.type === 'StringTypeAnnotation') resultPropType = {type: 'string'};

@@ -9,7 +9,7 @@ function makePropTypesAst(propTypeData) {
     var node = t.memberExpression(t.identifier('React'), t.identifier('PropTypes'));
     var isRequired = true;
 
-    if (method === 'any' || method === 'string' || method === 'number' || method === 'bool' || method === 'object' || method === 'array') {
+    if (method === 'any' || method === 'string' || method === 'number' || method === 'bool' || method === 'object' || method === 'array' || method === 'func') {
       node = t.memberExpression(node, t.identifier(method));
     }
     else if (method === 'raw') {
