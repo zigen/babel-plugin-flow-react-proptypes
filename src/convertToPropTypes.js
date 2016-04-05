@@ -4,11 +4,7 @@ module.exports = function convertToPropTypes(node, typesToIdentifiers) {
   $debug('convertToPropTypes', node);
   var resultPropType;
 
-  if (node.type === 'ObjectTypeAnnotation' && node.properties.length === 0) {
-    // FIXME: investigate why this is never hit
-    resultPropType = {type: 'object'};
-  }
-  else if (node.type === 'ObjectTypeAnnotation') {
+  if (node.type === 'ObjectTypeAnnotation') {
     var ret = node.properties.map((subnode) => {
       var key = subnode.key.name;
       var value = subnode.value;
@@ -37,6 +33,9 @@ module.exports = function convertToPropTypes(node, typesToIdentifiers) {
     }
     else if (node.id && node.id.name && typesToIdentifiers[node.id.name]) {
       resultPropType = {type: 'raw', value: typesToIdentifiers[node.id.name]};
+    }
+    else if (node.id.name === 'Object') {
+      resultPropType = {type: 'object'};
     }
     else {
       resultPropType = {type: 'any'};

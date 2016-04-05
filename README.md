@@ -12,7 +12,7 @@ var React = require('react');
 type FooProps = {
   an_optional_string?: string,
   a_number: number,
-  a_generic_object: object,
+  a_generic_object: Object,
   array_of_strings: Array<string>,
   instance_of_Bar: Bar,
   anything: any,
@@ -40,13 +40,13 @@ The output will be:
 var React = require('react');
 
 var Foo = function (_React$Component) {
-  // babel class boilerplate 
+  // babel class boilerplate
 }(React.Component)
 
 Foo.propTypes = {
   an_optional_string: React.PropTypes.string,
   a_number: React.PropTypes.number.isRequired,
-  a_generic_object: React.PropTypes.any.isRequired,
+  a_generic_object: React.PropTypes.object.isRequired,
   array_of_strings: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   instance_of_Bar: React.PropTypes.any.isRequired,
   anything: React.PropTypes.any.isRequired,
