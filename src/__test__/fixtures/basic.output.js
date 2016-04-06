@@ -28,7 +28,7 @@ Foo.propTypes = {
   an_optional_string: React.PropTypes.string,
   a_number: React.PropTypes.number.isRequired,
   a_boolean: React.PropTypes.bool.isRequired,
-  a_generic_object: React.PropTypes.any.isRequired,
+  a_generic_object: React.PropTypes.object.isRequired,
   array_of_strings: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   instance_of_Bar: React.PropTypes.any.isRequired,
   anything: React.PropTypes.any.isRequired,

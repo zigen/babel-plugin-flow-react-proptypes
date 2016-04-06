@@ -4,7 +4,7 @@ type FooProps = {
   an_optional_string?: string,
   a_number: number,
   a_boolean: boolean,
-  a_generic_object: object,
+  a_generic_object: Object,
   array_of_strings: Array<string>,
   instance_of_Bar: Bar,
   anything: any,
