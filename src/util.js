@@ -1,7 +1,7 @@
 var t = require('babel-types');
 
 var $debug = () => {};
-var $debug = console.error.bind(console);
+//var $debug = console.error.bind(console);
 exports.$debug = $debug;
 
 const PLUGIN_NAME = 'babel-plugin-flow-react-proptypes';
