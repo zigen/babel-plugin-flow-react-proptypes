@@ -68,7 +68,8 @@ export default function (babel) {
       ExportNamedDeclaration(path) {
         var {node} = path;
 
-        if (node.declaration.type !== 'TypeAlias') {
+        console.log('ExportNamedDeclaration');
+        if (!node.declaration || node.declaration.type !== 'TypeAlias') {
           return;
         }
 
