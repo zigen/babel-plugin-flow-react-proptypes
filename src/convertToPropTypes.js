@@ -27,6 +27,7 @@ module.exports = function convertToPropTypes(node, typesToIdentifiers) {
   else if (node.type === 'NumberTypeAnnotation') resultPropType = {type: 'number'};
   else if (node.type === 'StringTypeAnnotation') resultPropType = {type: 'string'};
   else if (node.type === 'BooleanTypeAnnotation') resultPropType = {type: 'bool'};
+  else if (node.type === 'VoidTypeAnnotation') resultPropType = {type: 'void'};
   else if (node.type === 'GenericTypeAnnotation') {
     if (node.id.name === 'Array') {
       resultPropType = {type: 'arrayOf', of: convertToPropTypes(node.typeParameters.params[0], typesToIdentifiers)};
