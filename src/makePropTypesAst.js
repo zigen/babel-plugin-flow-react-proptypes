@@ -1,5 +1,6 @@
 var {$debug, makeLiteral, PLUGIN_NAME} = require('./util');
 var t = require('babel-types');
+var template = require('babel-template');
 
 module.exports =
 function makePropTypesAst(propTypeData) {
@@ -47,13 +48,16 @@ function makePropTypesAst(propTypeData) {
         [t.arrayExpression(data.options.map(makePropType))]
       )
     }
+    else if (method === 'void') {
+      node = dontSetTemplate().expression;
+    }
     else {
       console.error(PLUGIN_NAME + ': This is an internal error that should never happen. Report it immediately with the source file and babel config.', data);
       $debug('Unknown node ' + JSON.stringify(data, null, 2));
       throw new Error(PLUGIN_NAME + ' processing error');
     }
 
-    if (isRequired && data.isRequired) {
+    if (isRequired && data.isRequired && method !== 'void') {
       node = t.memberExpression(node, t.identifier('isRequired'));
     }
 
@@ -68,3 +72,9 @@ function makePropTypesAst(propTypeData) {
   });
   return t.objectExpression(rootProperties);
 };
+
+var dontSetTemplate = template(`
+(props, propName, componentName) => {
+  if(props[propName] != null) return new Error(\`Invalid prop \\\`\${propName}\\\` of value \\\`\${value}\\\` passed to \\\`\${componentName\}\\\`. Expected undefined or null.\`);
+}
+`);

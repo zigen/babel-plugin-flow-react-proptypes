@@ -42,7 +42,10 @@ Foo.propTypes = {
       }).isRequired,
       string_property_2: React.PropTypes.string.isRequired
     }).isRequired
-  }).isRequired
+  }).isRequired,
+  should_error_if_provided: function should_error_if_provided(props, propName, componentName) {
+    if (props[propName] != null) return new Error('Invalid prop `' + propName + '` of value `' + value + '` passed to `' + componentName + '`. Expected undefined or null.');
+  }
 };
 exports.default = Foo;
 

@@ -18,7 +18,8 @@ type FooProps = {
       },
       string_property_2: string,
     }
-  }
+  },
+  should_error_if_provided: void
 }
 
 export default class Foo extends React.Component {
