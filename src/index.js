@@ -1,13 +1,13 @@
-var {$debug, getExportNameForType} = require('./util');
-var convertToPropTypes = require('./convertToPropTypes');
-var makePropTypesAst = require('./makePropTypesAst');
+import {$debug, getExportNameForType} from './util';
+import convertToPropTypes from './convertToPropTypes';
+import makePropTypesAst from './makePropTypesAst';
 
-var matchedPropTypes;
+let matchedPropTypes;
 
 // See ExportNamedDeclaration and ImportDeclaration
-var importedTypes = {};
-export default function (babel) {
-  var t = babel.types;
+let importedTypes = {};
+export default function flowReactPropTypes(babel) {
+  const t = babel.types;
 
   return {
     visitor: {
@@ -21,13 +21,13 @@ export default function (babel) {
           $debug(`TypeAlias ${path.node.id.name} is not a Props type`);
           return;
         }
-        var {right} = path.node;
+        const {right} = path.node;
         if (right.type !== 'ObjectTypeAnnotation') {
           $debug(`Expected ObjectTypeAnnotation but got ${right.type}`);
-          return
+          return;
         }
 
-        var propTypes = convertToPropTypes(right, importedTypes);
+        const propTypes = convertToPropTypes(right, importedTypes);
         matchedPropTypes = propTypes;
       },
       ClassDeclaration(path) {
@@ -39,26 +39,26 @@ export default function (babel) {
           $debug('Found ClassDeclaration for the TypeAlias');
         }
 
-        var {superClass} = path.node;
+        const {superClass} = path.node;
 
         // check if we're extending React.Compoennt
-        var extendsReactCompoennt = superClass.type === 'MemberExpression'
+        const extendsReactComponent = superClass.type === 'MemberExpression'
         && superClass.object.name === 'React'
         && superClass.property.name === 'Component';
-        var extendsComponent = superClass.type === 'Identifier' && superClass.name === 'Component';
-        if (!extendsReactCompoennt && !extendsComponent) {
-          debug('Found a class that isn\'t a react component', + JSON.stringify(superClass));
+        const extendsComponent = superClass.type === 'Identifier' && superClass.name === 'Component';
+        if (!extendsReactComponent && !extendsComponent) {
+          debug('Found a class that isn\'t a react component', superClass);
           return;
         }
 
-        var name = path.node.id.name;
+        const name = path.node.id.name;
 
-        var propTypeAST = makePropTypesAst(matchedPropTypes)
-        var attachPropTypesAST = t.expressionStatement(
+        const propTypesAST = makePropTypesAst(matchedPropTypes);
+        const attachPropTypesAST = t.expressionStatement(
           t.assignmentExpression(
             '=',
             t.memberExpression(t.identifier(name), t.identifier('propTypes')),
-            propTypeAST
+            propTypesAST
           )
         );
         path.insertAfter(attachPropTypesAST);
@@ -66,14 +66,14 @@ export default function (babel) {
 
       // See issue:
       ExportNamedDeclaration(path) {
-        var {node} = path;
+        const {node} = path;
 
         if (!node.declaration || node.declaration.type !== 'TypeAlias') {
           return;
         }
 
-        var propTypes = convertToPropTypes(node.declaration.right, importedTypes);
-        var propTypesAst = makePropTypesAst(propTypes);
+        const propTypes = convertToPropTypes(node.declaration.right, importedTypes);
+        let propTypesAst = makePropTypesAst(propTypes);
 
         if (propTypesAst.type === 'ObjectExpression') {
           propTypesAst = t.callExpression(
@@ -85,10 +85,10 @@ export default function (babel) {
               t.identifier('shape'),
             ),
             [propTypesAst],
-          )
+          );
         }
 
-        var exportAst = t.expressionStatement(t.callExpression(
+        const exportAst = t.expressionStatement(t.callExpression(
           t.memberExpression(t.identifier('Object'), t.identifier('defineProperty')),
           [
             t.memberExpression(t.identifier('module'), t.identifier('exports')),
@@ -99,12 +99,12 @@ export default function (babel) {
         path.insertAfter(exportAst);
       },
       ImportDeclaration(path) {
-        var {node} = path;
+        const {node} = path;
         if (node.importKind === 'type') {
           node.specifiers.forEach((specifier) => {
-            var typeName = specifier.imported.name;
+            const typeName = specifier.imported.name;
             importedTypes[typeName] = getExportNameForType(typeName);
-            var variableDeclarationAst = t.variableDeclaration(
+            const variableDeclarationAst = t.variableDeclaration(
               'var',
               [
                 t.variableDeclarator(
@@ -125,5 +125,5 @@ export default function (babel) {
         }
       }
     }
-  }
+  };
 };

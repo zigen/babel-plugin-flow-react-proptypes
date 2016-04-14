@@ -1,13 +1,13 @@
-var {$debug, PLUGIN_NAME} = require('./util');
+import {$debug, PLUGIN_NAME} from './util';
 
-module.exports = function convertToPropTypes(node, typesToIdentifiers) {
+export default function convertToPropTypes(node, typesToIdentifiers) {
   $debug('convertToPropTypes', node);
-  var resultPropType;
+  let resultPropType;
 
   if (node.type === 'ObjectTypeAnnotation') {
-    var ret = node.properties.map((subnode) => {
-      var key = subnode.key.name;
-      var value = subnode.value;
+    const ret = node.properties.map((subnode) => {
+      const key = subnode.key.name;
+      let value = subnode.value;
 
       // recurse
       value = convertToPropTypes(value, typesToIdentifiers);
@@ -18,7 +18,7 @@ module.exports = function convertToPropTypes(node, typesToIdentifiers) {
       }
 
       return {key, value};
-    })
+    });
 
     resultPropType = {type: 'shape', properties: ret};
   }
@@ -43,8 +43,8 @@ module.exports = function convertToPropTypes(node, typesToIdentifiers) {
     }
   }
   else if (node.type === 'UnionTypeAnnotation') {
-    var {types} = node;
-    var firstTypeType = types[0].type;
+    const {types} = node;
+    const firstTypeType = types[0].type;
 
     // e.g. 'hello' | 5
     if (/Literal/.test(firstTypeType)) {
@@ -60,7 +60,6 @@ module.exports = function convertToPropTypes(node, typesToIdentifiers) {
     return resultPropType;
   }
   else {
-    console.error(PLUGIN_NAME + ': Encountered an unknown node in the type definition', node);
-    throw new Error(PLUGIN_NAME + ' processing error');
+    throw new Error(`${PLUGIN_NAME}: Encountered an unknown node in the type definition. Node: ${JSON.stringify(node)}`);
   }
 }
