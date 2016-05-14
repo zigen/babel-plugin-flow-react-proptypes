@@ -14,7 +14,7 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
 
       // handles id?: string
       if (value) {
-        value.isRequired = !subnode.optional;
+        value.isRequired = !subnode.optional && !value.optional;
       }
 
       return {key, value};
@@ -28,6 +28,10 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
   else if (node.type === 'StringTypeAnnotation') resultPropType = {type: 'string'};
   else if (node.type === 'BooleanTypeAnnotation') resultPropType = {type: 'bool'};
   else if (node.type === 'VoidTypeAnnotation') resultPropType = {type: 'void'};
+  else if (node.type === 'NullableTypeAnnotation') {
+    resultPropType = convertToPropTypes(node.typeAnnotation, typesToIdentifiers);
+    resultPropType.optional = true;
+  }
   else if (node.type === 'GenericTypeAnnotation') {
     if (node.id.name === 'Array') {
       resultPropType = {type: 'arrayOf', of: convertToPropTypes(node.typeParameters.params[0], typesToIdentifiers)};
