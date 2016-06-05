@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(module.exports, 'babelPluginFlowReactPropTypes_proptype_Foo', React.PropTypes.shape({
-  a_string: React.PropTypes.string.isRequired
+  a_string: require('react').PropTypes.string.isRequired
 }));
 
 

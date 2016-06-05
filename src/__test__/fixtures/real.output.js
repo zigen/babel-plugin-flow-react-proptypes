@@ -38,23 +38,23 @@ var AlbumCard = function (_React$Component) {
 }(_react2.default.Component);
 
 AlbumCard.propTypes = {
-  data: _react2.default.PropTypes.shape({
-    stats: _react2.default.PropTypes.shape({
-      images: _react2.default.PropTypes.number.isRequired,
-      videos: _react2.default.PropTypes.number.isRequired,
-      reposts: _react2.default.PropTypes.number.isRequired,
-      shares: _react2.default.PropTypes.number.isRequired,
-      stashes: _react2.default.PropTypes.number.isRequired,
-      likes: _react2.default.PropTypes.number.isRequired,
-      comments: _react2.default.PropTypes.number.isRequired
+  data: require('react').PropTypes.shape({
+    stats: require('react').PropTypes.shape({
+      images: require('react').PropTypes.number.isRequired,
+      videos: require('react').PropTypes.number.isRequired,
+      reposts: require('react').PropTypes.number.isRequired,
+      shares: require('react').PropTypes.number.isRequired,
+      stashes: require('react').PropTypes.number.isRequired,
+      likes: require('react').PropTypes.number.isRequired,
+      comments: require('react').PropTypes.number.isRequired
     }).isRequired,
-    title: _react2.default.PropTypes.string.isRequired,
-    coverImage: _react2.default.PropTypes.shape({
-      id: _react2.default.PropTypes.string.isRequired,
-      src: _react2.default.PropTypes.string.isRequired
+    title: require('react').PropTypes.string.isRequired,
+    coverImage: require('react').PropTypes.shape({
+      id: require('react').PropTypes.string.isRequired,
+      src: require('react').PropTypes.string.isRequired
     }).isRequired,
-    description: _react2.default.PropTypes.string.isRequired,
-    userIsFollowing: _react2.default.PropTypes.oneOf([true, false]).isRequired
+    description: require('react').PropTypes.string.isRequired,
+    userIsFollowing: require('react').PropTypes.oneOf([true, false]).isRequired
   }).isRequired
 };
 exports.default = AlbumCard;

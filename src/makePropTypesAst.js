@@ -15,7 +15,8 @@ export default function makePropTypesAst(propTypeData) {
 function makePropType(data) {
   const method = data.type;
 
-  let node = t.memberExpression(t.identifier('React'), t.identifier('PropTypes'));
+  let reactNode = t.callExpression(t.identifier('require'), [makeLiteral('react')]);
+  let node = t.memberExpression(reactNode, t.identifier('PropTypes'));
   let isRequired = true;
 
   if (method === 'any' || method === 'string' || method === 'number' || method === 'bool' || method === 'object' ||

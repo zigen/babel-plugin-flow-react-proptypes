@@ -29,7 +29,7 @@ var MyComponent = function (_Component) {
 }(_react.Component);
 
 MyComponent.propTypes = {
-  onClick: _react2.default.PropTypes.func
+  onClick: require("react").PropTypes.func
 };
 exports.default = MyComponent;
 

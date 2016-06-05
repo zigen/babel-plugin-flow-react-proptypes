@@ -22,8 +22,8 @@ var C = function (_React$Component) {
 
 C.propTypes = {
   an_imported_type: babelPluginFlowReactPropTypes_proptype_Type,
-  a_global_type: React.PropTypes.any.isRequired,
-  a_undefined_type: React.PropTypes.any.isRequired
+  a_global_type: require('react').PropTypes.any.isRequired,
+  a_undefined_type: require('react').PropTypes.any.isRequired
 };
 ;
 
