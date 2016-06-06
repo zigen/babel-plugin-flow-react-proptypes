@@ -79,8 +79,11 @@ export default function flowReactPropTypes(babel) {
           propTypesAst = t.callExpression(
             t.memberExpression(
               t.memberExpression(
-                t.identifier('React'),
-                t.identifier('PropTypes'),
+                t.callExpression(
+                  t.identifier('require'),
+                  [t.stringLiteral('react')]
+                ),
+                t.identifier('PropTypes')
               ),
               t.identifier('shape'),
             ),
