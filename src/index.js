@@ -61,7 +61,8 @@ export default function flowReactPropTypes(babel) {
             propTypesAST
           )
         );
-        path.insertAfter(attachPropTypesAST);
+        var targetPath = path.parent.type === 'Program' ? path : path.parentPath;
+        targetPath.insertAfter(attachPropTypesAST);
       },
 
       // See issue:
