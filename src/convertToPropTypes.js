@@ -32,9 +32,16 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
     resultPropType = convertToPropTypes(node.typeAnnotation, typesToIdentifiers);
     resultPropType.optional = true;
   }
-  else if (node.type === 'GenericTypeAnnotation') {
-    if (node.id.name === 'Array') {
-      resultPropType = {type: 'arrayOf', of: convertToPropTypes(node.typeParameters.params[0], typesToIdentifiers)};
+  else if (node.type === 'GenericTypeAnnotation' || node.type === 'ArrayTypeAnnotation') {
+    if (node.type === 'ArrayTypeAnnotation' || node.id.name === 'Array') {
+      var arrayType;
+      if (node.type === 'ArrayTypeAnnotation') {
+        arrayType = node.elementType;
+      }
+      else {
+        arrayType = node.typeParameters.params[0];
+      }
+      resultPropType = {type: 'arrayOf', of: convertToPropTypes(arrayType, typesToIdentifiers)};
     }
     else if (node.id && node.id.name && typesToIdentifiers[node.id.name]) {
       resultPropType = {type: 'raw', value: typesToIdentifiers[node.id.name]};
