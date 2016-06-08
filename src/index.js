@@ -72,6 +72,9 @@ export default function flowReactPropTypes(babel) {
         if (!node.declaration || node.declaration.type !== 'TypeAlias') {
           return;
         }
+        if (!node.declaration.right.properties) {
+          return;
+        }
 
         const propTypes = convertToPropTypes(node.declaration.right, importedTypes);
         let propTypesAst = makePropTypesAst(propTypes);
