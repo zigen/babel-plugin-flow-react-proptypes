@@ -117,12 +117,27 @@ export default function flowReactPropTypes(babel) {
                 t.variableDeclarator(
                   // TODO: use local import name?
                   t.identifier(getExportNameForType(typeName)),
-                  t.memberExpression(
-                    t.callExpression(
-                      t.identifier('require'),
-                      [t.stringLiteral(node.source.value)]
+                  t.logicalExpression(
+                    '||',
+                    t.memberExpression(
+                      t.callExpression(
+                        t.identifier('require'),
+                        [t.stringLiteral(node.source.value)]
+                      ),
+                      t.identifier(getExportNameForType(typeName))
                     ),
-                    t.identifier(getExportNameForType(typeName))
+                    t.memberExpression(
+                      t.memberExpression(
+                        t.callExpression(
+                          t.identifier('require'),
+                          [
+                            t.stringLiteral('react'),
+                          ]
+                        ),
+                        t.identifier('PropTypes')
+                      ),
+                      t.identifier('any')
+                    )
                   ),
                 )
               ]

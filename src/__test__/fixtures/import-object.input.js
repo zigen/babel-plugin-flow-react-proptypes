@@ -1,7 +1,7 @@
-import type {Type} from './type';
+import type {SomeType} from './type';
 
 type FooProps = {
-  an_imported_type: Type,
+  an_imported_type: SomeType,
   a_global_type: Date,
   a_undefined_type: FooBarBaz,
 };
