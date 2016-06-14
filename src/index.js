@@ -109,7 +109,10 @@ export default function flowReactPropTypes(babel) {
         const {node} = path;
         if (node.importKind === 'type') {
           node.specifiers.forEach((specifier) => {
-            const typeName = specifier.imported.name;
+            const typeName = specifier.type === 'ImportDefaultSpecifier'
+              ? specifier.local.name
+              : specifier.imported.name;
+
             importedTypes[typeName] = getExportNameForType(typeName);
             const variableDeclarationAst = t.variableDeclaration(
               'var',

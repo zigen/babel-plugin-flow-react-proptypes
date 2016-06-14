@@ -6,7 +6,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var babelPluginFlowReactPropTypes_proptype_SomeType = require('./type').babelPluginFlowReactPropTypes_proptype_SomeType || require('react').PropTypes.any;
+var babelPluginFlowReactPropTypes_proptype_NamedType = require('./foo').babelPluginFlowReactPropTypes_proptype_NamedType || require('react').PropTypes.any;
+
+var babelPluginFlowReactPropTypes_proptype_DefaultType = require('./bar').babelPluginFlowReactPropTypes_proptype_DefaultType || require('react').PropTypes.any;
 
 var C = function (_React$Component) {
   _inherits(C, _React$Component);
@@ -21,7 +23,8 @@ var C = function (_React$Component) {
 }(React.Component);
 
 C.propTypes = {
-  an_imported_type: babelPluginFlowReactPropTypes_proptype_SomeType,
+  an_imported_named_type: babelPluginFlowReactPropTypes_proptype_NamedType,
+  an_imported_default_type: babelPluginFlowReactPropTypes_proptype_DefaultType,
   a_global_type: require('react').PropTypes.any.isRequired,
   a_undefined_type: require('react').PropTypes.any.isRequired
 };
