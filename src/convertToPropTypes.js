@@ -53,17 +53,28 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
       resultPropType = {type: 'any'};
     }
   }
-  else if (node.type === 'UnionTypeAnnotation') {
-    const {types} = node;
-    const firstTypeType = types[0].type;
+  else if (node.type in {
+    'UnionTypeAnnotation': 0,
+    'StringLiteralTypeAnnotation': 0,
+    'NumericLiteralTypeAnnotation': 0,
+    'BooleanLiteralTypeAnnotation': 0,
+    'NullLiteralTypeAnnotation': 0,
+  }) {
+    if (node.type === 'UnionTypeAnnotation') {
+      const {types} = node;
+      const firstTypeType = types[0].type;
 
-    // e.g. 'hello' | 5
-    if (/Literal/.test(firstTypeType)) {
-      resultPropType = {type: 'oneOf', options: types.map(({value}) => value)};
+      // e.g. 'hello' | 5
+      if (/Literal/.test(firstTypeType)) {
+        resultPropType = {type: 'oneOf', options: types.map(({value}) => value)};
+      }
+      // e.g. string | number
+      else {
+        resultPropType = {type: 'oneOfType', options: types.map((node) => convertToPropTypes(node, typesToIdentifiers))};
+      }
     }
-    // e.g. string | number
     else {
-      resultPropType = {type: 'oneOfType', options: types.map((node) => convertToPropTypes(node, typesToIdentifiers))};
+      resultPropType = {type: 'oneOf', options: [node.value]};
     }
   }
 
