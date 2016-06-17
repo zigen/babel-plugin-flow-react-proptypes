@@ -1,0 +1,11 @@
+'use strict';
+
+var ActionTypes = {
+  JUMP_TO: 'react-native/NavigationExperimental/tabs-jumpTo'
+};
+
+Object.defineProperty(module.exports, 'babelPluginFlowReactPropTypes_proptype_JumpToAction', require('react').PropTypes.shape({
+  type: require('react').PropTypes.any.isRequired,
+  index: require('react').PropTypes.number.isRequired
+}));
+
