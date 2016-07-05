@@ -42,7 +42,14 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
       else {
         arrayType = node.typeParameters.params[0];
       }
-      resultPropType = {type: 'arrayOf', of: convertToPropTypes(arrayType, typesToIdentifiers)};
+      if (arrayType.type === 'GenericTypeAnnotation' &&
+        arrayType.id.type === 'QualifiedTypeIdentifier' &&
+        arrayType.id.qualification.name === 'React' &&
+        arrayType.id.id.name === 'Element') {
+        resultPropType = {type: 'node'};
+      } else {
+        resultPropType = {type: 'arrayOf', of: convertToPropTypes(arrayType, typesToIdentifiers)};
+      }
     }
     else if (node.id && node.id.name && typesToIdentifiers[node.id.name]) {
       resultPropType = {type: 'raw', value: typesToIdentifiers[node.id.name]};

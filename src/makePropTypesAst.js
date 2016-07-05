@@ -20,7 +20,7 @@ function makePropType(data) {
   let isRequired = true;
 
   if (method === 'any' || method === 'string' || method === 'number' || method === 'bool' || method === 'object' ||
-      method === 'array' || method === 'func') {
+      method === 'array' || method === 'func' || method === 'node') {
     node = t.memberExpression(node, t.identifier(method));
   }
   else if (method === 'raw') {
