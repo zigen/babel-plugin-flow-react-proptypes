@@ -6,8 +6,24 @@ let matchedPropTypes;
 
 // See ExportNamedDeclaration and ImportDeclaration
 let importedTypes = {};
+
 export default function flowReactPropTypes(babel) {
   const t = babel.types;
+
+  const annotate = (path, matchedPropTypes) => {
+    const name = path.node.id.name;
+
+    const propTypesAST = makePropTypesAst(matchedPropTypes);
+    const attachPropTypesAST = t.expressionStatement(
+      t.assignmentExpression(
+        '=',
+        t.memberExpression(t.identifier(name), t.identifier('propTypes')),
+        propTypesAST
+      )
+    );
+    const targetPath = path.parent.type === 'Program' ? path : path.parentPath;
+    targetPath.insertAfter(attachPropTypesAST);
+  };
 
   return {
     visitor: {
@@ -51,18 +67,27 @@ export default function flowReactPropTypes(babel) {
           return;
         }
 
-        const name = path.node.id.name;
+        annotate(path, matchedPropTypes);
+      },
 
-        const propTypesAST = makePropTypesAst(matchedPropTypes);
-        const attachPropTypesAST = t.expressionStatement(
-          t.assignmentExpression(
-            '=',
-            t.memberExpression(t.identifier(name), t.identifier('propTypes')),
-            propTypesAST
-          )
-        );
-        var targetPath = path.parent.type === 'Program' ? path : path.parentPath;
-        targetPath.insertAfter(attachPropTypesAST);
+      FunctionDeclaration(path) {
+        if (!matchedPropTypes) {
+          $debug('at FunctionDeclaration no prop TypeAlias was found');
+          return;
+        } else {
+          $debug('Found FunctionDeclaration for the TypeAlias');
+        }
+
+        // Check if this looks like a stateless react component:
+        const hasPropsParam = path.node.params[0]
+          && path.node.params[0].typeAnnotation
+          && path.node.params[0].typeAnnotation.typeAnnotation
+          && path.node.params[0].typeAnnotation.typeAnnotation.id.name
+          && path.node.params[0].typeAnnotation.typeAnnotation.id.name.endsWith('Props');
+
+        if (!hasPropsParam) return;
+
+        annotate(path, matchedPropTypes);
       },
 
       // See issue:
