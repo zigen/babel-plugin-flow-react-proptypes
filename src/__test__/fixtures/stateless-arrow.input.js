@@ -1,7 +1,9 @@
 var React = require('react');
 
+type Choices = 'option1' | 'option2';
+
 type FooT = {
-    x?: number
+    x?: Choices
 };
 
 const Foo = (props: FooT) => {

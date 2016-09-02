@@ -14,7 +14,7 @@ var Foo = function Foo(props) {
 };
 
 Foo.propTypes = {
-  x: require('react').PropTypes.number
+  x: require('react').PropTypes.oneOf(['option1', 'option2'])
 };
 exports.default = Foo;
 
