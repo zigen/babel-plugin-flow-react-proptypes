@@ -22,7 +22,7 @@ var MyComponent = function (_Component) {
   function MyComponent() {
     _classCallCheck(this, MyComponent);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(MyComponent).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MyComponent.__proto__ || Object.getPrototypeOf(MyComponent)).apply(this, arguments));
   }
 
   return MyComponent;

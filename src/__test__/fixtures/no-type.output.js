@@ -12,7 +12,7 @@ var X = function (_React$Component) {
   function X() {
     _classCallCheck(this, X);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(X).apply(this, arguments));
+    return _possibleConstructorReturn(this, (X.__proto__ || Object.getPrototypeOf(X)).apply(this, arguments));
   }
 
   return X;
