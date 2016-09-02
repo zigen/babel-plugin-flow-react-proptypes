@@ -4,17 +4,19 @@
     "react"
   ],
   "rules": {
+    "brace-style": [2, "stroustrup"],
     "strict": 0,
-    "quotes": [1, "single"],
-    "curly": [1, "multi-line"],
+    "quotes": [2, "single"],
+    "curly": [2, "multi-line"],
     "camelcase": 0,
     "comma-dangle": 0,
-    "no-use-before-define": [1, "nofunc"],
+    "indent": [2, 2],
+    "no-use-before-define": [2, "nofunc"],
     "no-underscore-dangle": 0,
     "no-unused-vars": [1, {"args": "none"}],
-    "no-var": 1,
+    "no-var": 2,
     "new-cap": 0,
-    "prefer-const": 1,
+    "prefer-const": 2,
     "semi": 1
   },
   env: {

@@ -15,7 +15,7 @@ export default function makePropTypesAst(propTypeData) {
 function makePropType(data) {
   const method = data.type;
 
-  let reactNode = t.callExpression(t.identifier('require'), [makeLiteral('react')]);
+  const reactNode = t.callExpression(t.identifier('require'), [makeLiteral('react')]);
   let node = t.memberExpression(reactNode, t.identifier('PropTypes'));
   let isRequired = true;
 
@@ -62,9 +62,10 @@ function makePropType(data) {
     node = dontSetTemplate().expression;
   }
   else {
-    $debug('Unknown node ' + JSON.stringify(data, null, 2));
+    const bugData = JSON.stringify(data, null, 2);
+    $debug('Unknown node ' + bugData);
     throw new Error(`${PLUGIN_NAME} processing error: This is an internal error that should never happen. ` +
-      `Report it immediately with the source file and babel config. Data: ${data}`);
+      `Report it immediately with the source file and babel config. Data: ${bugData}`);
   }
 
   if (isRequired && data.isRequired && method !== 'void') {

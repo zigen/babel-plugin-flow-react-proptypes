@@ -74,7 +74,8 @@ export default function flowReactPropTypes(babel) {
         if (!matchedPropTypes) {
           $debug('at FunctionDeclaration no prop TypeAlias was found');
           return;
-        } else {
+        }
+        else {
           $debug('Found FunctionDeclaration for the TypeAlias');
         }
 

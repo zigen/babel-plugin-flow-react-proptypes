@@ -25,7 +25,7 @@ var ExportedVendorCard = exports.ExportedVendorCard = function (_React$Component
   function ExportedVendorCard() {
     _classCallCheck(this, ExportedVendorCard);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ExportedVendorCard).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ExportedVendorCard.__proto__ || Object.getPrototypeOf(ExportedVendorCard)).apply(this, arguments));
   }
 
   _createClass(ExportedVendorCard, [{
@@ -48,7 +48,7 @@ var LocalVendorCard = function (_React$Component2) {
   function LocalVendorCard() {
     _classCallCheck(this, LocalVendorCard);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(LocalVendorCard).apply(this, arguments));
+    return _possibleConstructorReturn(this, (LocalVendorCard.__proto__ || Object.getPrototypeOf(LocalVendorCard)).apply(this, arguments));
   }
 
   _createClass(LocalVendorCard, [{

@@ -35,7 +35,7 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
   }
   else if (node.type === 'GenericTypeAnnotation' || node.type === 'ArrayTypeAnnotation') {
     if (node.type === 'ArrayTypeAnnotation' || node.id.name === 'Array') {
-      var arrayType;
+      let arrayType;
       if (node.type === 'ArrayTypeAnnotation') {
         arrayType = node.elementType;
       }
@@ -47,7 +47,8 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
         arrayType.id.qualification.name === 'React' &&
         arrayType.id.id.name === 'Element') {
         resultPropType = {type: 'node'};
-      } else {
+      }
+      else {
         resultPropType = {type: 'arrayOf', of: convertToPropTypes(arrayType, typesToIdentifiers)};
       }
     }

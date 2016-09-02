@@ -24,7 +24,7 @@ var AlbumCard = function (_React$Component) {
   function AlbumCard() {
     _classCallCheck(this, AlbumCard);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AlbumCard).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AlbumCard.__proto__ || Object.getPrototypeOf(AlbumCard)).apply(this, arguments));
   }
 
   _createClass(AlbumCard, [{
