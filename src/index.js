@@ -2,7 +2,7 @@ import {$debug, getExportNameForType, PLUGIN_NAME} from './util';
 import convertToPropTypes from './convertToPropTypes';
 import makePropTypesAst from './makePropTypesAst';
 
-let matchedPropTypes;
+let typeAliasToPropTypes = {};
 
 // See ExportNamedDeclaration and ImportDeclaration
 let importedTypes = {};
@@ -21,12 +21,14 @@ const getFunctionalComponentTypeProps = path => {
 
   const hasPropsParamReference = typeAnnotation
     && typeAnnotation.id
-    && typeAnnotation.id.name
-    && typeAnnotation.id.name.endsWith('Props');
+    && typeAnnotation.id.name;
 
   let props = null;
   if (hasPropsParamReference) {
-    props = matchedPropTypes;
+    props = typeAliasToPropTypes[typeAnnotation.id.name];
+    if (!props) {
+      throw new Error(`Did not find type annotation for ${typeAnnotation.id.name}`);
+    }
   }
   else if (typeAnnotation.properties) {
     props = convertToPropTypes(typeAnnotation, importedTypes);
@@ -41,9 +43,10 @@ const getFunctionalComponentTypeProps = path => {
 export default function flowReactPropTypes(babel) {
   const t = babel.types;
 
-  const annotate = (path, matchedPropTypes) => {
+  const annotate = (path, props) => {
     let name;
     let targetPath;
+
     if (path.type === 'ArrowFunctionExpression') {
       name = path.parent.id.name;
       targetPath = path.parentPath.parentPath;
@@ -53,7 +56,11 @@ export default function flowReactPropTypes(babel) {
       targetPath = path.parent.type === 'Program' ? path : path.parentPath;
     }
 
-    const propTypesAST = makePropTypesAst(matchedPropTypes);
+    if (!props) {
+      throw new Error(`Did not find type annotation for ${name}`);
+    }
+
+    const propTypesAST = makePropTypesAst(props);
     const attachPropTypesAST = t.expressionStatement(
       t.assignmentExpression(
         '=',
@@ -67,33 +74,26 @@ export default function flowReactPropTypes(babel) {
   return {
     visitor: {
       Program(path) {
-        matchedPropTypes = null;
+        typeAliasToPropTypes = {};
         importedTypes = {};
       },
       TypeAlias(path) {
         $debug('TypeAlias found');
-        if (!/Props$/.test(path.node.id.name)) {
-          $debug(`TypeAlias ${path.node.id.name} is not a Props type`);
-          return;
-        }
         const {right} = path.node;
         if (right.type !== 'ObjectTypeAnnotation') {
           $debug(`Expected ObjectTypeAnnotation but got ${right.type}`);
           return;
         }
 
-        const propTypes = convertToPropTypes(right, importedTypes);
-        matchedPropTypes = propTypes;
-      },
-      ClassDeclaration(path) {
-        if (!matchedPropTypes) {
-          $debug('at ClassDeclaration no prop TypeAlias was found');
-          return;
-        }
-        else {
-          $debug('Found ClassDeclaration for the TypeAlias');
+        const typeAliasName = path.node.id.name;
+        if (!typeAliasName) {
+          throw new Error('Did not find name for type alias');
         }
 
+        const propTypes = convertToPropTypes(right, importedTypes);
+        typeAliasToPropTypes[typeAliasName] = propTypes;
+      },
+      ClassDeclaration(path) {
         const {superClass} = path.node;
 
         // check if we're extending React.Compoennt
@@ -106,7 +106,22 @@ export default function flowReactPropTypes(babel) {
           return;
         }
 
-        annotate(path, matchedPropTypes);
+        // And have type as property annotations or Component<void, Props, void>
+        path.node.body.body.forEach(bodyNode => {
+          if (bodyNode && bodyNode.key.name === 'props' && bodyNode.typeAnnotation) {
+            const typeAliasName = bodyNode.typeAnnotation.typeAnnotation.id.name;
+            const props = typeAliasToPropTypes[typeAliasName];
+            return annotate(path, props);
+          }
+        });
+
+        // super type parameter
+        const secondSuperParam = path.node.superTypeParameters && path.node.superTypeParameters.params[1];
+        if (secondSuperParam && secondSuperParam.type === 'GenericTypeAnnotation') {
+          const typeAliasName = secondSuperParam.id.name;
+          const props = typeAliasToPropTypes[typeAliasName];
+          return annotate(path, props);
+        }
       },
 
       FunctionDeclaration(path) {

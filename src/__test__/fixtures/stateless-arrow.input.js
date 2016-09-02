@@ -1,10 +1,10 @@
 var React = require('react');
 
-type FooProps = {
+type FooT = {
     x?: number
 };
 
-const Foo = (props: FooProps) => {
+const Foo = (props: FooT) => {
   <div>{props.x}</div>
 };
 

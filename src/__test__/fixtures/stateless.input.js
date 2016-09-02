@@ -1,6 +1,6 @@
 var React = require('react');
 
-type FooProps = {
+type T = {
   an_optional_string?: string,
   a_number: number,
   a_boolean: boolean,
@@ -22,6 +22,6 @@ type FooProps = {
   should_error_if_provided: void
 }
 
-export default function Foo(props: FooProps) {
+export default function Foo(props: T) {
 
 }
