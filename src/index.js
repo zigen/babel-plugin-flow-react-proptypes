@@ -1,4 +1,4 @@
-import {$debug, getExportNameForType} from './util';
+import {$debug, getExportNameForType, PLUGIN_NAME} from './util';
 import convertToPropTypes from './convertToPropTypes';
 import makePropTypesAst from './makePropTypesAst';
 
@@ -7,11 +7,51 @@ let matchedPropTypes;
 // See ExportNamedDeclaration and ImportDeclaration
 let importedTypes = {};
 
+const getFunctionalComponentTypeProps = path => {
+  // Check if this looks like a stateless react component with PropType reference:
+  const firstParam = path.node.params[0];
+  const typeAnnotation = firstParam
+    && firstParam.typeAnnotation
+    && firstParam.typeAnnotation.typeAnnotation;
+
+  if (!typeAnnotation) {
+    $debug('Found stateless function without type definition');
+    return;
+  }
+
+  const hasPropsParamReference = typeAnnotation
+    && typeAnnotation.id
+    && typeAnnotation.id.name
+    && typeAnnotation.id.name.endsWith('Props');
+
+  let props = null;
+  if (hasPropsParamReference) {
+    props = matchedPropTypes;
+  }
+  else if (typeAnnotation.properties) {
+    props = convertToPropTypes(typeAnnotation, importedTypes);
+  }
+  else {
+    throw new Error(`Expect prop type for functional component, but found none. This is a bug in ${PLUGIN_NAME}`);
+  }
+
+  return props;
+};
+
 export default function flowReactPropTypes(babel) {
   const t = babel.types;
 
   const annotate = (path, matchedPropTypes) => {
-    const name = path.node.id.name;
+    let name;
+    let targetPath;
+    if (path.type === 'ArrowFunctionExpression') {
+      name = path.parent.id.name;
+      targetPath = path.parentPath.parentPath;
+    }
+    else {
+      name = path.node.id.name;
+      targetPath = path.parent.type === 'Program' ? path : path.parentPath;
+    }
 
     const propTypesAST = makePropTypesAst(matchedPropTypes);
     const attachPropTypesAST = t.expressionStatement(
@@ -21,7 +61,6 @@ export default function flowReactPropTypes(babel) {
         propTypesAST
       )
     );
-    const targetPath = path.parent.type === 'Program' ? path : path.parentPath;
     targetPath.insertAfter(attachPropTypesAST);
   };
 
@@ -71,24 +110,17 @@ export default function flowReactPropTypes(babel) {
       },
 
       FunctionDeclaration(path) {
-        if (!matchedPropTypes) {
-          $debug('at FunctionDeclaration no prop TypeAlias was found');
-          return;
+        const props = getFunctionalComponentTypeProps(path);
+        if (props) {
+          annotate(path, props);
         }
-        else {
-          $debug('Found FunctionDeclaration for the TypeAlias');
+      },
+
+      ArrowFunctionExpression(path) {
+        const props = getFunctionalComponentTypeProps(path);
+        if (props) {
+          annotate(path, props);
         }
-
-        // Check if this looks like a stateless react component:
-        const hasPropsParam = path.node.params[0]
-          && path.node.params[0].typeAnnotation
-          && path.node.params[0].typeAnnotation.typeAnnotation
-          && path.node.params[0].typeAnnotation.typeAnnotation.id.name
-          && path.node.params[0].typeAnnotation.typeAnnotation.id.name.endsWith('Props');
-
-        if (!hasPropsParam) return;
-
-        annotate(path, matchedPropTypes);
       },
 
       // See issue:
