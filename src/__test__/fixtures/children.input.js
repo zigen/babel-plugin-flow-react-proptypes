@@ -5,4 +5,5 @@ type FooProps = {
 };
 
 function Foo(props: FooProps) {
+    <div>{props.children}</div>
 }

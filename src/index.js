@@ -22,7 +22,7 @@ const getFunctionalComponentTypeProps = path => {
     && firstParam.typeAnnotation.typeAnnotation;
 
   if (!typeAnnotation) {
-    $debug('Found stateless function without type definition');
+    $debug('Found stateless component without type definition');
     return;
   }
 
@@ -41,7 +41,7 @@ const getFunctionalComponentTypeProps = path => {
     props = convertNodeToPropTypes(typeAnnotation);
   }
   else {
-    throw new Error(`Expect prop type for functional component, but found none. This is a bug in ${PLUGIN_NAME}`);
+    throw new Error(`Expected prop type for functional component, but found none. This is a bug in ${PLUGIN_NAME}`);
   }
 
   return props;
@@ -50,11 +50,35 @@ const getFunctionalComponentTypeProps = path => {
 export default function flowReactPropTypes(babel) {
   const t = babel.types;
 
+  const isFunctionalReactComponent = path => {
+    const bodyParts = path.node.body.body;
+    for (let i = 0; i < bodyParts.length; i++) {
+      const b = bodyParts[i];
+      if (t.isExpressionStatement(b)) {
+        if (t.isJSXElement(b.expression)) {
+          return true;
+        }
+        const callee = b.expression.callee;
+        if (callee && callee.object && ['createElement', 'React'].indexOf(callee.object.name) >= 0) {
+          return true;
+        }
+      }
+      if (t.isReturnStatement(b) && t.isJSXElement(b.argument)) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   const annotate = (path, props) => {
     let name;
     let targetPath;
 
     if (path.type === 'ArrowFunctionExpression') {
+      name = path.parent.id.name;
+      targetPath = path.parentPath.parentPath;
+    }
+    else if (path.type === 'FunctionExpression') {
       name = path.parent.id.name;
       targetPath = path.parentPath.parentPath;
     }
@@ -76,6 +100,16 @@ export default function flowReactPropTypes(babel) {
       )
     );
     targetPath.insertAfter(attachPropTypesAST);
+  };
+
+  const functionVisitor = path => {
+    if (!isFunctionalReactComponent(path)) {
+      return;
+    }
+    const props = getFunctionalComponentTypeProps(path);
+    if (props) {
+      annotate(path, props);
+    }
   };
 
   return {
@@ -127,18 +161,16 @@ export default function flowReactPropTypes(babel) {
         }
       },
 
+      FunctionExpression(path) {
+        return functionVisitor(path);
+      },
+
       FunctionDeclaration(path) {
-        const props = getFunctionalComponentTypeProps(path);
-        if (props) {
-          annotate(path, props);
-        }
+        return functionVisitor(path);
       },
 
       ArrowFunctionExpression(path) {
-        const props = getFunctionalComponentTypeProps(path);
-        if (props) {
-          annotate(path, props);
-        }
+        return functionVisitor(path);
       },
 
       // See issue:

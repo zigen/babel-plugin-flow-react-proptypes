@@ -11,6 +11,14 @@ function Foo(_ref) {
   var x = _ref$x === undefined ? 1 : _ref$x;
   var _ref$y = _ref.y;
   var y = _ref$y === undefined ? 'foo' : _ref$y;
+
+  React.createElement(
+    'div',
+    null,
+    x,
+    '/',
+    y
+  );
 }
 Foo.propTypes = {
   x: require('react').PropTypes.number,

@@ -23,5 +23,5 @@ type T = {
 }
 
 export default function Foo(props: T) {
-
+    <div />
 }

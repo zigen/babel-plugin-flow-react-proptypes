@@ -6,7 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = Foo;
 var React = require('react');
 
-function Foo(props) {}
+function Foo(props) {
+  React.createElement('div', null);
+}
 Foo.propTypes = {
   an_optional_string: require('react').PropTypes.string,
   a_number: require('react').PropTypes.number.isRequired,

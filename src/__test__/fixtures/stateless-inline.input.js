@@ -21,5 +21,8 @@ export default function Foo(props: {
   },
   should_error_if_provided: void
 }) {
-
+  const x = props.a_number;
+  return (
+    <div>{x}</div>
+  )
 }

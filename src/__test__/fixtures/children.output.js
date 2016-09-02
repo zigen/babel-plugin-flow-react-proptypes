@@ -2,7 +2,13 @@
 
 var React = require('react');
 
-function Foo(props) {}
+function Foo(props) {
+  React.createElement(
+    'div',
+    null,
+    props.children
+  );
+}
 Foo.propTypes = {
   children: require('react').PropTypes.node.isRequired
 };
