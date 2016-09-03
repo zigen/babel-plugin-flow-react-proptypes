@@ -68,9 +68,8 @@ exports.default = Foo;
 
 ## Usage
 
-This plugin searches for a type declaration (`type FooProps = {...}`) that has a name containing 'Props'.
+This plugin searches for a React components using type declaration. Works with functional components, `React.createClass` and ES6 classes.
 
-It then searches for a class declaration, and it attaches a `propTypes` property to the class.
 
 ## Install
 

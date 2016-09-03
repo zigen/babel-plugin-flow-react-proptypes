@@ -1,19 +1,97 @@
-import {$debug, getExportNameForType} from './util';
+import {$debug, getExportNameForType, PLUGIN_NAME} from './util';
 import convertToPropTypes from './convertToPropTypes';
 import makePropTypesAst from './makePropTypesAst';
 
-let matchedPropTypes;
+// maps between type alias name to prop types
+let internalTypes = {};
 
-// See ExportNamedDeclaration and ImportDeclaration
+// maps between type alias to import alias
 let importedTypes = {};
+
+const convertNodeToPropTypes = node => convertToPropTypes(
+    node,
+    importedTypes,
+    internalTypes
+);
+
+const getFunctionalComponentTypeProps = path => {
+  // Check if this looks like a stateless react component with PropType reference:
+  const firstParam = path.node.params[0];
+  const typeAnnotation = firstParam
+    && firstParam.typeAnnotation
+    && firstParam.typeAnnotation.typeAnnotation;
+
+  if (!typeAnnotation) {
+    $debug('Found stateless component without type definition');
+    return;
+  }
+
+  const hasPropsParamReference = typeAnnotation
+    && typeAnnotation.id
+    && typeAnnotation.id.name;
+
+  let props = null;
+  if (hasPropsParamReference) {
+    props = internalTypes[typeAnnotation.id.name];
+    if (!props) {
+      throw new Error(`Did not find type annotation for ${typeAnnotation.id.name}`);
+    }
+  }
+  else if (typeAnnotation.properties) {
+    props = convertNodeToPropTypes(typeAnnotation);
+  }
+  else {
+    throw new Error(`Expected prop type for functional component, but found none. This is a bug in ${PLUGIN_NAME}`);
+  }
+
+  return props;
+};
 
 export default function flowReactPropTypes(babel) {
   const t = babel.types;
 
-  const annotate = (path, matchedPropTypes) => {
-    const name = path.node.id.name;
+  const isFunctionalReactComponent = path => {
+    const bodyParts = path.node.body.body;
+    for (let i = 0; i < bodyParts.length; i++) {
+      const b = bodyParts[i];
+      if (t.isExpressionStatement(b)) {
+        if (t.isJSXElement(b.expression)) {
+          return true;
+        }
+        const callee = b.expression.callee;
+        if (callee && callee.object && ['createElement', 'React'].indexOf(callee.object.name) >= 0) {
+          return true;
+        }
+      }
+      if (t.isReturnStatement(b) && t.isJSXElement(b.argument)) {
+        return true;
+      }
+    }
+    return false;
+  };
 
-    const propTypesAST = makePropTypesAst(matchedPropTypes);
+  const annotate = (path, props) => {
+    let name;
+    let targetPath;
+
+    if (path.type === 'ArrowFunctionExpression') {
+      name = path.parent.id.name;
+      targetPath = path.parentPath.parentPath;
+    }
+    else if (path.type === 'FunctionExpression') {
+      name = path.parent.id.name;
+      targetPath = path.parentPath.parentPath;
+    }
+    else {
+      name = path.node.id.name;
+      targetPath = path.parent.type === 'Program' ? path : path.parentPath;
+    }
+
+    if (!props) {
+      throw new Error(`Did not find type annotation for ${name}`);
+    }
+
+    const propTypesAST = makePropTypesAst(props);
     const attachPropTypesAST = t.expressionStatement(
       t.assignmentExpression(
         '=',
@@ -21,40 +99,38 @@ export default function flowReactPropTypes(babel) {
         propTypesAST
       )
     );
-    const targetPath = path.parent.type === 'Program' ? path : path.parentPath;
     targetPath.insertAfter(attachPropTypesAST);
+  };
+
+  const functionVisitor = path => {
+    if (!isFunctionalReactComponent(path)) {
+      return;
+    }
+    const props = getFunctionalComponentTypeProps(path);
+    if (props) {
+      annotate(path, props);
+    }
   };
 
   return {
     visitor: {
       Program(path) {
-        matchedPropTypes = null;
+        internalTypes = {};
         importedTypes = {};
       },
       TypeAlias(path) {
         $debug('TypeAlias found');
-        if (!/Props$/.test(path.node.id.name)) {
-          $debug(`TypeAlias ${path.node.id.name} is not a Props type`);
-          return;
-        }
         const {right} = path.node;
-        if (right.type !== 'ObjectTypeAnnotation') {
-          $debug(`Expected ObjectTypeAnnotation but got ${right.type}`);
-          return;
+
+        const typeAliasName = path.node.id.name;
+        if (!typeAliasName) {
+          throw new Error('Did not find name for type alias');
         }
 
-        const propTypes = convertToPropTypes(right, importedTypes);
-        matchedPropTypes = propTypes;
+        const propTypes = convertNodeToPropTypes(right);
+        internalTypes[typeAliasName] = propTypes;
       },
       ClassDeclaration(path) {
-        if (!matchedPropTypes) {
-          $debug('at ClassDeclaration no prop TypeAlias was found');
-          return;
-        }
-        else {
-          $debug('Found ClassDeclaration for the TypeAlias');
-        }
-
         const {superClass} = path.node;
 
         // check if we're extending React.Compoennt
@@ -67,28 +143,34 @@ export default function flowReactPropTypes(babel) {
           return;
         }
 
-        annotate(path, matchedPropTypes);
+        // And have type as property annotations or Component<void, Props, void>
+        path.node.body.body.forEach(bodyNode => {
+          if (bodyNode && bodyNode.key.name === 'props' && bodyNode.typeAnnotation) {
+            const typeAliasName = bodyNode.typeAnnotation.typeAnnotation.id.name;
+            const props = internalTypes[typeAliasName];
+            return annotate(path, props);
+          }
+        });
+
+        // super type parameter
+        const secondSuperParam = path.node.superTypeParameters && path.node.superTypeParameters.params[1];
+        if (secondSuperParam && secondSuperParam.type === 'GenericTypeAnnotation') {
+          const typeAliasName = secondSuperParam.id.name;
+          const props = internalTypes[typeAliasName];
+          return annotate(path, props);
+        }
+      },
+
+      FunctionExpression(path) {
+        return functionVisitor(path);
       },
 
       FunctionDeclaration(path) {
-        if (!matchedPropTypes) {
-          $debug('at FunctionDeclaration no prop TypeAlias was found');
-          return;
-        }
-        else {
-          $debug('Found FunctionDeclaration for the TypeAlias');
-        }
+        return functionVisitor(path);
+      },
 
-        // Check if this looks like a stateless react component:
-        const hasPropsParam = path.node.params[0]
-          && path.node.params[0].typeAnnotation
-          && path.node.params[0].typeAnnotation.typeAnnotation
-          && path.node.params[0].typeAnnotation.typeAnnotation.id.name
-          && path.node.params[0].typeAnnotation.typeAnnotation.id.name.endsWith('Props');
-
-        if (!hasPropsParam) return;
-
-        annotate(path, matchedPropTypes);
+      ArrowFunctionExpression(path) {
+        return functionVisitor(path);
       },
 
       // See issue:
@@ -102,7 +184,7 @@ export default function flowReactPropTypes(babel) {
           return;
         }
 
-        const propTypes = convertToPropTypes(node.declaration.right, importedTypes);
+        const propTypes = convertNodeToPropTypes(node.declaration.right);
         let propTypesAst = makePropTypesAst(propTypes);
 
         if (propTypesAst.type === 'ObjectExpression') {

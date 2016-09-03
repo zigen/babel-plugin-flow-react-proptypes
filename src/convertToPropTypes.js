@@ -1,6 +1,6 @@
 import {$debug, PLUGIN_NAME} from './util';
 
-export default function convertToPropTypes(node, typesToIdentifiers) {
+export default function convertToPropTypes(node, importedTypes, internalTypes) {
   $debug('convertToPropTypes', node);
   let resultPropType;
 
@@ -10,7 +10,7 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
       let value = subnode.value;
 
       // recurse
-      value = convertToPropTypes(value, typesToIdentifiers);
+      value = convertToPropTypes(value, importedTypes, internalTypes);
 
       // handles id?: string
       if (value) {
@@ -30,7 +30,7 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
   else if (node.type === 'BooleanTypeAnnotation') resultPropType = {type: 'bool'};
   else if (node.type === 'VoidTypeAnnotation') resultPropType = {type: 'void'};
   else if (node.type === 'NullableTypeAnnotation') {
-    resultPropType = convertToPropTypes(node.typeAnnotation, typesToIdentifiers);
+    resultPropType = convertToPropTypes(node.typeAnnotation, importedTypes, internalTypes);
     resultPropType.optional = true;
   }
   else if (node.type === 'GenericTypeAnnotation' || node.type === 'ArrayTypeAnnotation') {
@@ -49,11 +49,14 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
         resultPropType = {type: 'node'};
       }
       else {
-        resultPropType = {type: 'arrayOf', of: convertToPropTypes(arrayType, typesToIdentifiers)};
+        resultPropType = {type: 'arrayOf', of: convertToPropTypes(arrayType, importedTypes, internalTypes)};
       }
     }
-    else if (node.id && node.id.name && typesToIdentifiers[node.id.name]) {
-      resultPropType = {type: 'raw', value: typesToIdentifiers[node.id.name]};
+    else if (node.id && node.id.name && internalTypes[node.id.name]) {
+      resultPropType = Object.assign({}, internalTypes[node.id.name]);
+    }
+    else if (node.id && node.id.name && importedTypes[node.id.name]) {
+      resultPropType = {type: 'raw', value: importedTypes[node.id.name]};
     }
     else if (node.id.name === 'Object') {
       resultPropType = {type: 'object'};
@@ -79,7 +82,7 @@ export default function convertToPropTypes(node, typesToIdentifiers) {
       }
       // e.g. string | number
       else {
-        resultPropType = {type: 'oneOfType', options: types.map((node) => convertToPropTypes(node, typesToIdentifiers))};
+        resultPropType = {type: 'oneOfType', options: types.map((node) => convertToPropTypes(node, importedTypes, internalTypes))};
       }
     }
     else {

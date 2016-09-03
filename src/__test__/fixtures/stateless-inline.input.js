@@ -1,6 +1,6 @@
 var React = require('react');
 
-type T = {
+export default function Foo(props: {
   an_optional_string?: string,
   a_number: number,
   a_boolean: boolean,
@@ -20,8 +20,9 @@ type T = {
     }
   },
   should_error_if_provided: void
-}
-
-export default function Foo(props: T) {
-    <div />
+}) {
+  const x = props.a_number;
+  return (
+    <div>{x}</div>
+  )
 }

@@ -8,5 +8,6 @@ type FooProps = {
   a_undefined_type: FooBarBaz,
 };
 
-class C extends React.Component {};
-
+class C extends React.Component {
+    props: FooProps
+};
