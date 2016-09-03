@@ -29,6 +29,7 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
   else if (node.type === 'StringTypeAnnotation') resultPropType = {type: 'string'};
   else if (node.type === 'BooleanTypeAnnotation') resultPropType = {type: 'bool'};
   else if (node.type === 'VoidTypeAnnotation') resultPropType = {type: 'void'};
+  else if (node.type === 'TupleTypeAnnotation') resultPropType = {type: 'arrayOf', of: {type: 'any'}};
   else if (node.type === 'NullableTypeAnnotation') {
     resultPropType = convertToPropTypes(node.typeAnnotation, importedTypes, internalTypes);
     resultPropType.optional = true;
