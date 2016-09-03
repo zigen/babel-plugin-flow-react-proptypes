@@ -26,15 +26,15 @@ const getFunctionalComponentTypeProps = path => {
     return;
   }
 
-  const hasPropsParamReference = typeAnnotation
+  const typeAnnotationReference = typeAnnotation
     && typeAnnotation.id
     && typeAnnotation.id.name;
 
   let props = null;
-  if (hasPropsParamReference) {
-    props = internalTypes[typeAnnotation.id.name];
+  if (typeAnnotationReference) {
+    props = internalTypes[typeAnnotationReference] || importedTypes[typeAnnotationReference];
     if (!props) {
-      throw new Error(`Did not find type annotation for ${typeAnnotation.id.name}`);
+      throw new Error(`Did not find type annotation for reference ${typeAnnotationReference}`);
     }
   }
   else if (typeAnnotation.properties) {
@@ -52,6 +52,15 @@ export default function flowReactPropTypes(babel) {
 
   const isFunctionalReactComponent = path => {
     const bodyParts = path.node.body.body;
+    if (!bodyParts) {
+      return false;
+    }
+
+    if ((path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') && !path.parent.id) {
+      // Could be functions inside a React component
+      return false;
+    }
+
     for (let i = 0; i < bodyParts.length; i++) {
       const b = bodyParts[i];
       if (t.isExpressionStatement(b)) {
@@ -89,6 +98,14 @@ export default function flowReactPropTypes(babel) {
 
     if (!props) {
       throw new Error(`Did not find type annotation for ${name}`);
+    }
+
+    if (!props.properties) {
+      // Bail out if we don't have any properties. This will be the case if
+      // we have an imported PropType, like:
+      // import type { T } from '../types';
+      // const C = (props: T) => <div>{props.name}</div>;
+      return;
     }
 
     const propTypesAST = makePropTypesAst(props);
@@ -184,7 +201,10 @@ export default function flowReactPropTypes(babel) {
           return;
         }
 
+        const name = node.declaration.id.name;
         const propTypes = convertNodeToPropTypes(node.declaration.right);
+        internalTypes[name] = propTypes;
+
         let propTypesAst = makePropTypesAst(propTypes);
 
         if (propTypesAst.type === 'ObjectExpression') {
@@ -207,7 +227,7 @@ export default function flowReactPropTypes(babel) {
           t.memberExpression(t.identifier('Object'), t.identifier('defineProperty')),
           [
             t.memberExpression(t.identifier('module'), t.identifier('exports')),
-            t.stringLiteral(getExportNameForType(node.declaration.id.name)),
+            t.stringLiteral(getExportNameForType(name)),
             propTypesAst,
           ]
         ));

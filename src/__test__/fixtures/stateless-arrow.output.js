@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 var React = require('react');
 
+var arrowFunctionWithNoBody = function arrowFunctionWithNoBody() {
+  return window.console;
+};
+
 var Foo = function Foo(props) {
   React.createElement(
     'div',

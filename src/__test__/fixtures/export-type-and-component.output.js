@@ -1,0 +1,32 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Object.defineProperty(module.exports, 'babelPluginFlowReactPropTypes_proptype_T', require('react').PropTypes.shape({
+  f: require('react').PropTypes.func.isRequired,
+  i: require('react').PropTypes.number.isRequired,
+  x: require('react').PropTypes.oneOf(['foo', 'baz']).isRequired
+}));
+
+
+var C = function C(_ref) {
+  var f = _ref.f;
+
+  _react2.default.createElement('div', null);
+};
+
+C.propTypes = {
+  f: require('react').PropTypes.func.isRequired,
+  i: require('react').PropTypes.number.isRequired,
+  x: require('react').PropTypes.oneOf(['foo', 'baz']).isRequired
+};
+exports.default = C;
+
