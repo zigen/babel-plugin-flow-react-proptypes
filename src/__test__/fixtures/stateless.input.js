@@ -2,6 +2,10 @@ var React = require('react');
 
 type T = {
   an_optional_string?: string,
+  an_optional_string_1: null | string,
+  an_optional_union?: 1 | 10 | 'foo',
+  an_optional_union_1: 1 | 10 | 'foo' | null,
+  an_optional_union_2: null | string | number,
   a_number: number,
   a_boolean: boolean,
   a_generic_object: Object,
