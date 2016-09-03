@@ -1,5 +1,7 @@
 var React = require('react');
 
+const arrowFunctionWithNoBody = () => window.console;
+
 type Choices = 'option1' | 'option2';
 
 type FooT = {

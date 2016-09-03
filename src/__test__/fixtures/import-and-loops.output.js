@@ -1,0 +1,39 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var babelPluginFlowReactPropTypes_proptype_ExternalType = require('../types').babelPluginFlowReactPropTypes_proptype_ExternalType || require('react').PropTypes.any;
+
+Object.defineProperty(module.exports, 'babelPluginFlowReactPropTypes_proptype_T', require('react').PropTypes.shape({
+    flag: require('react').PropTypes.bool.isRequired,
+    list: require('react').PropTypes.arrayOf(babelPluginFlowReactPropTypes_proptype_ExternalType).isRequired
+}));
+
+
+var C = function C(_ref) {
+    var flag = _ref.flag;
+    var list = _ref.list;
+
+    return flag ? _react2.default.createElement(
+        'div',
+        null,
+        'yes'
+    ) : _react2.default.createElement(
+        Select,
+        null,
+        list.map(function (e) {
+            return _react2.default.createElement('option', { value: e.id, key: e.id });
+        })
+    );
+};
+
+exports.default = C;
+

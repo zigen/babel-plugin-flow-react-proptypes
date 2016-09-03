@@ -52,6 +52,15 @@ export default function flowReactPropTypes(babel) {
 
   const isFunctionalReactComponent = path => {
     const bodyParts = path.node.body.body;
+    if (!bodyParts) {
+      return false;
+    }
+
+    if ((path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') && !path.parent.id) {
+      // Could be functions inside a React component
+      return false;
+    }
+
     for (let i = 0; i < bodyParts.length; i++) {
       const b = bodyParts[i];
       if (t.isExpressionStatement(b)) {
