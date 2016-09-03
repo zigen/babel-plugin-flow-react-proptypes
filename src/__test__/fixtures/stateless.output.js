@@ -11,6 +11,10 @@ function Foo(props) {
 }
 Foo.propTypes = {
   an_optional_string: require('react').PropTypes.string,
+  an_optional_string_1: require('react').PropTypes.string,
+  an_optional_union: require('react').PropTypes.oneOf([1, 10, 'foo']),
+  an_optional_union_1: require('react').PropTypes.oneOf([1, 10, 'foo']),
+  an_optional_union_2: require('react').PropTypes.oneOfType([require('react').PropTypes.string, require('react').PropTypes.number]),
   a_number: require('react').PropTypes.number.isRequired,
   a_boolean: require('react').PropTypes.bool.isRequired,
   a_generic_object: require('react').PropTypes.object.isRequired,

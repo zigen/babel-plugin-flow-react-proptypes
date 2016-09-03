@@ -68,29 +68,44 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
       resultPropType = {type: 'any'};
     }
   }
+  else if (node.type === 'UnionTypeAnnotation') {
+    const {types} = node;
+
+    const typesWithoutNulls = types.filter(t => t.type !== 'NullLiteralTypeAnnotation');
+
+    // If a NullLiteralTypeAnnotation we know that this union type is not required.
+    const optional = typesWithoutNulls.length !== types.length;
+
+    // e.g. null | string
+    //     'foo' | null
+    if (typesWithoutNulls.length === 1) {
+      resultPropType = convertToPropTypes(typesWithoutNulls[0], importedTypes, internalTypes);
+      resultPropType.optional = optional;
+    }
+    else if (typesWithoutNulls.every(t => /Literal/.test(t.type))) {
+      // e.g. 'hello' | 5
+      resultPropType = {
+        type: 'oneOf',
+        optional: optional,
+        options: typesWithoutNulls.map(({value}) => value)
+      };
+    }
+    else {
+      // e.g. string | number
+      resultPropType = {
+        type: 'oneOfType',
+        optional: optional,
+        options: typesWithoutNulls.map((node) => convertToPropTypes(node, importedTypes, internalTypes))
+      };
+    }
+  }
   else if (node.type in {
-    'UnionTypeAnnotation': 0,
     'StringLiteralTypeAnnotation': 0,
     'NumericLiteralTypeAnnotation': 0,
     'BooleanLiteralTypeAnnotation': 0,
     'NullLiteralTypeAnnotation': 0,
   }) {
-    if (node.type === 'UnionTypeAnnotation') {
-      const {types} = node;
-      const firstTypeType = types[0].type;
-
-      // e.g. 'hello' | 5
-      if (/Literal/.test(firstTypeType)) {
-        resultPropType = {type: 'oneOf', options: types.map(({value}) => value)};
-      }
-      // e.g. string | number
-      else {
-        resultPropType = {type: 'oneOfType', options: types.map((node) => convertToPropTypes(node, importedTypes, internalTypes))};
-      }
-    }
-    else {
-      resultPropType = {type: 'oneOf', options: [node.value]};
-    }
+    resultPropType = {type: 'oneOf', options: [node.value]};
   }
 
   if (resultPropType) {
