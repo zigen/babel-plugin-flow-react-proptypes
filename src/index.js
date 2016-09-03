@@ -100,6 +100,14 @@ export default function flowReactPropTypes(babel) {
       throw new Error(`Did not find type annotation for ${name}`);
     }
 
+    if (!props.properties) {
+      // Bail out if we don't have any properties. This will be the case if
+      // we have an imported PropType, like:
+      // import type { T } from '../types';
+      // const C = (props: T) => <div>{props.name}</div>;
+      return;
+    }
+
     const propTypesAST = makePropTypesAst(props);
     const attachPropTypesAST = t.expressionStatement(
       t.assignmentExpression(
