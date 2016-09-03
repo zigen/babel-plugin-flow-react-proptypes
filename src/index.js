@@ -26,15 +26,15 @@ const getFunctionalComponentTypeProps = path => {
     return;
   }
 
-  const hasPropsParamReference = typeAnnotation
+  const typeAnnotationReference = typeAnnotation
     && typeAnnotation.id
     && typeAnnotation.id.name;
 
   let props = null;
-  if (hasPropsParamReference) {
-    props = internalTypes[typeAnnotation.id.name];
+  if (typeAnnotationReference) {
+    props = internalTypes[typeAnnotationReference] || importedTypes[typeAnnotationReference];
     if (!props) {
-      throw new Error(`Did not find type annotation for ${typeAnnotation.id.name}`);
+      throw new Error(`Did not find type annotation for reference ${typeAnnotationReference}`);
     }
   }
   else if (typeAnnotation.properties) {
@@ -193,7 +193,10 @@ export default function flowReactPropTypes(babel) {
           return;
         }
 
+        const name = node.declaration.id.name;
         const propTypes = convertNodeToPropTypes(node.declaration.right);
+        internalTypes[name] = propTypes;
+
         let propTypesAst = makePropTypesAst(propTypes);
 
         if (propTypesAst.type === 'ObjectExpression') {
@@ -216,7 +219,7 @@ export default function flowReactPropTypes(babel) {
           t.memberExpression(t.identifier('Object'), t.identifier('defineProperty')),
           [
             t.memberExpression(t.identifier('module'), t.identifier('exports')),
-            t.stringLiteral(getExportNameForType(node.declaration.id.name)),
+            t.stringLiteral(getExportNameForType(name)),
             propTypesAst,
           ]
         ));

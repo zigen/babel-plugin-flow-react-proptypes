@@ -61,6 +61,9 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
     else if (node.id.name === 'Object') {
       resultPropType = {type: 'object'};
     }
+    else if (node.id.name === 'Function') {
+      resultPropType = {type: 'func'};
+    }
     else {
       resultPropType = {type: 'any'};
     }
