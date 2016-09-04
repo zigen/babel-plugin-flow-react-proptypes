@@ -14,21 +14,8 @@ const convertNodeToPropTypes = node => convertToPropTypes(
     internalTypes
 );
 
-const getFunctionalComponentTypeProps = path => {
-  // Check if this looks like a stateless react component with PropType reference:
-  const firstParam = path.node.params[0];
-  const typeAnnotation = firstParam
-    && firstParam.typeAnnotation
-    && firstParam.typeAnnotation.typeAnnotation;
-
-  if (!typeAnnotation) {
-    $debug('Found stateless component without type definition');
-    return;
-  }
-
-  const typeAnnotationReference = typeAnnotation
-    && typeAnnotation.id
-    && typeAnnotation.id.name;
+const getPropsForTypeAnnotation = typeAnnotation => {
+  const typeAnnotationReference = typeAnnotation.id && typeAnnotation.id.name;
 
   let props = null;
   if (typeAnnotationReference) {
@@ -41,10 +28,25 @@ const getFunctionalComponentTypeProps = path => {
     props = convertNodeToPropTypes(typeAnnotation);
   }
   else {
-    throw new Error(`Expected prop type for functional component, but found none. This is a bug in ${PLUGIN_NAME}`);
+    throw new Error(`Expected prop types, but found none. This is a bug in ${PLUGIN_NAME}`);
   }
 
   return props;
+};
+
+const getFunctionalComponentTypeProps = path => {
+  // Check if this looks like a stateless react component with PropType reference:
+  const firstParam = path.node.params[0];
+  const typeAnnotation = firstParam
+    && firstParam.typeAnnotation
+    && firstParam.typeAnnotation.typeAnnotation;
+
+  if (!typeAnnotation) {
+    $debug('Found stateless component without type definition');
+    return;
+  }
+
+  return getPropsForTypeAnnotation(typeAnnotation);
 };
 
 export default function flowReactPropTypes(babel) {
@@ -163,8 +165,7 @@ export default function flowReactPropTypes(babel) {
         // And have type as property annotations or Component<void, Props, void>
         path.node.body.body.forEach(bodyNode => {
           if (bodyNode && bodyNode.key.name === 'props' && bodyNode.typeAnnotation) {
-            const typeAliasName = bodyNode.typeAnnotation.typeAnnotation.id.name;
-            const props = internalTypes[typeAliasName];
+            const props = getPropsForTypeAnnotation(bodyNode.typeAnnotation.typeAnnotation);
             return annotate(path, props);
           }
         });
