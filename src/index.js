@@ -85,13 +85,11 @@ export default function flowReactPropTypes(babel) {
     let name;
     let targetPath;
 
-    if (path.type === 'ArrowFunctionExpression') {
+
+    if (path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') {
       name = path.parent.id.name;
-      targetPath = path.parentPath.parentPath;
-    }
-    else if (path.type === 'FunctionExpression') {
-      name = path.parent.id.name;
-      targetPath = path.parentPath.parentPath;
+      const basePath = path.parentPath.parentPath;
+      targetPath = t.isExportDeclaration(basePath.parent) ? basePath.parentPath : basePath;
     }
     else {
       name = path.node.id.name;
