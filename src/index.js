@@ -53,29 +53,39 @@ export default function flowReactPropTypes(babel) {
   const t = babel.types;
 
   const isFunctionalReactComponent = path => {
-    const bodyParts = path.node.body.body;
-    if (!bodyParts) {
-      return false;
-    }
-
     if ((path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') && !path.parent.id) {
       // Could be functions inside a React component
       return false;
     }
-
-    for (let i = 0; i < bodyParts.length; i++) {
-      const b = bodyParts[i];
-      if (t.isExpressionStatement(b)) {
-        if (t.isJSXElement(b.expression)) {
-          return true;
-        }
-        const callee = b.expression.callee;
-        if (callee && callee.object && ['createElement', 'React'].indexOf(callee.object.name) >= 0) {
-          return true;
-        }
-      }
-      if (t.isReturnStatement(b) && t.isJSXElement(b.argument)) {
+    if (t.isJSXElement(path.node.body)) {
+      return true;
+    }
+    if (t.isCallExpression(path.node.body)) {
+      const callee = path.node.body.callee;
+      if (callee && callee.object && ['createElement', 'React'].indexOf(callee.object.name) >= 0) {
         return true;
+      }
+    }
+    if (t.isBlockStatement(path.node.body)) {
+      const bodyParts = path.node.body.body;
+      if (!bodyParts) {
+        return false;
+      }
+
+      for (let i = 0; i < bodyParts.length; i++) {
+        const b = bodyParts[i];
+        if (t.isExpressionStatement(b)) {
+          if (t.isJSXElement(b.expression)) {
+            return true;
+          }
+          const callee = b.expression.callee;
+          if (callee && callee.object && ['createElement', 'React'].indexOf(callee.object.name) >= 0) {
+            return true;
+          }
+        }
+        if (t.isReturnStatement(b) && t.isJSXElement(b.argument)) {
+          return true;
+        }
       }
     }
     return false;
