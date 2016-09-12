@@ -1,0 +1,20 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var React = require('react');
+
+var arrowFunctionWithBody = function arrowFunctionWithBody() {
+  return window.console;
+};
+
+var Foo = function Foo(props) {
+  return React.createElement('div', null, props.x);
+};
+
+Foo.propTypes = {
+  x: require('react').PropTypes.oneOf(['option1', 'option2'])
+};
+exports.default = Foo;
+
