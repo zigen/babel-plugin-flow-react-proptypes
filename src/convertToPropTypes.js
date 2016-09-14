@@ -34,6 +34,7 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
     resultPropType = convertToPropTypes(node.typeAnnotation, importedTypes, internalTypes);
     resultPropType.optional = true;
   }
+  else if (node.type === 'IntersectionTypeAnnotation') resultPropType = {type: 'any'};
   else if (node.type === 'GenericTypeAnnotation' || node.type === 'ArrayTypeAnnotation') {
     if (node.type === 'ArrayTypeAnnotation' || node.id.name === 'Array') {
       let arrayType;
