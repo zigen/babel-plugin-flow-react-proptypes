@@ -24,7 +24,7 @@ const getPropsForTypeAnnotation = typeAnnotation => {
       $debug(`Did not find type annotation for reference ${typeAnnotationReference}`);
     }
   }
-  else if (typeAnnotation.properties) {
+  else if (typeAnnotation.properties || typeAnnotation.type || 'GenericTypeAnnotation') {
     props = convertNodeToPropTypes(typeAnnotation);
   }
   else {
