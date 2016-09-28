@@ -36,6 +36,13 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
     resultPropType.optional = true;
   }
   else if (node.type === 'IntersectionTypeAnnotation') resultPropType = {type: 'any'};
+  // Exact
+  else if (node.type === 'GenericTypeAnnotation' && node.id.name === '$Exact') {
+    resultPropType = {
+      type: 'exact',
+      properties: convertToPropTypes(node.typeParameters.params[0], importedTypes, internalTypes),
+    };
+  }
   else if (node.type === 'GenericTypeAnnotation' || node.type === 'ArrayTypeAnnotation') {
     if (node.type === 'ArrayTypeAnnotation' || node.id.name === 'Array') {
       let arrayType;
