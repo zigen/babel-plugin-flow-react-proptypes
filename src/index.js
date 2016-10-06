@@ -8,7 +8,7 @@ let internalTypes = {};
 // maps between type alias to import alias
 let importedTypes = {};
 let suppress = false;
-const SUPPRESS_STRING = 'no babel-pluign-flow-react-proptypes';
+const SUPPRESS_STRING = 'no babel-plugin-flow-react-proptypes';
 
 const convertNodeToPropTypes = node => convertToPropTypes(
     node,

@@ -1,4 +1,4 @@
-'no babel-pluign-flow-react-proptypes';
+'no babel-plugin-flow-react-proptypes';
 var React = require('react');
 
 type FooProps = {
