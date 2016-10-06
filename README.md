@@ -107,7 +107,7 @@ To save some bytes in production, you can also only enable it in development mod
 This plugin isn't perfect. You can disable it for an entire file with this directive (including quotes):
 
 ```js
-'no babel-pluign-flow-react-proptypes';
+'no babel-plugin-flow-react-proptypes';
 ```
 
 
