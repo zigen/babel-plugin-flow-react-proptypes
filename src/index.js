@@ -147,9 +147,9 @@ export default function flowReactPropTypes(babel) {
         internalTypes = {};
         importedTypes = {};
         suppress = false;
-        let directives = path.node.directives;
+        const directives = path.node.directives;
         if(directives && directives.length)  {
-          let directive = directives[0];
+          const directive = directives[0];
           if (directive.value && directive.value.value == SUPPRESS_STRING) {
             suppress = true;
           }
