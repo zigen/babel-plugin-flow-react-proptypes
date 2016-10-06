@@ -7,6 +7,8 @@ let internalTypes = {};
 
 // maps between type alias to import alias
 let importedTypes = {};
+let suppress = false;
+const SUPPRESS_STRING = 'no babel-pluign-flow-react-proptypes';
 
 const convertNodeToPropTypes = node => convertToPropTypes(
     node,
@@ -144,8 +146,17 @@ export default function flowReactPropTypes(babel) {
       Program(path) {
         internalTypes = {};
         importedTypes = {};
+        suppress = false;
+        let directives = path.node.directives;
+        if(directives && directives.length)  {
+          let directive = directives[0];
+          if (directive.value && directive.value.value == SUPPRESS_STRING) {
+            suppress = true;
+          }
+        }
       },
       TypeAlias(path) {
+        if (suppress) return;
         $debug('TypeAlias found');
         const {right} = path.node;
 
@@ -158,6 +169,7 @@ export default function flowReactPropTypes(babel) {
         internalTypes[typeAliasName] = propTypes;
       },
       ClassDeclaration(path) {
+        if (suppress) return;
         const {superClass} = path.node;
 
         // check if we're extending React.Compoennt
@@ -188,19 +200,23 @@ export default function flowReactPropTypes(babel) {
       },
 
       FunctionExpression(path) {
+        if (suppress) return;
         return functionVisitor(path);
       },
 
       FunctionDeclaration(path) {
+        if (suppress) return;
         return functionVisitor(path);
       },
 
       ArrowFunctionExpression(path) {
+        if (suppress) return;
         return functionVisitor(path);
       },
 
       // See issue:
       ExportNamedDeclaration(path) {
+        if (suppress) return;
         const {node} = path;
 
         if (!node.declaration || node.declaration.type !== 'TypeAlias') {
@@ -243,6 +259,7 @@ export default function flowReactPropTypes(babel) {
         path.insertAfter(exportAst);
       },
       ImportDeclaration(path) {
+        if (suppress) return;
         const {node} = path;
         if (node.importKind === 'type') {
           node.specifiers.forEach((specifier) => {
