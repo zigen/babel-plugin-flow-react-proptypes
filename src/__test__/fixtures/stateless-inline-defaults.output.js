@@ -7,10 +7,10 @@ exports.default = Foo;
 var React = require('react');
 
 function Foo(_ref) {
-  var _ref$x = _ref.x;
-  var x = _ref$x === undefined ? 1 : _ref$x;
-  var _ref$y = _ref.y;
-  var y = _ref$y === undefined ? 'foo' : _ref$y;
+  var _ref$x = _ref.x,
+      x = _ref$x === undefined ? 1 : _ref$x,
+      _ref$y = _ref.y,
+      y = _ref$y === undefined ? 'foo' : _ref$y;
 
   React.createElement(
     'div',
