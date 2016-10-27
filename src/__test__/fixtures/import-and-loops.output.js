@@ -19,8 +19,8 @@ Object.defineProperty(module.exports, 'babelPluginFlowReactPropTypes_proptype_T'
 
 
 var C = function C(_ref) {
-    var flag = _ref.flag;
-    var list = _ref.list;
+    var flag = _ref.flag,
+        list = _ref.list;
 
     return flag ? _react2.default.createElement(
         'div',

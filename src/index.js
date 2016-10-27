@@ -175,8 +175,10 @@ export default function flowReactPropTypes(babel) {
         // check if we're extending React.Compoennt
         const extendsReactComponent = superClass && superClass.type === 'MemberExpression'
         && superClass.object.name === 'React'
-        && superClass.property.name === 'Component';
-        const extendsComponent = superClass && superClass.type === 'Identifier' && superClass.name === 'Component';
+        && (superClass.property.name === 'Component' || superClass.property.name === 'PureComponent');
+        const extendsComponent = superClass
+                                 && superClass.type === 'Identifier'
+                                 && (superClass.name === 'Component' || superClass.name === 'PureComponent');
         if (!extendsReactComponent && !extendsComponent) {
           $debug('Found a class that isn\'t a react component', superClass);
           return;
