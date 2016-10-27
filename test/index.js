@@ -29,7 +29,15 @@ describe('emit asserts for: ', () => {
             ]
           }
         ).code;
-        const expected = fs.readFileSync(path.join(fixturesDir, name + OUTPUT_POSTFIX)).toString();
+        let expected;
+        try {
+          expected = fs.readFileSync(path.join(fixturesDir, name + OUTPUT_POSTFIX)).toString();
+        }
+        catch (e) {
+          expected = actual;
+          fs.writeFileSync(path.join(fixturesDir, name + OUTPUT_POSTFIX), actual);
+        }
+
         assert.equal(trim(actual), trim(expected));
       });
     });
