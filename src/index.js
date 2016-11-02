@@ -1,4 +1,4 @@
-import {$debug, getExportNameForType, PLUGIN_NAME} from './util';
+import {$debug, getExportNameForType, containsReactElement, PLUGIN_NAME} from './util';
 import convertToPropTypes from './convertToPropTypes';
 import makePropTypesAst from './makePropTypesAst';
 
@@ -59,36 +59,8 @@ export default function flowReactPropTypes(babel) {
       // Could be functions inside a React component
       return false;
     }
-    if (t.isJSXElement(path.node.body)) {
+    if (containsReactElement(path.node)) {
       return true;
-    }
-    if (t.isCallExpression(path.node.body)) {
-      const callee = path.node.body.callee;
-      if (callee && callee.object && ['createElement', 'React'].indexOf(callee.object.name) >= 0) {
-        return true;
-      }
-    }
-    if (t.isBlockStatement(path.node.body)) {
-      const bodyParts = path.node.body.body;
-      if (!bodyParts) {
-        return false;
-      }
-
-      for (let i = 0; i < bodyParts.length; i++) {
-        const b = bodyParts[i];
-        if (t.isExpressionStatement(b)) {
-          if (t.isJSXElement(b.expression)) {
-            return true;
-          }
-          const callee = b.expression.callee;
-          if (callee && callee.object && ['createElement', 'React'].indexOf(callee.object.name) >= 0) {
-            return true;
-          }
-        }
-        if (t.isReturnStatement(b) && t.isJSXElement(b.argument)) {
-          return true;
-        }
-      }
     }
     return false;
   };

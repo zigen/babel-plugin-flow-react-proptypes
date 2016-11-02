@@ -1,0 +1,12 @@
+"use strict";
+
+var C = function C(props) {
+  var el = null;
+  if (true) {
+    el = React.createElement("div", null);
+  }
+  return el;
+};
+C.propTypes = {
+  name: require("react").PropTypes.string.isRequired
+};

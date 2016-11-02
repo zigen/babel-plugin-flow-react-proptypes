@@ -35,5 +35,8 @@ var C = function C(_ref) {
     );
 };
 
+C.propTypes = {
+    flag: require('react').PropTypes.bool.isRequired,
+    list: require('react').PropTypes.arrayOf(babelPluginFlowReactPropTypes_proptype_ExternalType).isRequired
+};
 exports.default = C;
-
