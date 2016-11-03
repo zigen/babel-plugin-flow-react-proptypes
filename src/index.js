@@ -1,4 +1,10 @@
-import {$debug, getExportNameForType, containsReactElement, PLUGIN_NAME} from './util';
+import {
+  $debug,
+  getExportNameForType,
+  containsReactElement,
+  PLUGIN_NAME,
+  hasReactElementTypeAnnotationReturn,
+} from './util';
 import convertToPropTypes from './convertToPropTypes';
 import makePropTypesAst from './makePropTypesAst';
 
@@ -56,8 +62,12 @@ export default function flowReactPropTypes(babel) {
 
   const isFunctionalReactComponent = path => {
     if ((path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') && !path.parent.id) {
+      console.error('nope');
       // Could be functions inside a React component
       return false;
+    }
+    if (hasReactElementTypeAnnotationReturn(path.node)) {
+      return true;
     }
     if (containsReactElement(path.node)) {
       return true;

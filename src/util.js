@@ -55,3 +55,25 @@ export function containsReactElement(node) {
   })
   return matched;
 }
+
+export function hasReactElementTypeAnnotationReturn(node) {
+  if (node.type !== 'ArrowFunctionExpression') {
+    return false;
+  }
+  if (!node.returnType || node.returnType.type !== 'TypeAnnotation') {
+    return false;
+  }
+
+  var type = node.returnType.typeAnnotation;
+  if (type.type === 'GenericTypeAnnotation') {
+    if (type.id && type.id.name === 'ReactElement') {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  return true;
+}
+
