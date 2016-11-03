@@ -21,14 +21,14 @@ export function getExportNameForType(name) {
 }
 
 export function containsReactElement(node) {
-  var fakeRoot = {
+  const fakeRoot = {
     type: 'File', program: {
       type: 'Program',
       sourceType: 'module',
       body: [node],
     },
   };
-  var matched = false;
+  const matched = false;
 
   traverse(fakeRoot, {
     JSXElement(path) {
@@ -41,8 +41,8 @@ export function containsReactElement(node) {
         return;
       };
 
-      var {node} = path;
-      var {callee} = node;
+      const {node} = path;
+      const {callee} = node;
       if (callee.type !== 'MemberExpression') return;
       if (
         callee.object && callee.object.name === 'React'
@@ -52,7 +52,7 @@ export function containsReactElement(node) {
         path.stop();
       }
     }
-  })
+  });
   return matched;
 }
 
@@ -64,7 +64,7 @@ export function hasReactElementTypeAnnotationReturn(node) {
     return false;
   }
 
-  var type = node.returnType.typeAnnotation;
+  const type = node.returnType.typeAnnotation;
   if (type.type === 'GenericTypeAnnotation') {
     if (type.id && type.id.name === 'ReactElement') {
       return true;
@@ -75,5 +75,5 @@ export function hasReactElementTypeAnnotationReturn(node) {
   }
 
   return true;
-}
+};
 
