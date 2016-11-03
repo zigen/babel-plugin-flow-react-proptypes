@@ -28,7 +28,7 @@ export function containsReactElement(node) {
       body: [node],
     },
   };
-  const matched = false;
+  let matched = false;
 
   traverse(fakeRoot, {
     JSXElement(path) {

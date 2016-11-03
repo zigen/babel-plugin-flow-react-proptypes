@@ -62,7 +62,6 @@ export default function flowReactPropTypes(babel) {
 
   const isFunctionalReactComponent = path => {
     if ((path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') && !path.parent.id) {
-      console.error('nope');
       // Could be functions inside a React component
       return false;
     }
