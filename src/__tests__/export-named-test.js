@@ -1,0 +1,35 @@
+var babel = require('babel-core');
+var content = `
+// @flow
+import React from 'react'
+type VendorProps = {
+  test: string,
+};
+
+export class ExportedVendorCard extends React.Component {
+  props: VendorProps;
+  render () {
+    return (
+      <div />
+    );
+  }
+}
+
+class LocalVendorCard extends React.Component {
+  props: VendorProps;
+  render () {
+    return (
+      <div />
+    );
+  }
+}
+`;
+
+it('export-named', () => {
+  var res = babel.transform(content, {
+    babelrc: false,
+    presets: ['es2015', 'stage-1', 'react'],
+    plugins: ['syntax-flow', require('../')],
+  }).code;
+  expect(res).toMatchSnapshot();
+});

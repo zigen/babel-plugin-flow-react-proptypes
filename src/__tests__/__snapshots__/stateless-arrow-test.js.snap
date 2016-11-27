@@ -1,0 +1,26 @@
+exports[`test stateless-arrow 1`] = `
+"\'use strict\';
+
+Object.defineProperty(exports, \"__esModule\", {
+  value: true
+});
+
+var React = require(\'react\');
+
+var arrowFunctionWithNoBody = function arrowFunctionWithNoBody() {
+  return window.console;
+};
+
+var Foo = function Foo(props) {
+  React.createElement(
+    \'div\',
+    null,
+    props.x
+  );
+};
+
+Foo.propTypes = {
+  x: require(\'react\').PropTypes.oneOf([\'option1\', \'option2\'])
+};
+exports.default = Foo;"
+`;

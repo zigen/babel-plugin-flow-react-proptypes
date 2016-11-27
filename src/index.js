@@ -57,7 +57,7 @@ const getFunctionalComponentTypeProps = path => {
   return getPropsForTypeAnnotation(typeAnnotation);
 };
 
-export default function flowReactPropTypes(babel) {
+module.exports = function flowReactPropTypes(babel) {
   const t = babel.types;
 
   const isFunctionalReactComponent = path => {

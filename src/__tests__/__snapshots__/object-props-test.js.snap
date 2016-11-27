@@ -1,0 +1,7 @@
+exports[`test object-props 1`] = `
+"\"use strict\";
+
+var Component = function Component(props) {
+  return React.createElement(\"div\", null);
+};"
+`;

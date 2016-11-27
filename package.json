@@ -36,12 +36,13 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-1": "^6.16.0",
     "eslint": "^3.8.1",
-    "eslint-plugin-react": "^6.4.1",
-    "mocha": "^3.1.2"
+    "eslint-plugin-react": "^6.4.1"
   },
   "dependencies": {
+    "babel-jest": "^17.0.2",
     "babel-template": "^6.16.0",
     "babel-traverse": "^6.18.0",
-    "babel-types": "^6.18.0"
+    "babel-types": "^6.18.0",
+    "jest": "^17.0.3"
   }
 }
