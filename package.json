@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint src test",
-    "test": "npm run build && mocha --compilers js:babel-core/register",
+    "test": "npm run build && jest",
     "build": "babel src/ --out-dir lib/ --ignore src/__test__ --presets es2015,stage-1,react"
   },
   "repository": {
@@ -44,5 +44,8 @@
     "babel-traverse": "^6.18.0",
     "babel-types": "^6.18.0",
     "jest": "^17.0.3"
+  },
+  "jest": {
+    "testPathIgnorePatterns": ["/node_modules/", "/lib/"]
   }
 }
