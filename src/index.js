@@ -244,6 +244,12 @@ module.exports = function flowReactPropTypes(babel) {
       ImportDeclaration(path) {
         if (suppress) return;
         const {node} = path;
+
+        // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/62
+        if (node.source.value[0] !== '.') {
+          return;
+        }
+
         if (node.importKind === 'type') {
           node.specifiers.forEach((specifier) => {
             const typeName = specifier.type === 'ImportDefaultSpecifier'
