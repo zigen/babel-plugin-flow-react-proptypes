@@ -234,12 +234,23 @@ module.exports = function flowReactPropTypes(babel) {
         const exportAst = t.expressionStatement(t.callExpression(
           t.memberExpression(t.identifier('Object'), t.identifier('defineProperty')),
           [
-            t.memberExpression(t.identifier('module'), t.identifier('exports')),
+            t.identifier('exports'),
             t.stringLiteral(getExportNameForType(name)),
             t.objectExpression([t.objectProperty(t.identifier('value'), propTypesAst)]),
           ]
         ));
-        path.insertAfter(exportAst);
+        const conditionalExportsAst = t.ifStatement(
+            t.binaryExpression(
+              '!==',
+              t.unaryExpression(
+                'typeof',
+                t.identifier('exports')
+              ),
+              t.stringLiteral('undefined')
+            ),
+            exportAst
+        );
+        path.insertAfter(conditionalExportsAst);
       },
       ImportDeclaration(path) {
         if (suppress) return;

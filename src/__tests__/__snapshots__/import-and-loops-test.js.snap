@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var babelPluginFlowReactPropTypes_proptype_ExternalType = require(\'../types\').babelPluginFlowReactPropTypes_proptype_ExternalType || require(\'react\').PropTypes.any;
 
-Object.defineProperty(module.exports, \'babelPluginFlowReactPropTypes_proptype_T\', {
+if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_T\', {
     value: require(\'react\').PropTypes.shape({
         flag: require(\'react\').PropTypes.bool.isRequired,
         list: require(\'react\').PropTypes.arrayOf(babelPluginFlowReactPropTypes_proptype_ExternalType).isRequired
