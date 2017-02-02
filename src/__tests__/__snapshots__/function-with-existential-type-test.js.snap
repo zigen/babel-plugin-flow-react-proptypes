@@ -1,0 +1,8 @@
+exports[`test function-with-type-annotation 1`] = `
+"\"use strict\";
+
+var C = function C(props) {};
+C.propTypes = {
+  bar: require(\"react\").PropTypes.any.isRequired
+};"
+`;
