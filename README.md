@@ -71,7 +71,7 @@ exports.default = Foo;
 
 ## Usage
 
-This plugin searches for a React components using type declaration. Works with functional components, `React.createClass` and ES6 classes.
+This plugin searches for a React components using type declaration. Works with functional components and ES6 classes. `React.createClass` is not currently supported.
 
 
 ## Install
