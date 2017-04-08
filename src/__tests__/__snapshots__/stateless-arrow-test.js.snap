@@ -20,7 +20,7 @@ var Foo = function Foo(props) {
 };
 
 Foo.propTypes = {
-  x: require(\'react\').PropTypes.oneOf([\'option1\', \'option2\'])
+  x: require(\'prop-types\').oneOf([\'option1\', \'option2\'])
 };
 exports.default = Foo;"
 `;

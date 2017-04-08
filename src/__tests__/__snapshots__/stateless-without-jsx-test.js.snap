@@ -12,7 +12,7 @@ var Foo = function Foo(props) {
 };
 
 Foo.propTypes = {
-  x: require(\'react\').PropTypes.number
+  x: require(\'prop-types\').number
 };
 exports.default = Foo;"
 `;

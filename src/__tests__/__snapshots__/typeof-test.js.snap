@@ -7,8 +7,8 @@ var ActionTypes = {
 
 if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_JumpToAction\', {
   value: require(\'react\').PropTypes.shape({
-    type: require(\'react\').PropTypes.any.isRequired,
-    index: require(\'react\').PropTypes.number.isRequired
+    type: require(\'prop-types\').any.isRequired,
+    index: require(\'prop-types\').number.isRequired
   })
 });"
 `;

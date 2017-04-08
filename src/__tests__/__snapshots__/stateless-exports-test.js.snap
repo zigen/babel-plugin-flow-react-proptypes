@@ -18,7 +18,7 @@ var C1 = exports.C1 = function C1(_ref) {
   return _react2.default.createElement(\"div\", null);
 };
 C1.propTypes = {
-  m: require(\"react\").PropTypes.string.isRequired
+  m: require(\"prop-types\").string.isRequired
 };
 var C2 = exports.C2 = function C2(_ref2) {
   var m = _ref2.m;
@@ -26,6 +26,6 @@ var C2 = exports.C2 = function C2(_ref2) {
   return _react2.default.createElement(\"div\", null);
 };
 C2.propTypes = {
-  m: require(\"react\").PropTypes.string.isRequired
+  m: require(\"prop-types\").string.isRequired
 };"
 `;

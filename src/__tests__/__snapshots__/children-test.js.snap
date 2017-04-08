@@ -11,6 +11,6 @@ function Foo(props) {
   );
 }
 Foo.propTypes = {
-  children: require(\'react\').PropTypes.node.isRequired
+  children: require(\'prop-types\').node.isRequired
 };"
 `;

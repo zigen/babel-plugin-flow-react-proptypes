@@ -23,7 +23,7 @@ function Foo(_ref) {
   );
 }
 Foo.propTypes = {
-  x: require(\'react\').PropTypes.number,
-  y: require(\'react\').PropTypes.string
+  x: require(\'prop-types\').number,
+  y: require(\'prop-types\').string
 };"
 `;

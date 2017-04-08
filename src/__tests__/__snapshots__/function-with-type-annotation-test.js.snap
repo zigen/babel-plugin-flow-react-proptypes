@@ -3,6 +3,6 @@ exports[`test function-with-type-annotation 1`] = `
 
 var C = function C(props) {};
 C.propTypes = {
-  name: require(\"react\").PropTypes.string.isRequired
+  name: require(\"prop-types\").string.isRequired
 };"
 `;

@@ -15,8 +15,8 @@ var babelPluginFlowReactPropTypes_proptype_ExternalType = require(\'../types\').
 
 if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_T\', {
     value: require(\'react\').PropTypes.shape({
-        flag: require(\'react\').PropTypes.bool.isRequired,
-        list: require(\'react\').PropTypes.arrayOf(babelPluginFlowReactPropTypes_proptype_ExternalType).isRequired
+        flag: require(\'prop-types\').bool.isRequired,
+        list: require(\'prop-types\').arrayOf(babelPluginFlowReactPropTypes_proptype_ExternalType).isRequired
     })
 });
 
@@ -39,8 +39,8 @@ var C = function C(_ref) {
 };
 
 C.propTypes = {
-    flag: require(\'react\').PropTypes.bool.isRequired,
-    list: require(\'react\').PropTypes.arrayOf(babelPluginFlowReactPropTypes_proptype_ExternalType).isRequired
+    flag: require(\'prop-types\').bool.isRequired,
+    list: require(\'prop-types\').arrayOf(babelPluginFlowReactPropTypes_proptype_ExternalType).isRequired
 };
 exports.default = C;"
 `;

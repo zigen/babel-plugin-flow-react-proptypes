@@ -3,7 +3,7 @@ exports[`test export-object 1`] = `
 
 if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_Foo\', {
   value: require(\'react\').PropTypes.shape({
-    a_string: require(\'react\').PropTypes.string.isRequired
+    a_string: require(\'prop-types\').string.isRequired
   })
 });
 

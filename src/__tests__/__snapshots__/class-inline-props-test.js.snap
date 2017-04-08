@@ -37,7 +37,7 @@ var Foo = function (_React$Component) {
 }(React.Component);
 
 Foo.propTypes = {
-  a_number: require(\'react\').PropTypes.number.isRequired,
+  a_number: require(\'prop-types\').number.isRequired,
   external: babelPluginFlowReactPropTypes_proptype_ExternalType
 };
 exports.default = Foo;"

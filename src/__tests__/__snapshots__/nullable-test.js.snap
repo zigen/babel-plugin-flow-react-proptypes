@@ -26,7 +26,7 @@ var Foo = function (_React$Component) {
 }(React.Component);
 
 Foo.propTypes = {
-  foo: require(\'react\').PropTypes.string
+  foo: require(\'prop-types\').string
 };
 exports.default = Foo;"
 `;

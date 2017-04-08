@@ -29,6 +29,6 @@ var Foo = function (_React$PureComponent) {
 }(React.PureComponent);
 
 Foo.propTypes = {
-  name: require(\"react\").PropTypes.string.isRequired
+  name: require(\"prop-types\").string.isRequired
 };"
 `;

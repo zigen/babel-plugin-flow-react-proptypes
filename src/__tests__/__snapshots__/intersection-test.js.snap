@@ -20,6 +20,6 @@ var MyComponent = function (_React$Component) {
 }(React.Component);
 
 MyComponent.propTypes = {
-    someProp: require(\"react\").PropTypes.any.isRequired
+    someProp: require(\"prop-types\").any.isRequired
 };"
 `;

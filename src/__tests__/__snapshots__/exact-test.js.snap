@@ -29,9 +29,9 @@ var Foo = function (_React$Component) {
 }(React.Component);
 
 Foo.propTypes = {
-  bar: require(\"react\").PropTypes.shape({
-    a: require(\"react\").PropTypes.string.isRequired,
-    b: require(\"react\").PropTypes.number.isRequired,
+  bar: require(\"prop-types\").shape({
+    a: require(\"prop-types\").string.isRequired,
+    b: require(\"prop-types\").number.isRequired,
     __exact__: function __exact__(values, prop, displayName) {
       var props = {
         a: true,

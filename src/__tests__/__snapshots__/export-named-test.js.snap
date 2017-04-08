@@ -40,7 +40,7 @@ var ExportedVendorCard = exports.ExportedVendorCard = function (_React$Component
 }(_react2.default.Component);
 
 ExportedVendorCard.propTypes = {
-  test: require(\'react\').PropTypes.string.isRequired
+  test: require(\'prop-types\').string.isRequired
 };
 
 var LocalVendorCard = function (_React$Component2) {
@@ -63,6 +63,6 @@ var LocalVendorCard = function (_React$Component2) {
 }(_react2.default.Component);
 
 LocalVendorCard.propTypes = {
-  test: require(\'react\').PropTypes.string.isRequired
+  test: require(\'prop-types\').string.isRequired
 };"
 `;

@@ -39,7 +39,7 @@ var TaskGridHeader = function (_Component) {
 }(_react.Component);
 
 TaskGridHeader.propTypes = {
-    tasksSetSort: require(\'react\').PropTypes.any.isRequired
+    tasksSetSort: require(\'prop-types\').any.isRequired
 };
 exports.default = TaskGridHeader;
 

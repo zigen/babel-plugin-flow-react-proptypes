@@ -20,10 +20,10 @@ var C = function (_React$Component) {
 }(React.Component);
 
 C.propTypes = {
-  an_imported_named_type: require(\'react\').PropTypes.any.isRequired,
-  an_imported_default_type: require(\'react\').PropTypes.any.isRequired,
-  a_global_type: require(\'react\').PropTypes.any.isRequired,
-  a_undefined_type: require(\'react\').PropTypes.any.isRequired
+  an_imported_named_type: require(\'prop-types\').any.isRequired,
+  an_imported_default_type: require(\'prop-types\').any.isRequired,
+  a_global_type: require(\'prop-types\').any.isRequired,
+  a_undefined_type: require(\'prop-types\').any.isRequired
 };
 ;"
 `;

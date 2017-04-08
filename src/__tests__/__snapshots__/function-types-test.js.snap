@@ -30,7 +30,7 @@ var MyComponent = function (_Component) {
 }(_react.Component);
 
 MyComponent.propTypes = {
-  onClick: require(\"react\").PropTypes.func
+  onClick: require(\"prop-types\").func
 };
 exports.default = MyComponent;"
 `;
