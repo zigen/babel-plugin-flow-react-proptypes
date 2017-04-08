@@ -82,6 +82,13 @@ First install the plugin:
 npm install --save-dev babel-plugin-flow-react-proptypes
 ```
 
+Also install the prop-types package. This is required for React `>=15.5.0`. For earlier React versions
+you can use version `0.21.0` of this plugin, which doesn't use the prop-types pacakge.
+
+```sh
+npm install --save prop-types
+```
+
 Then add it to your babelrc:
 
 ```json

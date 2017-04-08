@@ -2,6 +2,8 @@ import {$debug, makeLiteral, PLUGIN_NAME} from './util';
 import * as t from 'babel-types';
 import template from 'babel-template';
 
+const USE_PROPTYPES_PACKAGE = true;
+
 export default function makePropTypesAst(propTypeData) {
   const rootProperties = propTypeData.properties.map(({key, value}) => {
     return t.objectProperty(
@@ -19,10 +21,15 @@ function makePropType(data, isExact) {
   }
 
   const method = data.type;
-
-  const reactNode = t.callExpression(t.identifier('require'), [makeLiteral('react')]);
-  let node = t.memberExpression(reactNode, t.identifier('PropTypes'));
-  let isRequired = true;
+  let reactNode, node, isRequired;
+  if (USE_PROPTYPES_PACKAGE) {
+    node = t.callExpression(t.identifier('require'), [makeLiteral('prop-types')]);
+    isRequired = true;
+  } else {
+    reactNode = t.callExpression(t.identifier('require'), [makeLiteral('react')]);
+    node = t.memberExpression(reactNode, t.identifier('PropTypes'));
+    isRequired = true;
+  }
 
   if (method === 'any' || method === 'string' || method === 'number' || method === 'bool' || method === 'object' ||
       method === 'array' || method === 'func' || method === 'node') {
