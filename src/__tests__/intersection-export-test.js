@@ -19,7 +19,7 @@ class C extends React.Component {
 export default C;
 `;
 
-it('stateless', () => {
+it('interesection-export', () => {
   var res = babel.transform(content, {
     babelrc: false,
     presets: ['es2015', 'stage-1', 'react'],
