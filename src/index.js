@@ -202,15 +202,27 @@ module.exports = function flowReactPropTypes(babel) {
         if (suppress) return;
         const {node} = path;
 
+        let declarationObject;
+
         if (!node.declaration || node.declaration.type !== 'TypeAlias') {
           return;
         }
-        if (!node.declaration.right.properties) {
+        if (node.declaration.right.type === 'IntersectionTypeAnnotation') {
+          const {types} = node.declaration.right;
+          const last = types[types.length - 1];
+          if (last.type === 'ObjectTypeAnnotation') {
+            declarationObject = last;
+          } else {
+            return;
+          }
+        } else if (!node.declaration.right.properties) {
           return;
+        } else {
+          declarationObject = node.declaration.right;
         }
 
         const name = node.declaration.id.name;
-        const propTypes = convertNodeToPropTypes(node.declaration.right);
+        const propTypes = convertNodeToPropTypes(declarationObject);
         internalTypes[name] = propTypes;
 
         let propTypesAst = makePropTypesAst(propTypes);
