@@ -18,6 +18,5 @@ it('import-object', () => {
     presets: ['es2015', 'stage-1', 'react'],
     plugins: ['syntax-flow', require('../')],
   }).code;
-  console.log(res);
   expect(res).toMatchSnapshot();
 });
