@@ -86,7 +86,7 @@ module.exports = function flowReactPropTypes(babel) {
     }
     else {
       name = path.node.id.name;
-      targetPath = path.parent.type === 'Program' ? path : path.parentPath;
+      targetPath = ['Program', 'BlockStatement'].indexOf(path.parent.type) >= 0 ? path : path.parentPath;
     }
 
     if (!props) {
