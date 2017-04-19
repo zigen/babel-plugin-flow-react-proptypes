@@ -5,8 +5,11 @@ To run linting run `npm run lint`.
 
 To run the "tests" run `npm run test`.
 
-Instead of normal unit tests, there are example .input.js and output.js files which are manually inspected for correctness.
-They're checked into git so you can easily diff them when changes are made.
+Currently all tests are jest snapshot tests. Create a new file in src/__tests__ based on an existing file, update the code, and then run the tests.
 
-When fixing a bug, add a new test. Put the file in src/__test__/fixtures/{something}.input.js. `npm run test` will
-create the output file.
+To run in watch mode: `npm run test -- --watch`, and then you can filter the tests by following the instructions on screen.
+
+If tests are failing due to snapshots changing, press <kbd>u</kbd> in watch mode, or `npm run test -- -u` to update them.
+
+Make sure to add your tests when you commit.
+
