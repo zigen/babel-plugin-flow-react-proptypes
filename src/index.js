@@ -135,7 +135,7 @@ module.exports = function flowReactPropTypes(babel) {
             suppress = true;
           }
         }
-        if (this.file && this.file.opt && this.file.opt.filename) {
+        if (this.file && this.file.opts && this.file.opts.filename) {
           if (this.file.opts.filename.indexOf("node_modules") >= 0) {
             // Suppress any file that lives in node_modules
             suppress = true;
