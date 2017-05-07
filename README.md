@@ -118,4 +118,11 @@ This plugin isn't perfect. You can disable it for an entire file with this direc
 'no babel-plugin-flow-react-proptypes';
 ```
 
+Specifically for react-native you can disable this for files in `node_modules` with the `ignoreNodeModules` config option.
 
+```json
+{
+  "presets": ["..."],
+  "plugins": [["flow-react-proptypes", {ignoreNodeModules: true}]]
+}
+```
