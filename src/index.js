@@ -124,7 +124,7 @@ module.exports = function flowReactPropTypes(babel) {
 
   return {
     visitor: {
-      Program(path) {
+      Program(path, {opts}) {
         internalTypes = {};
         importedTypes = {};
         suppress = false;
@@ -136,9 +136,10 @@ module.exports = function flowReactPropTypes(babel) {
           }
         }
         if (this.file && this.file.opts && this.file.opts.filename) {
-          if (this.file.opts.filename.indexOf("node_modules") >= 0) {
-            // Suppress any file that lives in node_modules
-            suppress = true;
+          if (this.file.opts.filename.indexOf('node_modules') >= 0) {
+            // Suppress any file that lives in node_modules IF the
+            // ignoreNodeModules setting is true
+            suppress = opts.ignoreNodeModules;
           }
         }
       },
@@ -218,12 +219,15 @@ module.exports = function flowReactPropTypes(babel) {
           const last = types[types.length - 1];
           if (last.type === 'ObjectTypeAnnotation') {
             declarationObject = last;
-          } else {
+          }
+          else {
             return;
           }
-        } else if (!node.declaration.right.properties) {
+        }
+        else if (!node.declaration.right.properties) {
           return;
-        } else {
+        }
+        else {
           declarationObject = node.declaration.right;
         }
 
