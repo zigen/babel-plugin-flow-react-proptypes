@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint src test",
     "test": "npm run build && jest",
-    "build": "babel src/ --out-dir lib/ --ignore src/__tests__ --presets es2015,stage-1,react"
+    "build": "babel src/ --out-dir lib/ --ignore src/__tests__ --presets es2015,stage-1,react",
+    "predeploy": "npm run build && npm run lint"
   },
   "repository": {
     "type": "git",
