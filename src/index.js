@@ -6,7 +6,7 @@ import {
   hasReactElementTypeAnnotationReturn,
 } from './util';
 import convertToPropTypes from './convertToPropTypes';
-import makePropTypesAst from './makePropTypesAst';
+import {makePropTypesAstForExport, makePropTypesAstForPropTypesAssignment} from './makePropTypesAst';
 
 // maps between type alias name to prop types
 let internalTypes = {};
@@ -28,15 +28,9 @@ const convertNodeToPropTypes = node => convertToPropTypes(
 );
 
 const getPropsForTypeAnnotation = typeAnnotation => {
-  const typeAnnotationReference = typeAnnotation.id && typeAnnotation.id.name;
   let props = null;
-  if (typeAnnotationReference) {
-    props = internalTypes[typeAnnotationReference] || importedTypes[typeAnnotationReference];
-    if (!props) {
-      $debug(`Did not find type annotation for reference ${typeAnnotationReference}`);
-    }
-  }
-  else if (typeAnnotation.properties || typeAnnotation.type === 'GenericTypeAnnotation'
+
+  if (typeAnnotation.properties || typeAnnotation.type === 'GenericTypeAnnotation'
       || typeAnnotation.type === 'IntersectionTypeAnnotation'
       || typeAnnotation.type === 'AnyTypeAnnotation') {
     props = convertNodeToPropTypes(typeAnnotation);
@@ -109,18 +103,10 @@ module.exports = function flowReactPropTypes(babel) {
       throw new Error(`Did not find type annotation for ${name}`);
     }
 
-
-    if (!props.properties) {
-      // Bail out if we don't have any properties. This will be the case if
-      // we have an imported PropType, like:
-      // import type { T } from '../types';
-      // const C = (props: T) => <div>{props.name}</div>;
-
-      // TODO: this case is still handled elsewhere, correct?
+    const propTypesAST = makePropTypesAstForPropTypesAssignment(props);
+    if (propTypesAST == null) {
       return;
     }
-
-    const propTypesAST = makePropTypesAst(props);
     const attachPropTypesAST = t.expressionStatement(
       t.assignmentExpression(
         '=',
@@ -256,7 +242,7 @@ module.exports = function flowReactPropTypes(babel) {
         const propTypes = convertNodeToPropTypes(declarationObject);
         internalTypes[name] = propTypes;
 
-        const propTypesAst = makePropTypesAst(propTypes);
+        const propTypesAst = makePropTypesAstForExport(propTypes);
 
         const exportAst = t.expressionStatement(t.callExpression(
           t.memberExpression(t.identifier('Object'), t.identifier('defineProperty')),
