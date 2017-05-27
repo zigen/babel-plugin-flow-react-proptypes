@@ -16,6 +16,11 @@ let importedTypes = {};
 let suppress = false;
 const SUPPRESS_STRING = 'no babel-plugin-flow-react-proptypes';
 
+// General control flow:
+// Parse flow type annotations in index.js
+// Convert to intermediate representation via convertToPropTypes.js
+// Convert to prop-types AST in makePropTypesAst.js
+
 const convertNodeToPropTypes = node => convertToPropTypes(
     node,
     importedTypes,
@@ -24,7 +29,6 @@ const convertNodeToPropTypes = node => convertToPropTypes(
 
 const getPropsForTypeAnnotation = typeAnnotation => {
   const typeAnnotationReference = typeAnnotation.id && typeAnnotation.id.name;
-
   let props = null;
   if (typeAnnotationReference) {
     props = internalTypes[typeAnnotationReference] || importedTypes[typeAnnotationReference];
@@ -32,7 +36,9 @@ const getPropsForTypeAnnotation = typeAnnotation => {
       $debug(`Did not find type annotation for reference ${typeAnnotationReference}`);
     }
   }
-  else if (typeAnnotation.properties || typeAnnotation.type || 'GenericTypeAnnotation') {
+  else if (typeAnnotation.properties || typeAnnotation.type === 'GenericTypeAnnotation'
+      || typeAnnotation.type === 'IntersectionTypeAnnotation'
+      || typeAnnotation.type === 'AnyTypeAnnotation') {
     props = convertNodeToPropTypes(typeAnnotation);
   }
   else {
@@ -74,6 +80,16 @@ module.exports = function flowReactPropTypes(babel) {
     return false;
   };
 
+    /**
+     * Called when visiting a node.
+     *
+     * Converts the props param to AST and attaches it at the proper location,
+     * depending on the path param.
+     *
+     *
+     * @param path
+     * @param props
+     */
   const annotate = (path, props) => {
     let name;
     let targetPath;
@@ -93,11 +109,14 @@ module.exports = function flowReactPropTypes(babel) {
       throw new Error(`Did not find type annotation for ${name}`);
     }
 
+
     if (!props.properties) {
       // Bail out if we don't have any properties. This will be the case if
       // we have an imported PropType, like:
       // import type { T } from '../types';
       // const C = (props: T) => <div>{props.name}</div>;
+
+      // TODO: this case is still handled elsewhere, correct?
       return;
     }
 
@@ -112,6 +131,14 @@ module.exports = function flowReactPropTypes(babel) {
     targetPath.insertAfter(attachPropTypesAST);
   };
 
+    /**
+     * Visitor for functions.
+     *
+     * Determines if a function is a functional react component and
+     * inserts the proptypes AST via `annotate`.
+     *
+     * @param path
+     */
   const functionVisitor = path => {
     if (!isFunctionalReactComponent(path)) {
       return;
@@ -205,50 +232,31 @@ module.exports = function flowReactPropTypes(babel) {
       },
 
       // See issue:
+        /**
+         * Processes exported type aliases.
+         *
+         * This function also adds something to the AST directly, instead
+         * of invoking annotate.
+         *
+         * @param path
+         * @constructor
+         */
       ExportNamedDeclaration(path) {
         if (suppress) return;
         const {node} = path;
 
-        let declarationObject;
 
         if (!node.declaration || node.declaration.type !== 'TypeAlias') {
           return;
         }
-        if (node.declaration.right.type === 'IntersectionTypeAnnotation') {
-          const {types} = node.declaration.right;
-          const last = types[types.length - 1];
-          if (last.type === 'ObjectTypeAnnotation') {
-            declarationObject = last;
-          }
-          else {
-            return;
-          }
-        }
-        else if (!node.declaration.right.properties) {
-          return;
-        }
-        else {
-          declarationObject = node.declaration.right;
-        }
+
+        const declarationObject = node.declaration.right;
 
         const name = node.declaration.id.name;
         const propTypes = convertNodeToPropTypes(declarationObject);
         internalTypes[name] = propTypes;
 
-        let propTypesAst = makePropTypesAst(propTypes);
-
-        if (propTypesAst.type === 'ObjectExpression') {
-          propTypesAst = t.callExpression(
-            t.memberExpression(
-              t.callExpression(
-                t.identifier('require'),
-                [t.stringLiteral('prop-types')]
-              ),
-              t.identifier('shape'),
-            ),
-            [propTypesAst],
-          );
-        }
+        const propTypesAst = makePropTypesAst(propTypes);
 
         const exportAst = t.expressionStatement(t.callExpression(
           t.memberExpression(t.identifier('Object'), t.identifier('defineProperty')),
@@ -284,7 +292,15 @@ module.exports = function flowReactPropTypes(babel) {
             const typeName = specifier.type === 'ImportDefaultSpecifier'
               ? specifier.local.name
               : specifier.imported.name;
-
+            // Store the name the type so we can use it later. We do
+            // mark it as importedTypes because we do handle these
+            // differently than internalTypes.
+            // imported types are basically realized as imports;
+            // because we can be somewhat sure that we generated
+            // the proper exported propTypes in the imported file
+            // Later, we will check importedTypes to determine if
+            // we want to put this as a 'raw' type in our internal
+            // representation
             importedTypes[typeName] = getExportNameForType(typeName);
             const variableDeclarationAst = t.variableDeclaration(
               'var',

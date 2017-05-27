@@ -36,7 +36,27 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
     resultPropType = convertToPropTypes(node.typeAnnotation, importedTypes, internalTypes);
     resultPropType.optional = true;
   }
-  else if (node.type === 'IntersectionTypeAnnotation') resultPropType = {type: 'any'};
+  else if (node.type === 'IntersectionTypeAnnotation') {
+    const objectTypeAnnotations = node.types.filter(annotation => annotation.type === 'ObjectTypeAnnotation' || annotation.type === 'GenericTypeAnnotation');
+
+    const propTypes = objectTypeAnnotations.map(node => convertToPropTypes(node, importedTypes, internalTypes));
+    const shapes = propTypes.filter(propType => propType.type === 'shape');
+
+    const requiresRuntimeMerge = propTypes.filter(propType => propType.type === 'raw' || propType.type === 'shape-intersect-runtime');
+    const mergedProperties = [].concat(...shapes.map(propType => propType.properties));
+
+    if (mergedProperties.length === 0 && requiresRuntimeMerge.length === 0) {
+      resultPropType = {type: 'any'};
+    }
+    else if (requiresRuntimeMerge.length === 0) {
+      resultPropType = {'type': 'shape', properties: mergedProperties};
+    }
+    else {
+      // TODO: properties may be a misnomer - that probably means a list of object
+      // property specifications
+      resultPropType = {'type': 'shape-intersect-runtime', properties: propTypes};
+    }
+  }
   // Exact
   else if (node.type === 'GenericTypeAnnotation' && node.id.name === '$Exact') {
     resultPropType = {

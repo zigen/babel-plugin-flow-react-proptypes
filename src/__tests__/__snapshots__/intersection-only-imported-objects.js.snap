@@ -1,4 +1,4 @@
-exports[`test import-object 1`] = `
+exports[`test intersection-with-only-imported-objects 1`] = `
 "\'use strict\';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }
@@ -9,25 +9,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \"function\
 
 var babelPluginFlowReactPropTypes_proptype_NamedType = require(\'./foo\').babelPluginFlowReactPropTypes_proptype_NamedType || require(\'prop-types\').any;
 
-var babelPluginFlowReactPropTypes_proptype_DefaultType = require(\'./bar\').babelPluginFlowReactPropTypes_proptype_DefaultType || require(\'prop-types\').any;
+var babelPluginFlowReactPropTypes_proptype_SomeOtherType = require(\'./bar\').babelPluginFlowReactPropTypes_proptype_SomeOtherType || require(\'prop-types\').any;
 
 var C = function (_React$Component) {
-  _inherits(C, _React$Component);
+    _inherits(C, _React$Component);
 
-  function C() {
-    _classCallCheck(this, C);
+    function C() {
+        _classCallCheck(this, C);
 
-    return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
-  }
+        return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
+    }
 
-  return C;
+    return C;
 }(React.Component);
 
-C.propTypes = {
-  an_imported_named_type: typeof babelPluginFlowReactPropTypes_proptype_NamedType === \'function\' ? babelPluginFlowReactPropTypes_proptype_NamedType : require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_NamedType),
-  an_imported_default_type: typeof babelPluginFlowReactPropTypes_proptype_DefaultType === \'function\' ? babelPluginFlowReactPropTypes_proptype_DefaultType : require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_DefaultType),
-  a_global_type: require(\'prop-types\').any.isRequired,
-  a_undefined_type: require(\'prop-types\').any.isRequired
-};
-;"
+C.propTypes = Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\'prop-types\').any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, babelPluginFlowReactPropTypes_proptype_SomeOtherType === require(\'prop-types\').any ? {} : babelPluginFlowReactPropTypes_proptype_SomeOtherType);"
 `;
