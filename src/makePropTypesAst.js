@@ -54,14 +54,19 @@ export function makePropTypesAstForExport(propTypeData) {
 };
 
 
+function makeAnyPropTypeAST() {
+  const importNode = makePropTypeImportNode();
+  const anyNode = t.memberExpression(importNode, t.identifier('any'));
+  return anyNode;
+}
+
 function makeObjectAstForRaw(propTypeSpec, propTypeObjects) {
   let propTypeObject = t.identifier(propTypeSpec.value);
 
   // This will just be a variable, referencing an import we
   // generated above. This variable may contain prop-types.any,
   // which will not work when used in an intersection.
-  const importNode = makePropTypeImportNode();
-  const anyNode = t.memberExpression(importNode, t.identifier('any'));
+  const anyNode = makeAnyPropTypeAST();
   const testExpression = t.binaryExpression('===', propTypeObject, anyNode);
   propTypeObject = t.conditionalExpression(testExpression, t.objectExpression([]), propTypeObject);
   return propTypeObject;
@@ -162,6 +167,12 @@ function makePropTypeImportNode() {
     return t.memberExpression(reactNode, t.identifier('PropTypes'));
   }
 }
+function makeFunctionCheckAST(variableNode) {
+  return t.binaryExpression('===', t.unaryExpression('typeof', variableNode), t.stringLiteral('function'));
+}
+function markNodeAsRequired(node) {
+  return t.memberExpression(node, t.identifier('isRequired'));
+}
 /**
  * Handles all prop types.
  *
@@ -190,18 +201,18 @@ function makePropType(data, isExact) {
     return makePropType(data.properties, true);
   }
 
-  let isRequired = true;
   let node = makePropTypeImportNode();
+  let markFullExpressionAsRequired = true;
 
   if (method === 'any' || method === 'string' || method === 'number' || method === 'bool' || method === 'object' ||
       method === 'array' || method === 'func' || method === 'node') {
     node = t.memberExpression(node, t.identifier(method));
   }
   else if (method === 'raw') {
+    markFullExpressionAsRequired = false;
     // In 'raw', we handle variables - typically derived from imported types.
     // These are either - at run-time - objects or functions. Objects are wrapped in a shape;
     // for functions, we assume that the variable already contains a proptype assertion
-
     const variableNode = t.identifier(data.value);
     const shapeNode = t.callExpression(
         t.memberExpression(
@@ -210,9 +221,8 @@ function makePropType(data, isExact) {
         ),
         [variableNode],
     );
-    const functionCheckNode = t.binaryExpression('===', t.unaryExpression('typeof', variableNode), t.stringLiteral('function'));
+    const functionCheckNode = makeFunctionCheckAST(variableNode);
     node = t.conditionalExpression(functionCheckNode, variableNode, shapeNode);
-    isRequired = false;
   }
   else if (method === 'shape') {
     const shapeObjectProperties = data.properties.map(({key, value}) => {
@@ -257,7 +267,25 @@ function makePropType(data, isExact) {
     );
   }
   else if (method === 'void') {
+    markFullExpressionAsRequired = false;
     node = dontSetTemplate().expression;
+  }
+  else if (method === 'possible-class') {
+    markFullExpressionAsRequired = false;
+
+    let instanceOfNode = t.callExpression(
+        t.memberExpression(node, t.identifier('instanceOf')),
+        [t.identifier(data.value)]
+      );
+    let anyNode = makeAnyPropTypeAST();
+    if (data.isRequired) {
+      instanceOfNode = markNodeAsRequired(instanceOfNode);
+      anyNode = markNodeAsRequired(anyNode);
+    }
+    const functionCheckNode = makeFunctionCheckAST(t.identifier(data.value));
+    node = t.conditionalExpression(functionCheckNode, instanceOfNode, anyNode);
+    // Don't add .required on the full expression; we already handled this ourselves
+    // for any proptypes we generated
   }
   else {
     const bugData = JSON.stringify(data, null, 2);
@@ -266,8 +294,8 @@ function makePropType(data, isExact) {
       `Report it immediately with the source file and babel config. Data: ${bugData}`);
   }
 
-  if (isRequired && data.isRequired && method !== 'void') {
-    node = t.memberExpression(node, t.identifier('isRequired'));
+  if (markFullExpressionAsRequired && data.isRequired) {
+    node = markNodeAsRequired(node);
   }
 
   return node;
