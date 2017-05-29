@@ -8,6 +8,7 @@
     "test": "npm run build && jest --coverage",
     "build": "babel src/ --out-dir lib/ --ignore src/__tests__ --presets es2015,stage-1,react",
     "predeploy": "npm run build && npm run lint",
+    "prepublish": "npm run build && npm run lint",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
   },
   "repository": {
