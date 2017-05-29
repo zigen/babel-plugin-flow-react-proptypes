@@ -1,0 +1,7 @@
+exports[`test function-types 1`] = `
+"\"use strict\";
+
+var NotComponent = function NotComponent(x, y) {
+  return x + y;
+};"
+`;

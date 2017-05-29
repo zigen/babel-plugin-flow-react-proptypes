@@ -74,6 +74,6 @@ export function hasReactElementTypeAnnotationReturn(node) {
     }
   }
 
-  return true;
+  return false;
 };
 
