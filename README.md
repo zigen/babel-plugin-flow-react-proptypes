@@ -124,6 +124,6 @@ Specifically for react-native you can disable this for files in `node_modules` w
 ```json
 {
   "presets": ["..."],
-  "plugins": [["flow-react-proptypes", {ignoreNodeModules: true}]]
+  "plugins": [["flow-react-proptypes", {"ignoreNodeModules": true}]]
 }
 ```
