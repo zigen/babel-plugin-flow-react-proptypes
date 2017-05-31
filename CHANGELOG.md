@@ -1,3 +1,6 @@
+## 4.0.0
+  - Fix issue 96 type annotations with member expressions #98
+
 ## 3.1.3
   - Fix error on attempted propTypes generation for non-component function (#66)
 
