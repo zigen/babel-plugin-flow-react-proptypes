@@ -1,4 +1,4 @@
-## 4.0.0
+## 3.2.0
   - Fix issue 96 type annotations with member expressions #98
 
 ## 3.1.3
