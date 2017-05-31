@@ -1,4 +1,4 @@
-## NEXT
+## 3.1.3
   - Fix error on attempted propTypes generation for non-component function (#66)
 
 ## 3.1.2
