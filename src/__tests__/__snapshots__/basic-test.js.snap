@@ -13,6 +13,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \"function\
 
 var React = require(\'react\');
 
+if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_Qux\', {
+  value: {
+    baz: require(\'prop-types\').oneOf([\'literal\']).isRequired
+  }
+});
+
+var babelPluginFlowReactPropTypes_proptype_SomeExternalType = require(\'./types\').babelPluginFlowReactPropTypes_proptype_SomeExternalType || require(\'prop-types\').any;
+
 var Foo = function (_React$Component) {
   _inherits(Foo, _React$Component);
 
@@ -47,7 +55,16 @@ Foo.propTypes = {
   }).isRequired,
   should_error_if_provided: function should_error_if_provided(props, propName, componentName) {
     if (props[propName] != null) return new Error(\'Invalid prop \`\' + propName + \'\` of value \`\' + value + \'\` passed to \`\' + componentName + \'\`. Expected undefined or null.\');
-  }
+  },
+  intersection: require(\'prop-types\').shape({
+    foo: require(\'prop-types\').string.isRequired,
+    bar: require(\'prop-types\').number.isRequired,
+    baz: require(\'prop-types\').oneOf([\'literal\']).isRequired
+  }).isRequired,
+  some_external_type: typeof babelPluginFlowReactPropTypes_proptype_SomeExternalType === \'function\' ? babelPluginFlowReactPropTypes_proptype_SomeExternalType : require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_SomeExternalType).isRequired,
+  some_external_type_intersection: require(\'prop-types\').shape(Object.assign({}, {
+    foo: require(\'prop-types\').string.isRequired
+  }, babelPluginFlowReactPropTypes_proptype_SomeExternalType === require(\'prop-types\').any ? {} : babelPluginFlowReactPropTypes_proptype_SomeExternalType)).isRequired
 };
 exports.default = Foo;"
 `;

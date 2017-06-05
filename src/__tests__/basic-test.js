@@ -2,6 +2,10 @@ const babel = require('babel-core');
 const content = `
 var React = require('react');
 
+export type Qux = {baz: 'literal'};
+
+import type SomeExternalType from './types';
+
 type FooProps = {
   an_optional_string?: string,
   a_number: number,
@@ -22,7 +26,10 @@ type FooProps = {
       string_property_2: string,
     }
   },
-  should_error_if_provided: void
+  should_error_if_provided: void,
+  intersection: {foo: string} & { bar: number } & Qux,
+  some_external_type: SomeExternalType,
+  some_external_type_intersection: {foo: string} & SomeExternalType,
 }
 
 export default class Foo extends React.Component {
