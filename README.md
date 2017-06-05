@@ -53,17 +53,19 @@ The output will be:
 ```js
 var React = require('react');
 
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Qux', {
-  value: {
-    baz: require('prop-types').oneOf(['literal']).isRequired
-  }
-});
+if (typeof exports !== 'undefined')
+  Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Qux', {
+    value: {
+      baz: require('prop-types').oneOf(['literal']).isRequired,
+    },
+  });
 
-var babelPluginFlowReactPropTypes_proptype_SomeExternalType = require('./types').babelPluginFlowReactPropTypes_proptype_SomeExternalType || require('prop-types').any;
+var babelPluginFlowReactPropTypes_proptype_SomeExternalType = require('./types').babelPluginFlowReactPropTypes_proptype_SomeExternalType ||
+  require('prop-types').any;
 
-var Foo = function (_React$Component) {
-    // babel class boilerplate
-}(React.Component);
+var Foo = (function(_React$Component) {
+  // babel class boilerplate
+})(React.Component);
 
 Foo.propTypes = {
   an_optional_string: require('prop-types').string,
@@ -71,7 +73,9 @@ Foo.propTypes = {
   a_boolean: require('prop-types').bool.isRequired,
   a_generic_object: require('prop-types').object.isRequired,
   array_of_strings: require('prop-types').arrayOf(require('prop-types').string).isRequired,
-  instance_of_Bar: typeof Bar === 'function' ? require('prop-types').instanceOf(Bar).isRequired : require('prop-types').any.isRequired,
+  instance_of_Bar: typeof Bar === 'function'
+    ? require('prop-types').instanceOf(Bar).isRequired
+    : require('prop-types').any.isRequired,
   anything: require('prop-types').any.isRequired,
   mixed: require('prop-types').any.isRequired,
   one_of: require('prop-types').oneOf(['QUACK', 'BARK', 5]).isRequired,
@@ -80,23 +84,40 @@ Foo.propTypes = {
     string_property_1: require('prop-types').string.isRequired,
     nested_object_level_2: require('prop-types').shape({
       nested_object_level_3: require('prop-types').shape({
-        string_property_3: require('prop-types').string.isRequired
+        string_property_3: require('prop-types').string.isRequired,
       }).isRequired,
-      string_property_2: require('prop-types').string.isRequired
-    }).isRequired
+      string_property_2: require('prop-types').string.isRequired,
+    }).isRequired,
   }).isRequired,
   should_error_if_provided: function should_error_if_provided(props, propName, componentName) {
-    if (props[propName] != null) return new Error('Invalid prop `' + propName + '` of value `' + value + '` passed to `' + componentName + '`. Expected undefined or null.');
+    if (props[propName] != null)
+      return new Error(
+        'Invalid prop `' +
+          propName +
+          '` of value `' +
+          value +
+          '` passed to `' +
+          componentName +
+          '`. Expected undefined or null.'
+      );
   },
   intersection: require('prop-types').shape({
     foo: require('prop-types').string.isRequired,
     bar: require('prop-types').number.isRequired,
-    baz: require('prop-types').oneOf(['literal']).isRequired
+    baz: require('prop-types').oneOf(['literal']).isRequired,
   }).isRequired,
-  some_external_type: typeof babelPluginFlowReactPropTypes_proptype_SomeExternalType === 'function' ? babelPluginFlowReactPropTypes_proptype_SomeExternalType : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_SomeExternalType).isRequired,
-  some_external_type_intersection: require('prop-types').shape(Object.assign({}, {
-    foo: require('prop-types').string.isRequired
-  }, babelPluginFlowReactPropTypes_proptype_SomeExternalType === require('prop-types').any ? {} : babelPluginFlowReactPropTypes_proptype_SomeExternalType)).isRequired
+  some_external_type: typeof babelPluginFlowReactPropTypes_proptype_SomeExternalType === 'function'
+    ? babelPluginFlowReactPropTypes_proptype_SomeExternalType
+    : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_SomeExternalType).isRequired,
+  some_external_type_intersection: require('prop-types').shape(
+    Object.assign(
+      {},
+      {foo: require('prop-types').string.isRequired,},
+      babelPluginFlowReactPropTypes_proptype_SomeExternalType === require('prop-types').any
+        ? {}
+        : babelPluginFlowReactPropTypes_proptype_SomeExternalType
+    )
+  ).isRequired,
 };
 exports.default = Foo;
 ```
