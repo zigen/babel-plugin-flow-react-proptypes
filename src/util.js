@@ -6,6 +6,10 @@ export const $debug = () => {};
 
 export const PLUGIN_NAME = 'babel-plugin-flow-react-proptypes';
 
+export function isExact(node) {
+  return node.id.name === '$Exact';
+}
+
 export function makeLiteral(value) {
   if (typeof value === 'string') return t.stringLiteral(value);
   else if (typeof value === 'number') return t.numericLiteral(value);
