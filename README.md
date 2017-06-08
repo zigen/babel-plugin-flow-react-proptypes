@@ -179,3 +179,12 @@ Specifically for react-native you can disable this for files in `node_modules` w
   "plugins": [["flow-react-proptypes", {"ignoreNodeModules": true}]]
 }
 ```
+
+If you already have other plugins in plugins section. It is important to place
+`flow-react-proptypes` before the following plugins:
+
+- `transform-class-properties`
+- `transform-flow-strip-types`
+
+If you're using the 'react' or 'flow' presets, you don't need to do anything special.
+
