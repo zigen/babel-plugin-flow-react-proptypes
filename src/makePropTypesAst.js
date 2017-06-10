@@ -48,6 +48,7 @@ export function makePropTypesAstForPropTypesAssignment(propTypeData) {
 export function makePropTypesAstForExport(propTypeData) {
   let ast = makePropTypesAstForPropTypesAssignment(propTypeData);
   if (ast == null) {
+    propTypeData.isRequired = !propTypeData.optional;
     ast = makePropType(propTypeData);
   }
   return ast;
@@ -196,7 +197,7 @@ function processQualifiedTypeIdentifierIntoMemberExpression(qualifiedTypeIdentif
 
   const memberExpression = t.memberExpression(objectAST, propertyAST);
 
-  return t.conditionalExpression(makeNullCheckAST(memberExpression), t.objectExpression([]), memberExpression)
+  return t.conditionalExpression(makeNullCheckAST(memberExpression), t.objectExpression([]), memberExpression);
 
 }
 
