@@ -1,5 +1,8 @@
 {
   "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
+  },
   "plugins": [
     "react"
   ],
@@ -19,7 +22,7 @@
     "prefer-const": 2,
     "semi": 1
   },
-  env: {
+  "env": {
     "browser": true,
     "node": true
   }

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`intersection inline with exported type 1`] = `
+exports[`object-type-spread-exact 1`] = `
 "\\"use strict\\";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\\"Cannot call a class as a function\\"); } }
@@ -9,26 +9,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_ExportedType\\", {
-  value: {
-    bar: require(\\"prop-types\\").number.isRequired
-  }
-});
-
 var MyComponent = function (_React$Component) {
-  _inherits(MyComponent, _React$Component);
+    _inherits(MyComponent, _React$Component);
 
-  function MyComponent() {
-    _classCallCheck(this, MyComponent);
+    function MyComponent() {
+        _classCallCheck(this, MyComponent);
 
-    return _possibleConstructorReturn(this, (MyComponent.__proto__ || Object.getPrototypeOf(MyComponent)).apply(this, arguments));
-  }
+        return _possibleConstructorReturn(this, (MyComponent.__proto__ || Object.getPrototypeOf(MyComponent)).apply(this, arguments));
+    }
 
-  return MyComponent;
+    return MyComponent;
 }(React.Component);
 
 MyComponent.propTypes = {
-  foo: require(\\"prop-types\\").string.isRequired,
-  bar: require(\\"prop-types\\").number.isRequired
+    bar: require(\\"prop-types\\").string.isRequired,
+    foo: require(\\"prop-types\\").string.isRequired
 };"
 `;

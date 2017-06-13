@@ -1,26 +1,66 @@
-import {$debug, PLUGIN_NAME} from './util';
+import {$debug, isExact, PLUGIN_NAME} from './util';
 
 export default function convertToPropTypes(node, importedTypes, internalTypes) {
   $debug('convertToPropTypes', node);
   let resultPropType;
 
   if (node.type === 'ObjectTypeAnnotation') {
-    const ret = node.properties.map((subnode) => {
-      const key = subnode.key.name;
-      let value = subnode.value;
+    const properties = [];
 
-      // recurse
-      value = convertToPropTypes(value, importedTypes, internalTypes);
+    // recurse on object properties
+    node.properties.forEach((subnode) => {
+      // result may be from:
+      //  ObjectTypeProperty - {key, value}
+      //  ObjectTypeSpreadProperty - Array<{key, value}>
+      const result = convertToPropTypes(subnode, importedTypes, internalTypes);
 
-      // handles id?: string
-      if (value) {
-        value.isRequired = !subnode.optional && !value.optional;
+      if (Array.isArray(result)){
+        result.forEach((prop) => properties.push(prop));
       }
-
-      return {key, value};
+      else {
+        properties.push(result);
+      }
     });
 
-    resultPropType = {type: 'shape', properties: ret, isExact: node.exact};
+    // return a shape
+    resultPropType = {type: 'shape', properties, isExact: node.exact};
+  }
+  else if (node.type === 'ObjectTypeProperty') {
+    const key = node.key.name;
+    let value = node.value;
+
+    // recurse
+    value = convertToPropTypes(value, importedTypes, internalTypes);
+
+    // handles id?: string
+    if (value) {
+      value.isRequired = !node.optional && !value.optional;
+    }
+
+    return {key, value};
+  }
+  else if (node.type === 'ObjectTypeSpreadProperty') {
+    const exact = isExact(node.argument);
+    let subnode;
+    if(exact) {
+      subnode = node.argument.typeParameters.params[0];
+    }
+    else {
+      subnode = node.argument;
+    }
+
+    const spreadShape = convertToPropTypes(subnode, importedTypes, internalTypes);
+    const properties = spreadShape.properties;
+
+    // Unless or until the strange default behavior changes in flow (https://github.com/facebook/flow/issues/3214)
+    // every property from spread becomes optional unless it uses `...$Exact<T>`
+
+    // @see also explanation of behavior - https://github.com/facebook/flow/issues/3534#issuecomment-287580240
+    // @returns flattened properties from shape
+    if(!exact) {
+      properties.forEach((prop) => prop.value.isRequired = false);
+    }
+    return properties;
   }
   else if (node.type === 'FunctionTypeAnnotation') resultPropType = {type: 'func'};
   else if (node.type === 'AnyTypeAnnotation') resultPropType = {type: 'any'};

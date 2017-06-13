@@ -1,10 +1,12 @@
-exports[`test export-intersection-type 1`] = `
-"\"use strict\";
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
-if (typeof exports !== \"undefined\") Object.defineProperty(exports, \"babelPluginFlowReactPropTypes_proptype_T\", {
-  value: require(\"prop-types\").string.isRequired
+exports[`export-intersection-type 1`] = `
+"\\"use strict\\";
+
+if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_T\\", {
+  value: require(\\"prop-types\\").string.isRequired
 });
-if (typeof exports !== \"undefined\") Object.defineProperty(exports, \"babelPluginFlowReactPropTypes_proptype_TOptional\", {
-  value: require(\"prop-types\").string
+if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_TOptional\\", {
+  value: require(\\"prop-types\\").string
 });"
 `;

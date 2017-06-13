@@ -1,16 +1,22 @@
-exports[`test children 1`] = `
-"\'use strict\';
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
-var React = require(\'react\');
+exports[`children 1`] = `
+"'use strict';
+
+var React = require('react');
+var Element = React.Element;
 
 function Foo(props) {
   React.createElement(
-    \'div\',
+    'div',
     null,
     props.children
   );
 }
 Foo.propTypes = {
-  children: require(\'prop-types\').node.isRequired
+  children: require('prop-types').node.isRequired,
+  children2: require('prop-types').arrayOf(typeof Element === 'function' ? require('prop-types').instanceOf(Element) : require('prop-types').any).isRequired,
+  children3: typeof Element === 'function' ? require('prop-types').instanceOf(Element).isRequired : require('prop-types').any.isRequired,
+  children4: typeof Element === 'function' ? require('prop-types').instanceOf(Element).isRequired : require('prop-types').any.isRequired
 };"
 `;

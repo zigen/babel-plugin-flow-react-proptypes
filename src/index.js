@@ -22,9 +22,9 @@ const SUPPRESS_STRING = 'no babel-plugin-flow-react-proptypes';
 // Convert to prop-types AST in makePropTypesAst.js
 
 const convertNodeToPropTypes = node => convertToPropTypes(
-    node,
-    importedTypes,
-    internalTypes
+  node,
+  importedTypes,
+  internalTypes
 );
 
 const getPropsForTypeAnnotation = typeAnnotation => {
@@ -221,7 +221,7 @@ module.exports = function flowReactPropTypes(babel) {
       },
 
       // See issue:
-        /**
+      /**
          * Processes exported type aliases.
          *
          * This function also adds something to the AST directly, instead
@@ -256,15 +256,15 @@ module.exports = function flowReactPropTypes(babel) {
           ]
         ));
         const conditionalExportsAst = t.ifStatement(
-            t.binaryExpression(
-              '!==',
-              t.unaryExpression(
-                'typeof',
-                t.identifier('exports')
-              ),
-              t.stringLiteral('undefined')
+          t.binaryExpression(
+            '!==',
+            t.unaryExpression(
+              'typeof',
+              t.identifier('exports')
             ),
-            exportAst
+            t.stringLiteral('undefined')
+          ),
+          exportAst
         );
         path.insertAfter(conditionalExportsAst);
       },
