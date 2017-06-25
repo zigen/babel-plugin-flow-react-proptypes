@@ -63,7 +63,7 @@ Foo.propTypes = {
     bar: require('prop-types').number.isRequired,
     baz: require('prop-types').oneOf(['literal']).isRequired
   }).isRequired,
-  some_external_type: typeof babelPluginFlowReactPropTypes_proptype_SomeExternalType === 'function' ? babelPluginFlowReactPropTypes_proptype_SomeExternalType : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_SomeExternalType).isRequired,
+  some_external_type: typeof babelPluginFlowReactPropTypes_proptype_SomeExternalType === 'function' ? babelPluginFlowReactPropTypes_proptype_SomeExternalType.isRequired ? babelPluginFlowReactPropTypes_proptype_SomeExternalType.isRequired : babelPluginFlowReactPropTypes_proptype_SomeExternalType : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_SomeExternalType).isRequired,
   some_external_type_intersection: require('prop-types').shape(Object.assign({}, {
     foo: require('prop-types').string.isRequired
   }, babelPluginFlowReactPropTypes_proptype_SomeExternalType === require('prop-types').any ? {} : babelPluginFlowReactPropTypes_proptype_SomeExternalType)).isRequired

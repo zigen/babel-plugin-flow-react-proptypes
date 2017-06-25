@@ -8,6 +8,7 @@ export default class Foo extends React.Component {
   props: {
     a_number: number,
     external: ExternalType,
+    externalOptional?: ExternalType,
   }
 
   render () {

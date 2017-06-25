@@ -16,7 +16,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 var React = require('react');
 
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_U', {
-  value: require('prop-types').oneOfType([require('prop-types').oneOf(['foo']), require('prop-types').oneOf(['bar']), require('prop-types').number]).isRequired
+  value: require('prop-types').oneOfType([require('prop-types').oneOf(['foo']), require('prop-types').oneOf(['bar']), require('prop-types').number])
 });
 
 var Foo = function (_React$Component) {

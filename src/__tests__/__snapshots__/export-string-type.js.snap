@@ -4,7 +4,7 @@ exports[`export-intersection-type 1`] = `
 "\\"use strict\\";
 
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_T\\", {
-  value: require(\\"prop-types\\").string.isRequired
+  value: require(\\"prop-types\\").string
 });
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_TOptional\\", {
   value: require(\\"prop-types\\").string

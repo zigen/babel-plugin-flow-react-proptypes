@@ -69,7 +69,9 @@ export function makePropTypesAstForPropTypesAssignment(propTypeData) {
 export function makePropTypesAstForExport(propTypeData) {
   let ast = makePropTypesAstForPropTypesAssignment(propTypeData);
   if (ast == null) {
-    propTypeData.isRequired = !propTypeData.optional;
+    // Now we handle isRequired on the import side
+    // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/113
+    propTypeData.isRequired = false;
     ast = makePropType(propTypeData);
   }
   return ast;
@@ -262,7 +264,8 @@ function makePropType(data, isExact) {
     // In 'raw', we handle variables - typically derived from imported types.
     // These are either - at run-time - objects or functions. Objects are wrapped in a shape;
     // for functions, we assume that the variable already contains a proptype assertion
-    const variableNode = t.identifier(data.value);
+    let variableNode = t.identifier(data.value);
+    const originalVariableNode = variableNode;
     let shapeNode = t.callExpression(
       t.memberExpression(
         makePropTypeImportNode(),
@@ -273,7 +276,14 @@ function makePropType(data, isExact) {
     if (data.isRequired) {
       shapeNode = markNodeAsRequired(shapeNode);
     }
-    const functionCheckNode = makeFunctionCheckAST(variableNode);
+    if (data.isRequired) {
+      variableNode = t.conditionalExpression(
+        t.memberExpression(variableNode, t.identifier('isRequired')),
+        t.memberExpression(variableNode, t.identifier('isRequired')),
+        variableNode
+      );
+    }
+    const functionCheckNode = makeFunctionCheckAST(originalVariableNode);
     node = t.conditionalExpression(functionCheckNode, variableNode, shapeNode);
   }
   else if (method === 'shape') {
