@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const prettier = require('prettier');
+const chalk = require('chalk');
+
+const search = process.argv[2];
+
+const files = fs.readdirSync('src/__tests__')
+  .filter(x => /\.js$/.test(x));
+
+if (!search) {
+  console.error(`USAGE ./${1} <search>`);
+  console.log(files.join('\n'));
+  process.exit(7);
+}
+
+const matches = files.filter(x => new RegExp(search, 'gi').test(x));
+
+if (!matches.length) {
+  console.error(`Found no matches`);
+  process.exit(7);
+}
+if (matches.length > 1) {
+  console.error(`Found multiple matches: ${matches.join(' ')}`);
+  process.exit(7);
+}
+
+const match = matches[0];
+
+const testPath = `src/__tests__/${match}`;
+const snapPath = `src/__tests__/__snapshots__/${match}.snap`;
+
+const test = fs.readFileSync(testPath, 'utf-8');
+const snap = fs.readFileSync(snapPath, 'utf-8');
+
+const snapString = new Function(`
+  const module = {};
+  const exports = {};
+  module.exports = exports;
+  ${snap}
+  return module.exports[Object.keys(module.exports).shift()]
+`)();
+
+console.log(chalk.blue(`Test file`));
+console.log(test);
+console.log(chalk.blue(`Snapshot file`));
+console.log(prettier.format(snapString.trim().slice(1, -1)))
+
