@@ -12,6 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_VendorProps', {
   value: {
     test: require('prop-types').string.isRequired
-  }
+  },
+  configurable: true
 });"
 `;

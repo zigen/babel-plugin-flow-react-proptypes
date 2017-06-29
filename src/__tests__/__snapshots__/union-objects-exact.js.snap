@@ -34,7 +34,8 @@ if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginF
         }
       }
     })]).isRequired
-  }
+  },
+  configurable: true
 });
 
 var Foo = function (_React$Component) {

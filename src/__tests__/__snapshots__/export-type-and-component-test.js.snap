@@ -18,7 +18,8 @@ if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginF
     f: require('prop-types').func.isRequired,
     i: require('prop-types').number.isRequired,
     x: require('prop-types').oneOf(['foo', 'baz']).isRequired
-  }
+  },
+  configurable: true
 });
 
 

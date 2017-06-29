@@ -6,7 +6,8 @@ exports[`export-object 1`] = `
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Foo', {
   value: {
     a_string: require('prop-types').string.isRequired
-  }
+  },
+  configurable: true
 });
 
 

@@ -12,7 +12,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_ExportedType\\", {
   value: {
     bar: require(\\"prop-types\\").number.isRequired
-  }
+  },
+  configurable: true
 });
 
 var MyComponent = function (_React$Component) {

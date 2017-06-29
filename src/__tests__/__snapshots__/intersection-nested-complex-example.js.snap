@@ -20,7 +20,8 @@ var babelPluginFlowReactPropTypes_proptype_NamedType = require(\\"./types\\").ba
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_X\\", {
    value: Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\\"prop-types\\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
       a: require(\\"prop-types\\").string.isRequired
-   })
+   }),
+   configurable: true
 });
 
 var D = function (_React$Component) {

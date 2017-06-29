@@ -18,7 +18,8 @@ var React = require('react');
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Qux', {
   value: {
     baz: require('prop-types').oneOf(['literal']).isRequired
-  }
+  },
+  configurable: true
 });
 
 var babelPluginFlowReactPropTypes_proptype_SomeExternalType = require('./types').babelPluginFlowReactPropTypes_proptype_SomeExternalType || require('prop-types').any;

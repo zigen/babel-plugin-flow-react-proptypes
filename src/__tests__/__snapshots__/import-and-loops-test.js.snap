@@ -19,7 +19,8 @@ if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginF
     value: {
         flag: require('prop-types').bool.isRequired,
         list: require('prop-types').arrayOf(typeof babelPluginFlowReactPropTypes_proptype_ExternalType === 'function' ? babelPluginFlowReactPropTypes_proptype_ExternalType : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_ExternalType)).isRequired
-    }
+    },
+    configurable: true
 });
 
 

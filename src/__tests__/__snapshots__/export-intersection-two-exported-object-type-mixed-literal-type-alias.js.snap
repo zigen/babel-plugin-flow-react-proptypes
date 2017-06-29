@@ -18,13 +18,15 @@ var React = require('react');
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_T', {
   value: {
     bar: require('prop-types').string.isRequired
-  }
+  },
+  configurable: true
 });
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_U', {
   value: {
     bar: require('prop-types').string.isRequired,
     foo: require('prop-types').string.isRequired
-  }
+  },
+  configurable: true
 });
 
 var C = function (_React$Component) {

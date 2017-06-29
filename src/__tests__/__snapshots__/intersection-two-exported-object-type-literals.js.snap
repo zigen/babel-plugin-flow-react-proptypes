@@ -19,7 +19,8 @@ if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginF
   value: {
     bar: require('prop-types').string.isRequired,
     foo: require('prop-types').string.isRequired
-  }
+  },
+  configurable: true
 });
 
 var C = function (_React$Component) {

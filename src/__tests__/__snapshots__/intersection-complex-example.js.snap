@@ -22,12 +22,14 @@ var babelPluginFlowReactPropTypes_proptype_DefaultType = require(\\"./types\\").
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_T\\", {
   value: {
     foo: require(\\"prop-types\\").string.isRequired
-  }
+  },
+  configurable: true
 });
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_U\\", {
   value: {
     bar: require(\\"prop-types\\").number.isRequired
-  }
+  },
+  configurable: true
 });
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_X\\", {
   value: Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\\"prop-types\\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
@@ -37,7 +39,8 @@ if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelP
     bar: require(\\"prop-types\\").number.isRequired
   }, {
     foo: require(\\"prop-types\\").string.isRequired
-  })
+  }),
+  configurable: true
 });
 
 var C = function (_React$Component) {
