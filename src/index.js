@@ -252,7 +252,10 @@ module.exports = function flowReactPropTypes(babel) {
           [
             t.identifier('exports'),
             t.stringLiteral(getExportNameForType(name)),
-            t.objectExpression([t.objectProperty(t.identifier('value'), propTypesAst)]),
+            t.objectExpression([
+              t.objectProperty(t.identifier('value'), propTypesAst),
+              t.objectProperty(t.identifier('configurable'), t.booleanLiteral(true)),
+            ]),
           ]
         ));
         const conditionalExportsAst = t.ifStatement(
