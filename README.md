@@ -188,3 +188,28 @@ If you already have other plugins in plugins section. It is important to place
 
 If you're using the 'react' or 'flow' presets, you don't need to do anything special.
 
+## Minimizing production bundle size
+In production, omitting props and minimizing bundle size can be done with the additon of two things:
+1. Add the [transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) plugin
+2. Omit exported types to allow for dead code pruning
+
+There are cases where a library wishes to `export type` making types available in `*.js.flow` shadow files,
+but these may have no other purpose during runtime.  If you wish to omit the corresponding export of
+the generated flow types, using this option with the 
+[transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) 
+plugin will allow for the smallest production bundle size.
+
+An example snippet from a `.babelrc`:
+```json
+"production": {
+  "plugins": [
+    ["transform-react-remove-prop-types", {
+      "mode": "wrap",
+      "plugins": [
+        ["babel-plugin-flow-react-proptypes", {"omitRuntimeTypeExport": true}],
+        "babel-plugin-transform-flow-strip-types",
+      ]
+    }]
+  ]
+}
+```
