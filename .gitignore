@@ -5,3 +5,4 @@ npm-debug.log
 .DS_Store
 src/__tests__/lib/test-types.js.transpiled
 coverage
+*.tgz
