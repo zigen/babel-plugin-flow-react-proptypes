@@ -334,7 +334,7 @@ module.exports = function flowReactPropTypes(babel) {
             importedTypes[typeName] = getExportNameForType(typeName);
 
             // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/129
-            if (node.source.value === 'react') {
+            if (node.source.value === 'react' && typeName === 'ComponentType') {
               const ast = t.variableDeclaration(
                 'var',
                 [
