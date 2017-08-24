@@ -332,6 +332,30 @@ module.exports = function flowReactPropTypes(babel) {
             // we want to put this as a 'raw' type in our internal
             // representation
             importedTypes[typeName] = getExportNameForType(typeName);
+
+            // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/129
+            if (node.source.value === 'react') {
+              const ast = t.variableDeclaration(
+                'var',
+                [
+                  t.variableDeclarator(
+                    t.identifier(getExportNameForType(typeName)),
+                    t.memberExpression(
+                      t.callExpression(
+                        t.identifier('require'),
+                        [
+                          t.stringLiteral('prop-types'),
+                        ],
+                      ),
+                      t.identifier('func'),
+                    ),
+                  ),
+                ],
+              );
+              path.insertAfter(ast);
+              return;
+            }
+
             const variableDeclarationAst = t.variableDeclaration(
               'var',
               [
