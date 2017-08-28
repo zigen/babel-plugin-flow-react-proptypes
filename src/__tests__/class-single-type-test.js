@@ -7,7 +7,6 @@ type FooProps = {
 }
 
 export default class Foo extends React.Component<FooProps> {
-  props: FooProps
 }
 `;
 
