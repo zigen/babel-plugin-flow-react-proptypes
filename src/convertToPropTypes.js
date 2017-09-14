@@ -149,7 +149,7 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
   else if (node.type === 'UnionTypeAnnotation') {
     const {types} = node;
 
-    const typesWithoutNulls = types.filter(t => t.type !== 'NullLiteralTypeAnnotation');
+    const typesWithoutNulls = types.filter(t => t.type !== 'NullLiteralTypeAnnotation' && t.type !== 'VoidTypeAnnotation');
 
     // If a NullLiteralTypeAnnotation we know that this union type is not required.
     const optional = typesWithoutNulls.length !== types.length;
