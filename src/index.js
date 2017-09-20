@@ -80,7 +80,6 @@ module.exports = function flowReactPropTypes(babel) {
     let name;
     let targetPath;
 
-
     if (path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') {
       name = path.parent.id.name;
       const basePath = path.parentPath.parentPath;
@@ -221,6 +220,7 @@ module.exports = function flowReactPropTypes(babel) {
         const secondSuperParam = getPropsTypeParam(path.node);
         if (secondSuperParam && secondSuperParam.type === 'GenericTypeAnnotation') {
           const typeAliasName = secondSuperParam.id.name;
+          if (typeAliasName === 'Object') return;
           const props = internalTypes[typeAliasName];
           return annotate(path, props);
         }
@@ -406,4 +406,3 @@ function getPropsTypeParam(node) {
   }
   return null;
 }
-

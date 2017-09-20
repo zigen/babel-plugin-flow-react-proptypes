@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MuiThemeProvider 1`] = `
+"'use strict';
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\\"value\\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _brcast = require('brcast');
+
+var _brcast2 = _interopRequireDefault(_brcast);
+
+var _themeListener = require('./themeListener');
+
+var _themeListener2 = _interopRequireDefault(_themeListener);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\\"Cannot call a class as a function\\"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\\"this hasn't been initialised - super() hasn't been called\\"); } return call && (typeof call === \\"object\\" || typeof call === \\"function\\") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MuiThemeProvider = function (_React$Component) {
+  _inherits(MuiThemeProvider, _React$Component);
+
+  function MuiThemeProvider(props, context) {
+    _classCallCheck(this, MuiThemeProvider);
+
+    // Get the outer theme from the context, can be null
+    var _this = _possibleConstructorReturn(this, (MuiThemeProvider.__proto__ || Object.getPrototypeOf(MuiThemeProvider)).call(this, props, context));
+
+    _this.broadcast = (0, _brcast2.default)();
+    _this.unsubscribeId = null;
+    _this.outerTheme = null;
+    _this.outerTheme = _themeListener2.default.initial(context);
+    // Propagate the theme so it can be accessed by the children
+    _this.broadcast.setState(_this.mergeOuterLocalTheme(_this.props.theme));
+    return _this;
+  }
+
+  _createClass(MuiThemeProvider, [{
+    key: 'getChildContext',
+    value: function getChildContext() {
+      if (this.props.sheetsManager) {
+        var _ref;
+
+        return _ref = {}, _defineProperty(_ref, _themeListener.CHANNEL, this.broadcast), _defineProperty(_ref, 'sheetsManager', this.props.sheetsManager), _ref;
+      }
+
+      return _defineProperty({}, _themeListener.CHANNEL, this.broadcast);
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      // Subscribe on the outer theme, if present
+      this.unsubscribeId = _themeListener2.default.subscribe(this.context, function (outerTheme) {
+        _this2.outerTheme = outerTheme;
+        // Forward the parent theme update to the children
+        _this2.broadcast.setState(_this2.mergeOuterLocalTheme(_this2.props.theme));
+      });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      // Propagate a local theme update
+      if (this.props.theme !== nextProps.theme) {
+        this.broadcast.setState(this.mergeOuterLocalTheme(nextProps.theme));
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this.unsubscribeId !== null) {
+        _themeListener2.default.unsubscribe(this.context, this.unsubscribeId);
+      }
+    }
+    // We are not using the React state in order to avoid unnecessary rerender.
+
+  }, {
+    key: 'mergeOuterLocalTheme',
+
+
+    // Simple merge between the outer theme and the local theme
+    value: function mergeOuterLocalTheme(localTheme) {
+      // To support composition of theme.
+      if (typeof localTheme === 'function') {
+        return localTheme(this.outerTheme);
+      }
+
+      if (!this.outerTheme) {
+        return localTheme;
+      }
+
+      return _extends({}, this.outerTheme, localTheme);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return this.props.children;
+    }
+  }]);
+
+  return MuiThemeProvider;
+}(_react2.default.Component);
+
+MuiThemeProvider.propTypes = {
+  /**
+   * You can only provide a single element.
+   */
+  children: _propTypes2.default.element.isRequired,
+  /**
+   * The sheetsManager is used in order to only inject once a style sheet in a page for
+   * a given theme object.
+   * You should provide on the server.
+   */
+  sheetsManager: _propTypes2.default.object,
+  /**
+   * A theme object.
+   */
+  theme: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.func]).isRequired
+};
+
+MuiThemeProvider.childContextTypes = _extends({}, _themeListener2.default.contextTypes, {
+  sheetsManager: _propTypes2.default.object
+});
+
+MuiThemeProvider.contextTypes = _themeListener2.default.contextTypes;
+
+exports.default = MuiThemeProvider;"
+`;
