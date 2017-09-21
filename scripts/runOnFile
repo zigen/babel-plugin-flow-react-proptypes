@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env ./node_modules/.bin/babel-node
 
 const fs = require('fs');
 const babel = require('babel-core');
@@ -6,7 +6,7 @@ const babel = require('babel-core');
 const res = babel.transform(fs.readFileSync(process.argv[2], 'utf-8'), {
   babelrc: false,
   presets: ['es2015', 'stage-1', 'react'],
-  plugins: ['syntax-flow', require('../')],
+  plugins: ['syntax-flow', require('../src/index.js')],
 }).code;
 console.log(res);
 
