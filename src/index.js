@@ -211,7 +211,11 @@ module.exports = function flowReactPropTypes(babel) {
         // And have type as property annotations or Component<void, Props, void>
         path.node.body.body.forEach(bodyNode => {
           if (bodyNode && bodyNode.key.name === 'props' && bodyNode.typeAnnotation) {
-            const props = getPropsForTypeAnnotation(bodyNode.typeAnnotation.typeAnnotation);
+            const annotation = bodyNode.typeAnnotation.typeAnnotation;
+            const props = getPropsForTypeAnnotation(annotation);
+            if (!props) {
+              throw new TypeError('Couldn\'t process \`class { props: This }`');
+            }
             return annotate(path, props);
           }
         });
@@ -221,7 +225,10 @@ module.exports = function flowReactPropTypes(babel) {
         if (secondSuperParam && secondSuperParam.type === 'GenericTypeAnnotation') {
           const typeAliasName = secondSuperParam.id.name;
           if (typeAliasName === 'Object') return;
-          const props = internalTypes[typeAliasName];
+          const props = internalTypes[typeAliasName] || importedTypes[typeAliasName];
+          if (!props) {
+            throw new TypeError(`Couldn't find type "${typeAliasName}"`);
+          }
           return annotate(path, props);
         }
       },
