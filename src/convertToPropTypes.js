@@ -117,16 +117,21 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
       if (node.type === 'ArrayTypeAnnotation') {
         arrayType = node.elementType;
       }
+      else if (!node.typeParameters) {
+        resultPropType = { type: 'array' };
+        arrayType = null;
+      }
       else {
         arrayType = node.typeParameters.params[0];
       }
-      if (arrayType.type === 'GenericTypeAnnotation' &&
+      if (arrayType &&
+        arrayType.type === 'GenericTypeAnnotation' &&
         arrayType.id.type === 'QualifiedTypeIdentifier' &&
         arrayType.id.qualification.name === 'React' &&
         (arrayType.id.id.name === 'Element' || arrayType.id.id.name === 'Node')) {
         resultPropType = {type: 'node'};
       }
-      else {
+      else if (arrayType) {
         resultPropType = {type: 'arrayOf', of: convertToPropTypes(arrayType, importedTypes, internalTypes)};
       }
     }
