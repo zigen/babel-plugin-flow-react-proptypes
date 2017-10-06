@@ -123,12 +123,18 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
       if (arrayType.type === 'GenericTypeAnnotation' &&
         arrayType.id.type === 'QualifiedTypeIdentifier' &&
         arrayType.id.qualification.name === 'React' &&
-        arrayType.id.id.name === 'Element') {
+        (arrayType.id.id.name === 'Element' || arrayType.id.id.name === 'Node')) {
         resultPropType = {type: 'node'};
       }
       else {
         resultPropType = {type: 'arrayOf', of: convertToPropTypes(arrayType, importedTypes, internalTypes)};
       }
+    }
+    else if (node.type === 'GenericTypeAnnotation' &&
+      node.id.type === 'QualifiedTypeIdentifier' &&
+      node.id.qualification.name === 'React' &&
+      (node.id.id.name === 'Element' || node.id.id.name === 'Node')) {
+      resultPropType = {type: 'node'};
     }
     else if (node.id && node.id.name && internalTypes[node.id.name]) {
       resultPropType = Object.assign({}, internalTypes[node.id.name]);
