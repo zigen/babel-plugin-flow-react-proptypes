@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`preserve-comments 1`] = `
+"'use strict';
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+
+var React = require('react');
+
+var C = function C(props) {
+  return React.createElement('div', null);
+};
+
+C.propTypes = {
+  /** foo comment */
+  foo: require('prop-types').string.isRequired,
+
+
+  // bar comment
+  bar: require('prop-types').string.isRequired,
+  baz: require('prop-types').shape({
+    // subbar comment
+    subbar: require('prop-types').number.isRequired
+  }).isRequired
+};
+exports.default = C;"
+`;

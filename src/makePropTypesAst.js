@@ -175,11 +175,15 @@ function makeObjectAstForShape(propTypeData) {
   // TODO: this is almost duplicated with the shape handling below;
   // but this code does not generate AST for a shape function,
   // but returns the AST for the object instead.
-  const rootProperties = propTypeData.properties.map(({key, value}) => {
-    return t.objectProperty(
+  const rootProperties = propTypeData.properties.map(({key, value, leadingComments}) => {
+    const node = t.objectProperty(
       t.identifier(key),
       makePropType(value)
     );
+    if (leadingComments) {
+      node.leadingComments = leadingComments;
+    }
+    return node;
   });
   return t.objectExpression(rootProperties);
 }
@@ -289,8 +293,13 @@ function makePropType(data, isExact) {
     node = t.conditionalExpression(functionCheckNode, variableNode, shapeNode);
   }
   else if (method === 'shape') {
-    const shapeObjectProperties = data.properties.map(({key, value}) => {
-      return t.objectProperty(t.identifier(key), makePropType(value));
+    const shapeObjectProperties = data.properties.map(({key, value, leadingComments}) => {
+      const node = t.objectProperty(t.identifier(key), makePropType(value));
+      if (leadingComments) {
+        console.log(leadingComments);
+        node.leadingComments = leadingComments;
+      }
+      return node;
     });
     if (isExact || data.isExact) {
       shapeObjectProperties.push(

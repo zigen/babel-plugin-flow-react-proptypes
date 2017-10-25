@@ -20,7 +20,9 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
       //  ObjectTypeProperty - {key, value}
       //  ObjectTypeSpreadProperty - Array<{key, value}>
       const result = convertToPropTypes(subnode, importedTypes, internalTypes);
-
+      if (subnode.leadingComments && subnode.leadingComments.length) {
+        result.leadingComments = subnode.leadingComments;
+      }
       if (Array.isArray(result)){
         result.forEach((prop) => properties.push(prop));
       }
