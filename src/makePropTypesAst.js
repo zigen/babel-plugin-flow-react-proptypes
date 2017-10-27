@@ -296,7 +296,6 @@ function makePropType(data, isExact) {
     const shapeObjectProperties = data.properties.map(({key, value, leadingComments}) => {
       const node = t.objectProperty(t.identifier(key), makePropType(value));
       if (leadingComments) {
-        console.log(leadingComments);
         node.leadingComments = leadingComments;
       }
       return node;
