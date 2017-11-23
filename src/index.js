@@ -85,9 +85,12 @@ module.exports = function flowReactPropTypes(babel) {
       const basePath = path.parentPath.parentPath;
       targetPath = t.isExportDeclaration(basePath.parent) ? basePath.parentPath : basePath;
     }
-    else {
+    else if (path.node.id) {
       name = path.node.id.name;
       targetPath = ['Program', 'BlockStatement'].indexOf(path.parent.type) >= 0 ? path : path.parentPath;
+    }
+    else {
+      throw new Error(`babel-plugin-flow-react-proptypes attempted to add propTypes to a function/class with no name`);
     }
 
     if (!propsOrVar) {
