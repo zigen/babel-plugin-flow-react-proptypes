@@ -9,7 +9,7 @@
   "rules": {
     "brace-style": [2, "stroustrup"],
     "strict": 0,
-    "quotes": [2, "single"],
+    "quotes": [0, "single"],
     "curly": [2, "multi-line"],
     "camelcase": 0,
     "comma-dangle": 0,
