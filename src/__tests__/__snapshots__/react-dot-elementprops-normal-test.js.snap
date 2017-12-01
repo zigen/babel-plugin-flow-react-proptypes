@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`react-dot-elementprops-normal 1`] = `
+"'use strict';
+
+var React = require('react');
+var MenuItem = require('./MenuItem');
+
+var C = function C(props) {
+  return React.createElement('div', null);
+};
+C.propTypes = {
+  foo: require('prop-types').shape(MenuItem.propTypes).isRequired
+};"
+`;

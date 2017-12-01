@@ -48,17 +48,20 @@ const anyTemplate = template(`
  * @returns {*} AST expression always returning an object.
  */
 export function makePropTypesAstForPropTypesAssignment(propTypeData) {
+  let node = null;
   if (propTypeData.type === 'shape-intersect-runtime') {
     // For top-level usage, e.g. Foo.proptype, return
     // an expression returning an object.
-    return makeObjectMergeAstForShapeIntersectRuntime(propTypeData);
+    node = makeObjectMergeAstForShapeIntersectRuntime(propTypeData);
   }
   else if (propTypeData.type === 'shape') {
-    return makeObjectAstForShape(propTypeData);
+    node = makeObjectAstForShape(propTypeData);
   }
   else if (propTypeData.type === 'raw') {
-    return makeObjectAstForRaw(propTypeData);
+    node = makeObjectAstForRaw(propTypeData);
   }
+
+  return node;
 };
 
 
@@ -275,7 +278,7 @@ function makePropType(data, isExact) {
   }
   else if (method === 'any') {
     markFullExpressionAsRequired = false;
-    
+
     if (data.isRequired) {
       node = anyTemplate().expression;
     }
@@ -354,6 +357,20 @@ function makePropType(data, isExact) {
     node = t.callExpression(
       t.memberExpression(node, t.identifier('oneOfType')),
       [t.arrayExpression(data.options.map(item => makePropType(item)))]
+    );
+  }
+  else if (method === 'reference') {
+    const pp = data.propertyPath.slice();
+    let valueNode = t.identifier(pp.shift());
+    while (pp.length) {
+      valueNode = t.memberExpression(valueNode, t.identifier(pp.shift()));
+    }
+    node = t.callExpression(
+      t.memberExpression(
+        node,
+        t.identifier('shape'),
+      ),
+      [valueNode],
     );
   }
   else if (method === 'void') {

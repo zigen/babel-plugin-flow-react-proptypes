@@ -106,6 +106,40 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
       resultPropType = {'type': 'shape-intersect-runtime', properties: propTypes};
     }
   }
+  // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/147
+  else if (node.type === 'GenericTypeAnnotation'
+    && node.id.type === 'QualifiedTypeIdentifier'
+    && node.id.qualification
+    && node.id.qualification.name === 'React'
+    && node.id.id
+    && node.id.id.name === 'ElementProps'
+  ) {
+    const tp = node.typeParameters && node.typeParameters.params;
+    if (!tp || tp.length !== 1) {
+      throw new TypeError(`babel-plugin-flow-react-proptypes expected React.ElementProps to have one type parameter`);
+    }
+    if (tp[0].type === 'StringLiteralTypeAnnotation') {
+      resultPropType = {
+        type: 'object',
+        properties: [],
+      };
+    }
+    else if (tp[0].type === 'TypeofTypeAnnotation') {
+      const { argument } = tp[0];
+      const { id } = argument;
+      if (id.type !== 'Identifier') {
+        throw new TypeError(`babel-plugin-flow-react-proptypes expected React.ElementProps<typeof OneIdentifier>, but found some other type parameter`);
+      }
+      const { name } = id;
+      resultPropType = {
+        type: 'reference',
+        propertyPath: [name, 'propTypes'],
+      };
+    }
+    else {
+      throw new TypeError(`babel-plugin-flow-react-proptypes expected React.ElementProps to either be e.g. React.ElementProps<'div'> or React.ElementProps<typeof SomeComponent> `);
+    }
+  }
   // Exact
   else if (node.type === 'GenericTypeAnnotation' && node.id.name === '$Exact') {
     resultPropType = {
