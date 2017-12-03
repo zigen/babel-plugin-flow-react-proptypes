@@ -14,7 +14,6 @@ var babelPluginFlowReactPropTypes_proptype_VendorProps = {
 };
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_VendorProps', {
   value: babelPluginFlowReactPropTypes_proptype_VendorProps,
-  configurable: true,
-  enumerable: true
+  configurable: true
 });"
 `;

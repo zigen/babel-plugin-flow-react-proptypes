@@ -17,7 +17,6 @@ var babelPluginFlowReactPropTypes_proptype_JumpToAction = {
 };
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_JumpToAction', {
   value: babelPluginFlowReactPropTypes_proptype_JumpToAction,
-  configurable: true,
-  enumerable: true
+  configurable: true
 });"
 `;

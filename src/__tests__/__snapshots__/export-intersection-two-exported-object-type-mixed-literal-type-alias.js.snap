@@ -20,8 +20,7 @@ var babelPluginFlowReactPropTypes_proptype_T = {
 };
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_T', {
   value: babelPluginFlowReactPropTypes_proptype_T,
-  configurable: true,
-  enumerable: true
+  configurable: true
 });
 var babelPluginFlowReactPropTypes_proptype_U = {
   bar: require('prop-types').string.isRequired,
@@ -29,8 +28,7 @@ var babelPluginFlowReactPropTypes_proptype_U = {
 };
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_U', {
   value: babelPluginFlowReactPropTypes_proptype_U,
-  configurable: true,
-  enumerable: true
+  configurable: true
 });
 
 var C = function (_React$Component) {
