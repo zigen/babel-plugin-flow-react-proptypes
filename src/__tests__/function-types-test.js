@@ -8,7 +8,7 @@ type Props = {
   onClick?: () => void,
 }
 
-class MyComponent extends Component<void, Props, void> {
+class MyComponent extends Component<Props, void, void> {
 }
 
 export default MyComponent;

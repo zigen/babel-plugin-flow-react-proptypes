@@ -474,7 +474,7 @@ function getPropsTypeParam(node) {
     return superTypes.params[0];
   }
   else if (superTypes.params.length === 3) {
-    return superTypes.params[1];
+    return superTypes.params[0];
   }
   else if (superTypes.params.length === 1) {
     return superTypes.params[0];

@@ -12,7 +12,7 @@ type FooC = {
     lang: string,
 };
 
-class Foo extends React.Component<void, FooT, FooC> {
+class Foo extends React.Component<FooT, void, FooC> {
   render() {
     return <div />;
   }
