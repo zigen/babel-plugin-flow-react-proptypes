@@ -66,6 +66,46 @@ module.exports = function flowReactPropTypes(babel) {
     return false;
   };
 
+
+    /**
+     * Adds propTypes or contextTypes annotations to code
+     *
+     * Extracts some shared logic from `annotate`.
+     *
+     * @param path
+     * @param name
+     * @param attribute - target member name ('propTypes' or 'contextTypes')
+     * @param typesOrVar - propsOrVar / contextOrVar value
+     */
+  const addAnnotationsToAST = (path, name, attribute, typesOrVar) => {
+    let attachPropTypesAST;
+    // if type was exported, use the declared variable
+    if (typeof typesOrVar === 'string'){
+      attachPropTypesAST = t.expressionStatement(
+        t.assignmentExpression(
+          '=',
+          t.memberExpression(t.identifier(name), t.identifier(attribute)),
+          t.identifier(typesOrVar)
+        )
+      );
+    }
+    // type was not exported, generate
+    else {
+      const propTypesAST = makePropTypesAstForPropTypesAssignment(typesOrVar);
+      if (propTypesAST == null) {
+        return;
+      }
+      attachPropTypesAST = t.expressionStatement(
+        t.assignmentExpression(
+          '=',
+          t.memberExpression(t.identifier(name), t.identifier(attribute)),
+          propTypesAST
+        )
+      );
+    }
+    path.insertAfter(attachPropTypesAST);
+  };
+
     /**
      * Called when visiting a node.
      *
@@ -75,8 +115,9 @@ module.exports = function flowReactPropTypes(babel) {
      *
      * @param path
      * @param propsOrVar - props or exported props variable reference
+     * @param contextOrVar - context or exported context variable reference
      */
-  const annotate = (path, propsOrVar) => {
+  const annotate = (path, propsOrVar, contextOrVar = null) => {
     let name;
     let targetPath;
 
@@ -93,43 +134,20 @@ module.exports = function flowReactPropTypes(babel) {
       throw new Error(`babel-plugin-flow-react-proptypes attempted to add propTypes to a function/class with no name`);
     }
 
-    if (!propsOrVar) {
-      throw new Error(`Did not find type annotation for ${name}`);
+    if (propsOrVar) {
+      addAnnotationsToAST(targetPath, name, 'propTypes', propsOrVar);
     }
 
-    let attachPropTypesAST;
-    // if type was exported, use the declared variable
-    if (typeof propsOrVar === 'string'){
-      attachPropTypesAST = t.expressionStatement(
-        t.assignmentExpression(
-          '=',
-          t.memberExpression(t.identifier(name), t.identifier('propTypes')),
-          t.identifier(propsOrVar)
-        )
-      );
+    if (contextOrVar) {
+      addAnnotationsToAST(targetPath, name, 'contextTypes', contextOrVar);
     }
-    // type was not exported, generate
-    else {
-      const propTypesAST = makePropTypesAstForPropTypesAssignment(propsOrVar);
-      if (propTypesAST == null) {
-        return;
-      }
-      attachPropTypesAST = t.expressionStatement(
-        t.assignmentExpression(
-          '=',
-          t.memberExpression(t.identifier(name), t.identifier('propTypes')),
-          propTypesAST
-        )
-      );
-    }
-    targetPath.insertAfter(attachPropTypesAST);
   };
 
     /**
      * Visitor for functions.
      *
      * Determines if a function is a functional react component and
-     * inserts the proptypes AST via `annotate`.
+     * inserts the proptypes and contexttypes AST via `annotate`.
      *
      * @param path
      */
@@ -144,6 +162,12 @@ module.exports = function flowReactPropTypes(babel) {
       && firstParam.typeAnnotation
       && firstParam.typeAnnotation.typeAnnotation;
 
+    // Check if the component has context annotations
+    const secondParam = path.node.params[1];
+    const contextAnnotation = secondParam
+      && secondParam.typeAnnotation
+      && secondParam.typeAnnotation.typeAnnotation;
+
     let propsOrVar = null;
     if (!typeAnnotation) {
       $debug('Found stateless component without type definition');
@@ -154,8 +178,19 @@ module.exports = function flowReactPropTypes(babel) {
         getPropsForTypeAnnotation(typeAnnotation);
     }
 
+    let contextOrVar;
+
+    if (contextAnnotation) {
+      contextOrVar = contextAnnotation.id && exportedTypes[contextAnnotation.id.name] ?
+        exportedTypes[contextAnnotation.id.name] :
+        getPropsForTypeAnnotation(contextAnnotation);
+    }
+    else {
+      contextOrVar = null;
+    }
+
     if (propsOrVar) {
-      annotate(path, propsOrVar);
+      annotate(path, propsOrVar, contextOrVar);
     }
   };
 
@@ -211,7 +246,9 @@ module.exports = function flowReactPropTypes(babel) {
           return;
         }
 
-        // And have type as property annotations or Component<void, Props, void>
+
+        let propTypes = null, contextTypes = null;
+        // And have type as property annotations
         path.node.body.body.forEach(bodyNode => {
           if (bodyNode && bodyNode.key.name === 'props' && bodyNode.typeAnnotation) {
             const annotation = bodyNode.typeAnnotation.typeAnnotation;
@@ -219,11 +256,24 @@ module.exports = function flowReactPropTypes(babel) {
             if (!props) {
               throw new TypeError('Couldn\'t process \`class { props: This }`');
             }
-            return annotate(path, props);
+
+            propTypes = props;
+
+            return;
+          }
+
+          if (bodyNode && bodyNode.key.name === 'context' && bodyNode.typeAnnotation) {
+            const annotation = bodyNode.typeAnnotation.typeAnnotation;
+            const context = getPropsForTypeAnnotation(annotation);
+            if (!context) {
+              throw new TypeError('Couldn\'t process \`class { context: This }`');
+            }
+
+            contextTypes = context;
           }
         });
 
-        // super type parameter
+        // or Component<void, Props, Context>
         const secondSuperParam = getPropsTypeParam(path.node);
         if (secondSuperParam && secondSuperParam.type === 'GenericTypeAnnotation') {
           const typeAliasName = secondSuperParam.id.name;
@@ -232,8 +282,23 @@ module.exports = function flowReactPropTypes(babel) {
           if (!props) {
             throw new TypeError(`Couldn't find type "${typeAliasName}"`);
           }
-          return annotate(path, props);
+
+          propTypes = props;
         }
+
+        const thirdSuperParam = getContextTypeParam(path.node);
+        if (thirdSuperParam && thirdSuperParam.type === 'GenericTypeAnnotation') {
+          const typeAliasName = thirdSuperParam.id.name;
+          if (typeAliasName === 'Object') return;
+          const props = internalTypes[typeAliasName] || importedTypes[typeAliasName];
+          if (!props) {
+            throw new TypeError(`Couldn't find type "${typeAliasName}"`);
+          }
+
+          contextTypes = props;
+        }
+
+        annotate(path, propTypes, contextTypes);
       },
 
       FunctionExpression(path) {
@@ -413,6 +478,16 @@ function getPropsTypeParam(node) {
   }
   else if (superTypes.params.length === 1) {
     return superTypes.params[0];
+  }
+  return null;
+}
+
+function getContextTypeParam(node) {
+  if (!node) return null;
+  if (!node.superTypeParameters) return null;
+  const superTypes = node.superTypeParameters;
+  if (superTypes.params.length === 3) {
+    return superTypes.params[2];
   }
   return null;
 }
