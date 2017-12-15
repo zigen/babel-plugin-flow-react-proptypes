@@ -17,7 +17,7 @@ if (process.argv.includes('--rn')) {
     presets: ['react-native/configs/hmr.js'],
     plugins: ['syntax-flow', selfConf],
   };
-  babelConfig = {
+/*  babelConfig = {
     babelrc: false,
     presets: [
       'react-native/configs/hmr.js',
@@ -25,13 +25,14 @@ if (process.argv.includes('--rn')) {
     ],
     plugins: ['syntax-flow'],
   };
+*/
 
 } else {
   console.error(`Running in default config`);
   babelConfig = {
     babelrc: false,
     presets: ['es2015', 'stage-1', 'react'],
-    plugins: ['syntax-flow', self],
+    plugins: ['syntax-flow', [self, { "useStatic": true}]],
   };
 }
 

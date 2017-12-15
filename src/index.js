@@ -111,13 +111,13 @@ module.exports = function flowReactPropTypes(babel) {
       );
     }
 
-    if (opts.useStatic && path.type === 'ClassDeclaration') {
+    if (opts.useStatic && (path.type === 'ClassDeclaration' || path.type === 'ClassExpression')) {
       const newNode = t.classProperty(
         t.identifier(attribute),
         valueNode
       );
       newNode.static = true;
-      path.node.body.body.unshift(newNode);
+      path.node.body.body.push(newNode);
     }
     else {
       path.insertAfter(attachPropTypesAST);
@@ -252,9 +252,11 @@ module.exports = function flowReactPropTypes(babel) {
         const propTypes = convertNodeToPropTypes(right);
         internalTypes[typeAliasName] = propTypes;
       },
-      Class(path) {
+      "ClassExpression|ClassDeclaration"(path) {
         if (!opts.useStatic && path.node.type === 'ClassExpression') return;
-        console.log(path.node.type);
+
+        if (path.node.BPFRP_HIT_FOR_CLASS_ANNOTATION) return;
+        path.node.BPFRP_HIT_FOR_CLASS_ANNOTATION = true;
 
         if (suppress) return;
         const {superClass} = path.node;

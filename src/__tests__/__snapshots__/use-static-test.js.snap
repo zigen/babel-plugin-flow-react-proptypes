@@ -32,8 +32,8 @@ var C = function (_React$Component) {
   return C;
 }(React.Component);
 
+C.test = 1;
 C.propTypes = {
   x: require('prop-types').string.isRequired
-};
-C.test = 1;"
+};"
 `;
