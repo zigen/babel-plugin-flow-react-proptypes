@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Component } from "react"
+import { View } from "react-native"
 
-type Props = {
-  xs: Array,
-  ys?: Array,
-};
-
-export default
-class ArrayTest extends React.Component<Props> {
+type Props = { test: string }
+export default class App extends Component<Props> {
+  render() {
+    return 'span'
+  }
 }

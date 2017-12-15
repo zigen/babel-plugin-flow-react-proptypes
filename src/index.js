@@ -52,6 +52,8 @@ const getPropsForTypeAnnotation = typeAnnotation => {
 module.exports = function flowReactPropTypes(babel) {
   const t = babel.types;
 
+  let opts = {};
+
   const isFunctionalReactComponent = path => {
     if ((path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') && !path.parent.id) {
       // Could be functions inside a React component
@@ -80,18 +82,23 @@ module.exports = function flowReactPropTypes(babel) {
   const addAnnotationsToAST = (path, name, attribute, typesOrVar) => {
     let attachPropTypesAST;
     // if type was exported, use the declared variable
+    let valueNode = null;
+
     if (typeof typesOrVar === 'string'){
+      valueNode = t.identifier(typesOrVar);
       attachPropTypesAST = t.expressionStatement(
         t.assignmentExpression(
           '=',
           t.memberExpression(t.identifier(name), t.identifier(attribute)),
-          t.identifier(typesOrVar)
+          valueNode,
         )
       );
     }
     // type was not exported, generate
     else {
       const propTypesAST = makePropTypesAstForPropTypesAssignment(typesOrVar);
+      valueNode = propTypesAST;
+
       if (propTypesAST == null) {
         return;
       }
@@ -103,7 +110,18 @@ module.exports = function flowReactPropTypes(babel) {
         )
       );
     }
-    path.insertAfter(attachPropTypesAST);
+
+    if (opts.useStatic && path.type === 'ClassDeclaration') {
+      const newNode = t.classProperty(
+        t.identifier(attribute),
+        valueNode
+      );
+      newNode.static = true;
+      path.node.body.body.unshift(newNode);
+    }
+    else {
+      path.insertAfter(attachPropTypesAST);
+    }
   };
 
     /**
@@ -121,7 +139,10 @@ module.exports = function flowReactPropTypes(babel) {
     let name;
     let targetPath;
 
-    if (path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') {
+    if (opts.useStatic && (path.type === 'ClassDeclaration' || path.type === 'ClassExpression')) {
+      targetPath = path;
+    }
+    else if (path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') {
       name = path.parent.id.name;
       const basePath = path.parentPath.parentPath;
       targetPath = t.isExportDeclaration(basePath.parent) ? basePath.parentPath : basePath;
@@ -196,7 +217,8 @@ module.exports = function flowReactPropTypes(babel) {
 
   return {
     visitor: {
-      Program(path, {opts}) {
+      Program(path, {opts: _opts}) {
+        opts = _opts;
         internalTypes = {};
         importedTypes = {};
         exportedTypes = {};
@@ -230,7 +252,10 @@ module.exports = function flowReactPropTypes(babel) {
         const propTypes = convertNodeToPropTypes(right);
         internalTypes[typeAliasName] = propTypes;
       },
-      ClassDeclaration(path) {
+      Class(path) {
+        if (!opts.useStatic && path.node.type === 'ClassExpression') return;
+        console.log(path.node.type);
+
         if (suppress) return;
         const {superClass} = path.node;
 

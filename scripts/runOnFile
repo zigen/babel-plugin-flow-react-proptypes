@@ -3,10 +3,39 @@
 const fs = require('fs');
 const babel = require('babel-core');
 
-const res = babel.transform(fs.readFileSync(process.argv[2], 'utf-8'), {
-  babelrc: false,
-  presets: ['es2015', 'stage-1', 'react'],
-  plugins: ['syntax-flow', require('../src/index.js')],
-}).code;
+const self = process.argv.includes('--lib')
+  ? require('../lib/index.js')
+  : require('../src/index.js');
+
+let babelConfig = null;
+
+if (process.argv.includes('--rn')) {
+  console.error(`Running with react-native`);
+  const selfConf = [self, { useStatic: true }];
+  babelConfig = {
+    babelrc: false,
+    presets: ['react-native/configs/hmr.js'],
+    plugins: ['syntax-flow', selfConf],
+  };
+  babelConfig = {
+    babelrc: false,
+    presets: [
+      'react-native/configs/hmr.js',
+      { plugins: [ selfConf ] },
+    ],
+    plugins: ['syntax-flow'],
+  };
+
+} else {
+  console.error(`Running in default config`);
+  babelConfig = {
+    babelrc: false,
+    presets: ['es2015', 'stage-1', 'react'],
+    plugins: ['syntax-flow', self],
+  };
+}
+
+const input = fs.readFileSync(process.argv[2], 'utf-8');
+const res = babel.transform(input, babelConfig).code;
 console.log(res);
 
