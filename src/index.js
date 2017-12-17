@@ -20,6 +20,11 @@ let omitRuntimeTypeExport = false;
 
 const SUPPRESS_STRING = 'no babel-plugin-flow-react-proptypes';
 
+// The template to use for the dead code elimination check
+// if it passes, the prop types will be removed
+// currently the 'deadCode' option is off by default, but this may change
+const DEFAULT_DCE = `process.env.NODE_ENV === 'production'`;
+
 // General control flow:
 // Parse flow type annotations in index.js
 // Convert to intermediate representation via convertToPropTypes.js
@@ -54,6 +59,37 @@ module.exports = function flowReactPropTypes(babel) {
 
   let opts = {};
 
+  const _templateCache = {};
+  function getDcePredicate() {
+    // opts.deadCode could be a boolean (true for DEFAULT_DCE), or a string to be
+    // used as a template
+    // if it's falsy, then just return node without any wrapper
+    if (!opts.deadCode) return null;
+
+    // cache the template since it's going to be used a lot
+    const templateCode = typeof opts.deadCode === 'string' ? opts.deadCode : DEFAULT_DCE;
+    if (!_templateCache[templateCode]) {
+      _templateCache[templateCode] = babel.template(templateCode);
+    }
+
+    // return a ternary
+    const predicate = _templateCache[templateCode]({}).expression;
+    return predicate;
+  }
+
+  function wrapInDceCheck(node) {
+    const predicate = getDcePredicate(node);
+    if (!predicate) return node;
+
+    const conditional = t.conditionalExpression(
+      predicate,
+      t.nullLiteral(),
+      node,
+    );
+
+    return conditional;
+  }
+
   const isFunctionalReactComponent = path => {
     if ((path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') && !path.parent.id) {
       // Could be functions inside a React component
@@ -86,18 +122,26 @@ module.exports = function flowReactPropTypes(babel) {
 
     if (typeof typesOrVar === 'string'){
       valueNode = t.identifier(typesOrVar);
-      attachPropTypesAST = t.expressionStatement(
-        t.assignmentExpression(
-          '=',
-          t.memberExpression(t.identifier(name), t.identifier(attribute)),
-          valueNode,
-        )
+      let inner = t.assignmentExpression(
+        '=',
+        t.memberExpression(t.identifier(name), t.identifier(attribute)),
+        valueNode,
       );
+
+      if (attribute === 'propTypes') {
+        inner = wrapInDceCheck(inner);
+      }
+
+      attachPropTypesAST = t.expressionStatement(inner);
     }
     // type was not exported, generate
     else {
       const propTypesAST = makePropTypesAstForPropTypesAssignment(typesOrVar);
       valueNode = propTypesAST;
+
+      if (attribute === 'propTypes') {
+        valueNode = wrapInDceCheck(valueNode);
+      }
 
       if (propTypesAST == null) {
         return;
@@ -106,7 +150,7 @@ module.exports = function flowReactPropTypes(babel) {
         t.assignmentExpression(
           '=',
           t.memberExpression(t.identifier(name), t.identifier(attribute)),
-          propTypesAST
+          valueNode
         )
       );
     }
@@ -377,7 +421,7 @@ module.exports = function flowReactPropTypes(babel) {
           [
             t.variableDeclarator(
               t.identifier(exportedName),
-              propTypesAst
+              wrapInDceCheck(propTypesAst)
             )
           ]
         );
@@ -396,15 +440,27 @@ module.exports = function flowReactPropTypes(babel) {
               ]),
             ]
           ));
-          const conditionalExportsAst = t.ifStatement(
-            t.binaryExpression(
-              '!==',
-              t.unaryExpression(
-                'typeof',
-                t.identifier('exports')
-              ),
-              t.stringLiteral('undefined')
+          const exportsDefinedCondition = t.binaryExpression(
+            '!==',
+            t.unaryExpression(
+              'typeof',
+              t.identifier('exports')
             ),
+            t.stringLiteral('undefined')
+          );
+
+          let ifCond = exportsDefinedCondition;
+          if (opts.deadCode) {
+            const dceConditional = t.unaryExpression('!', getDcePredicate());
+            ifCond = t.logicalExpression(
+              '&&',
+              dceConditional,
+              ifCond,
+            );
+          }
+
+          const conditionalExportsAst = t.ifStatement(
+            ifCond,
             exportAst
           );
           path.insertAfter(conditionalExportsAst);
