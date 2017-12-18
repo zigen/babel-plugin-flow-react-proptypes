@@ -166,7 +166,7 @@ To save some bytes in production, you can also only enable it in development mod
 
 ## useStatic
 
-When combining it with some plugins, such as react-transform (also used by react-native in development mode), the way we normally add `propTypes` doesn't work. You can enable the `useStatic` option to cause us to generat code like:
+When combining it with some plugins, such as react-transform (also used by react-native in development mode), the way we normally add `propTypes` doesn't work. You can enable the `useStatic` option to cause us to generate code like:
 
 ```js
 class C extends Component<Props> {
@@ -181,6 +181,7 @@ Add the option to your babel config.
   "presets": ["..."],
   "plugins": [["flow-react-proptypes", { "useStatic": true }]]
 }
+```
 
 ## deadCode
 
