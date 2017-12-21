@@ -356,6 +356,10 @@ module.exports = function flowReactPropTypes(babel) {
           propTypes = props;
         }
 
+        if (secondSuperParam && secondSuperParam.type === 'ObjectTypeAnnotation') {
+          propTypes = convertToPropTypes(secondSuperParam);
+        }
+
         const thirdSuperParam = getContextTypeParam(path.node);
         if (thirdSuperParam && thirdSuperParam.type === 'GenericTypeAnnotation') {
           const typeAliasName = thirdSuperParam.id.name;
