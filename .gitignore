@@ -6,3 +6,4 @@ npm-debug.log
 src/__tests__/lib/test-types.js.transpiled
 coverage
 *.tgz
+a.js

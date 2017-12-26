@@ -27,16 +27,16 @@ if (process.argv.includes('--rn')) {
   };
 */
 
-} else {
+}
+else {
   console.error(`Running in default config`);
   babelConfig = {
     babelrc: false,
     presets: ['es2015', 'stage-1', 'react'],
-    plugins: ['syntax-flow', [self, { "useStatic": true, deadCode: '__DEV__' }]],
+    plugins: ['syntax-flow', [self, {}]],
   };
 }
 
 const input = fs.readFileSync(process.argv[2], 'utf-8');
 const res = babel.transform(input, babelConfig).code;
 console.log(res);
-
