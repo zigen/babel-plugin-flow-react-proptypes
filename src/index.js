@@ -357,7 +357,7 @@ module.exports = function flowReactPropTypes(babel) {
         }
 
         if (secondSuperParam && secondSuperParam.type === 'ObjectTypeAnnotation') {
-          propTypes = convertToPropTypes(secondSuperParam);
+          propTypes = convertToPropTypes(secondSuperParam, importedTypes, internalTypes);
         }
 
         const thirdSuperParam = getContextTypeParam(path.node);
