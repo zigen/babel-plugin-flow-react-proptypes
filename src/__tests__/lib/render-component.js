@@ -26,9 +26,9 @@ module.exports.getConsoleErrorsForComponent = (sourceCode, includes) => {
   const consoleError = console.error;
   console.error = mockConsoleError;
   const transpiled = module.exports.transform(sourceCode);
+  console.log(transpiled);
   eval(transpiled);
   console.error = consoleError;
   const errorsSeen = mockConsoleError.mock.calls;
   return errorsSeen;
 };
-

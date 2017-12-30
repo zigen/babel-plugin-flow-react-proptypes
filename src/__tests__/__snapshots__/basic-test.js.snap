@@ -7,6 +7,14 @@ Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _types = require('./types');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\\"Cannot call a class as a function\\"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\\"this hasn't been initialised - super() hasn't been called\\"); } return call && (typeof call === \\"object\\" || typeof call === \\"function\\") ? call : self; }
@@ -22,8 +30,6 @@ if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginF
   value: babelPluginFlowReactPropTypes_proptype_Qux,
   configurable: true
 });
-
-var babelPluginFlowReactPropTypes_proptype_SomeExternalType = require('./types').babelPluginFlowReactPropTypes_proptype_SomeExternalType || require('prop-types').any;
 
 var Foo = function (_React$Component) {
   _inherits(Foo, _React$Component);
@@ -75,10 +81,10 @@ Foo.propTypes = {
     bar: require('prop-types').number.isRequired,
     baz: require('prop-types').oneOf(['literal']).isRequired
   }).isRequired,
-  some_external_type: typeof babelPluginFlowReactPropTypes_proptype_SomeExternalType === 'function' ? babelPluginFlowReactPropTypes_proptype_SomeExternalType.isRequired ? babelPluginFlowReactPropTypes_proptype_SomeExternalType.isRequired : babelPluginFlowReactPropTypes_proptype_SomeExternalType : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_SomeExternalType).isRequired,
+  some_external_type: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType || _propTypes2.default.func) === 'function' ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType || _propTypes2.default.func : require('prop-types').shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType || _propTypes2.default.func).isRequired,
   some_external_type_intersection: require('prop-types').shape(Object.assign({}, {
     foo: require('prop-types').string.isRequired
-  }, babelPluginFlowReactPropTypes_proptype_SomeExternalType === require('prop-types').any ? {} : babelPluginFlowReactPropTypes_proptype_SomeExternalType)).isRequired
+  }, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType || _propTypes2.default.func) === require('prop-types').any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType || _propTypes2.default.func)).isRequired
 };
 exports.default = Foo;"
 `;

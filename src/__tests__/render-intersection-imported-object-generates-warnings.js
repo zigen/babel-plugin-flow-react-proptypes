@@ -11,12 +11,13 @@ type FooProps = TestType & {
 
 class C extends React.Component {
     props: FooProps
-    
+
     render() { return <div/> };
 }
-  const tree1 = renderer.create(
-    <C/>
-  );`;
+const tree1 = renderer.create(
+  <C/>
+);`
+;
 
 const utils = require('./lib/render-component');
 
@@ -28,4 +29,3 @@ it('intersection-with-imported-object-generates-warnings', () => {
   ]);
   expect(errorsSeen).toMatchSnapshot();
 });
-
