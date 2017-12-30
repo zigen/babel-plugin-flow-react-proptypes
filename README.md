@@ -164,25 +164,6 @@ To save some bytes in production, you can also only enable it in development mod
 }
 ```
 
-## useStatic
-
-When combining it with some plugins, such as react-transform (also used by react-native in development mode), the way we normally add `propTypes` doesn't work. You can enable the `useStatic` option to cause us to generate code like:
-
-```js
-class C extends Component<Props> {
-  static propTypes = { x: require('prop-types').string }
-}
-```
-
-Add the option to your babel config.
-
-```json
-{
-  "presets": ["..."],
-  "plugins": [["flow-react-proptypes", { "useStatic": true }]]
-}
-```
-
 ## deadCode
 
 The deadCode option (disabled by default) adds a predicate to the code allowing both your propTypes definitions and potentially the
@@ -209,7 +190,7 @@ This plugin isn't perfect. You can disable it for an entire file with this direc
 'no babel-plugin-flow-react-proptypes';
 ```
 
-Specifically for react-native you can disable this for files in `node_modules` with the `ignoreNodeModules` config option. In react-native, you'll also want the `useStatic` option.
+Specifically for react-native you can disable this for files in `node_modules` with the `ignoreNodeModules` config option.
 
 ```json
 {

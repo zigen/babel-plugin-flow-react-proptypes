@@ -97,7 +97,7 @@ module.exports = function flowReactPropTypes(babel) {
             if (ppath.node && ppath.node.type === 'Program') break;
           } while (ppath = ppath.parentPath);
           if (ppath && ppath.node.body) {
-            ppath.node.body.unshift(toAdd);
+            ppath.node.body.push(toAdd);
           }
         }
       }
@@ -217,7 +217,7 @@ module.exports = function flowReactPropTypes(babel) {
       );
     }
 
-    if (opts.useStatic && (path.type === 'ClassDeclaration' || path.type === 'ClassExpression')) {
+    if (!opts.noStatic && (path.type === 'ClassDeclaration' || path.type === 'ClassExpression')) {
       const newNode = t.classProperty(
         t.identifier(attribute),
         valueNode
@@ -245,7 +245,7 @@ module.exports = function flowReactPropTypes(babel) {
     let name;
     let targetPath;
 
-    if (opts.useStatic && (path.type === 'ClassDeclaration' || path.type === 'ClassExpression')) {
+    if (!opts.noStatic && (path.type === 'ClassDeclaration' || path.type === 'ClassExpression')) {
       targetPath = path;
     }
     else if (path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') {
@@ -362,7 +362,7 @@ module.exports = function flowReactPropTypes(babel) {
         internalTypes[typeAliasName] = propTypes;
       },
       "ClassExpression|ClassDeclaration"(path) {
-        if (!opts.useStatic && path.node.type === 'ClassExpression') return;
+        if (opts.noStatic && path.node.type === 'ClassExpression') return;
 
         if (path.node.BPFRP_HIT_FOR_CLASS_ANNOTATION) return;
         path.node.BPFRP_HIT_FOR_CLASS_ANNOTATION = true;
