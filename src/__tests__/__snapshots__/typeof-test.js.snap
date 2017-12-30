@@ -9,6 +9,10 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var ActionTypes = {
+  JUMP_TO: 'react-native/NavigationExperimental/tabs-jumpTo'
+};
+
 var babelPluginFlowReactPropTypes_proptype_JumpToAction = {
   type: function type(props, propName, componentName) {
     if (!Object.prototype.hasOwnProperty.call(props, propName)) {
@@ -17,11 +21,6 @@ var babelPluginFlowReactPropTypes_proptype_JumpToAction = {
   },
   index: _propTypes2.default.number.isRequired
 };
-
-var ActionTypes = {
-  JUMP_TO: 'react-native/NavigationExperimental/tabs-jumpTo'
-};
-
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_JumpToAction', {
   value: babelPluginFlowReactPropTypes_proptype_JumpToAction,
   configurable: true

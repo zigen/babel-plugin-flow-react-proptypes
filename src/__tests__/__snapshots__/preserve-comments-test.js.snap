@@ -15,6 +15,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var React = require('react');
 
+var C = function C(props) {
+  return React.createElement('div', null);
+};
+
 C.propTypes = {
   /** foo comment */
   foo: _propTypes2.default.string.isRequired,
@@ -27,11 +31,5 @@ C.propTypes = {
     subbar: _propTypes2.default.number.isRequired
   }).isRequired
 };
-
-
-var C = function C(props) {
-  return React.createElement('div', null);
-};
-
 exports.default = C;"
 `;

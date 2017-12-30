@@ -23,34 +23,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 
 var React = require('react');
 
-Foo.contextTypes = {
-  lang: _propTypes2.default.string.isRequired
-};
+var Foo = function (_React$Component) {
+  _inherits(Foo, _React$Component);
+
+  function Foo() {
+    _classCallCheck(this, Foo);
+
+    return _possibleConstructorReturn(this, (Foo.__proto__ || Object.getPrototypeOf(Foo)).apply(this, arguments));
+  }
+
+  _createClass(Foo, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement('div', null);
+    }
+  }]);
+
+  return Foo;
+}(React.Component);
+
 Foo.propTypes = {
   x: _propTypes2.default.oneOf(['option1', 'option2'])
 };
-
-function () {
-  var Foo = function (_React$Component) {
-    _inherits(Foo, _React$Component);
-
-    function Foo() {
-      _classCallCheck(this, Foo);
-
-      return _possibleConstructorReturn(this, (Foo.__proto__ || Object.getPrototypeOf(Foo)).apply(this, arguments));
-    }
-
-    _createClass(Foo, [{
-      key: 'render',
-      value: function render() {
-        return React.createElement('div', null);
-      }
-    }]);
-
-    return Foo;
-  }(React.Component);
-}()
-
+Foo.contextTypes = {
+  lang: _propTypes2.default.string.isRequired
+};
 ;
 
 exports.default = Foo;"

@@ -19,14 +19,12 @@ var arrowFunctionWithBody = function arrowFunctionWithBody() {
   return window.console;
 };
 
-Foo.propTypes = {
-  x: _propTypes2.default.oneOf(['option1', 'option2'])
-};
-
-
 var Foo = function Foo(props) {
   return React.createElement('div', null, props.x);
 };
 
+Foo.propTypes = {
+  x: _propTypes2.default.oneOf(['option1', 'option2'])
+};
 exports.default = Foo;"
 `;

@@ -15,14 +15,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var React = require('react');
 
-Foo.propTypes = {
-  x: _propTypes2.default.number
-};
-
-
 var Foo = function Foo(props) {
   React.createElement('div', null, props.x);
 };
 
+Foo.propTypes = {
+  x: _propTypes2.default.number
+};
 exports.default = Foo;"
 `;

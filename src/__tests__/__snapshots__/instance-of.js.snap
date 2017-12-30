@@ -3,13 +3,13 @@
 exports[`instance-of 1`] = `
 "'use strict';
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _some_class = require('./some_class');
 
 var _some_class2 = _interopRequireDefault(_some_class);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22,6 +22,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var SomeOtherClass = function SomeOtherClass() {
   _classCallCheck(this, SomeOtherClass);
 };
+
+var MyComponent = function (_React$Component) {
+  _inherits(MyComponent, _React$Component);
+
+  function MyComponent() {
+    _classCallCheck(this, MyComponent);
+
+    return _possibleConstructorReturn(this, (MyComponent.__proto__ || Object.getPrototypeOf(MyComponent)).apply(this, arguments));
+  }
+
+  return MyComponent;
+}(React.Component);
 
 MyComponent.propTypes = {
   some_class: function some_class() {
@@ -36,19 +48,5 @@ MyComponent.propTypes = {
   value_can_be_null: function value_can_be_null() {
     return (typeof SomeOtherClass === 'function' ? _propTypes2.default.instanceOf(SomeOtherClass) : _propTypes2.default.any).apply(this, arguments);
   }
-};
-
-function () {
-  var MyComponent = function (_React$Component) {
-    _inherits(MyComponent, _React$Component);
-
-    function MyComponent() {
-      _classCallCheck(this, MyComponent);
-
-      return _possibleConstructorReturn(this, (MyComponent.__proto__ || Object.getPrototypeOf(MyComponent)).apply(this, arguments));
-    }
-
-    return MyComponent;
-  }(React.Component);
-}()"
+};"
 `;

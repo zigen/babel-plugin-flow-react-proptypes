@@ -3,20 +3,17 @@
 exports[`stateless-inline-imports 1`] = `
 "'use strict';
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _types = require('../types');
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _types = require('../types');
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-C.propTypes = _types.bpfrp_babelPluginFlowReactPropTypes_proptype_T === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_T;
-
 
 var C = function C(props) {
   _react2.default.createElement(
@@ -24,5 +21,7 @@ var C = function C(props) {
     null,
     props.name
   );
-};"
+};
+
+C.propTypes = _types.bpfrp_babelPluginFlowReactPropTypes_proptype_T === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_T;"
 `;

@@ -1,22 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`intersection-with-imported-object-generates-warnings: No warnings, all props given correctly 1`] = `
-Array [
-  Array [
-    "Warning: Failed prop type: The prop \`nested_intersection.isRequired\` is marked as required in \`C\`, but its value is \`undefined\`.
-    in C",
-  ],
-]
-`;
+exports[`intersection-with-imported-object-generates-warnings: No warnings, all props given correctly 1`] = `Array []`;
 
 exports[`intersection-with-imported-object-generates-warnings: invalid value given for key quy.baz 1`] = `Array []`;
 
 exports[`intersection-with-imported-object-generates-warnings: no prop types given 1`] = `
 Array [
-  Array [
-    "Warning: Failed prop type: The prop \`isRequired\` is marked as required in \`C\`, but its value is \`undefined\`.
-    in C",
-  ],
   Array [
     "Warning: Failed prop type: The prop \`foo\` is marked as required in \`C\`, but its value is \`undefined\`.
     in C",

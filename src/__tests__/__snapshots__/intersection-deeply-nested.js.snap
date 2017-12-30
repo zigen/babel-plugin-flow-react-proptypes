@@ -7,11 +7,11 @@ Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
 
+var _types = require(\\"./types\\");
+
 var _propTypes = require(\\"prop-types\\");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _types = require(\\"./types\\");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23,6 +23,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 
 var React = require('react');
 
+var D = function (_React$Component) {
+  _inherits(D, _React$Component);
+
+  function D() {
+    _classCallCheck(this, D);
+
+    return _possibleConstructorReturn(this, (D.__proto__ || Object.getPrototypeOf(D)).apply(this, arguments));
+  }
+
+  return D;
+}(React.Component);
+
 D.propTypes = Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
   foo: _propTypes2.default.number.isRequired,
   bar: typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired,
@@ -31,21 +43,6 @@ D.propTypes = Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_propt
     bar: _propTypes2.default.shape(Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType)).isRequired
   }, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType)).isRequired
 });
-
-function () {
-  var D = function (_React$Component) {
-    _inherits(D, _React$Component);
-
-    function D() {
-      _classCallCheck(this, D);
-
-      return _possibleConstructorReturn(this, (D.__proto__ || Object.getPrototypeOf(D)).apply(this, arguments));
-    }
-
-    return D;
-  }(React.Component);
-}()
-
 ;
 
 exports.default = D;"

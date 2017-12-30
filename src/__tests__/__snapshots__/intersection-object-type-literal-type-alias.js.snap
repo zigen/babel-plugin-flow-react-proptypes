@@ -23,24 +23,21 @@ var React = require('react');
 
 ;
 
+var C = function (_React$Component) {
+  _inherits(C, _React$Component);
+
+  function C() {
+    _classCallCheck(this, C);
+
+    return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
+  }
+
+  return C;
+}(React.Component);
+
 C.propTypes = {
   bar: _propTypes2.default.string.isRequired,
   foo: _propTypes2.default.string.isRequired
 };
-
-function () {
-  var C = function (_React$Component) {
-    _inherits(C, _React$Component);
-
-    function C() {
-      _classCallCheck(this, C);
-
-      return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
-    }
-
-    return C;
-  }(React.Component);
-}()
-
 exports.default = C;"
 `;

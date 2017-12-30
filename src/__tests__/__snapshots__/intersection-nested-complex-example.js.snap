@@ -7,11 +7,11 @@ Object.defineProperty(exports, \\"__esModule\\", {
    value: true
 });
 
+var _types = require(\\"./types\\");
+
 var _propTypes = require(\\"prop-types\\");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _types = require(\\"./types\\");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21,12 +21,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var React = require('react');
+
 var babelPluginFlowReactPropTypes_proptype_X = Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
    a: _propTypes2.default.string.isRequired
 });
-
-var React = require('react');
-
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_X\\", {
    value: babelPluginFlowReactPropTypes_proptype_X,
    configurable: true

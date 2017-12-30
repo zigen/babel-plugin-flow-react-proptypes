@@ -11,16 +11,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var React = require('react');
 
-C.propTypes = {
-  foo: _propTypes2.default.string
-};
-
-
 function C(props) {
   return React.createElement(
     'div',
     null,
     props.foo
   );
-}"
+}
+C.propTypes = {
+  foo: _propTypes2.default.string
+};"
 `;

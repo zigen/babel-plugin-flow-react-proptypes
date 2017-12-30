@@ -15,14 +15,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var React = require('react');
 
-Foo.contextTypes = {
-    lang: _propTypes2.default.string.isRequired
-};
-Foo.propTypes = {
-    x: _propTypes2.default.oneOf(['option1', 'option2'])
-};
-
-
 var Foo = function Foo(props, context) {
     React.createElement(
         'div',
@@ -31,5 +23,11 @@ var Foo = function Foo(props, context) {
     );
 };
 
+Foo.contextTypes = {
+    lang: _propTypes2.default.string.isRequired
+};
+Foo.propTypes = {
+    x: _propTypes2.default.oneOf(['option1', 'option2'])
+};
 exports.default = Foo;"
 `;
