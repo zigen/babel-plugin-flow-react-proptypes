@@ -38,7 +38,9 @@ if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelP
   configurable: true
 });
 var babelPluginFlowReactPropTypes_proptype_X = Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
-  a: typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired,
+  a: function a() {
+    return (typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired).apply(this, arguments);
+  },
   b: _propTypes2.default.string.isRequired
 }, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
   bar: _propTypes2.default.number.isRequired
@@ -93,9 +95,13 @@ var D = function (_React$Component2) {
 
 D.propTypes = Object.assign({}, {
   c: _propTypes2.default.string.isRequired,
-  b: typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired
+  b: function b() {
+    return (typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired).apply(this, arguments);
+  }
 }, Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
-  a: typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired,
+  a: function a() {
+    return (typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired).apply(this, arguments);
+  },
   b: _propTypes2.default.string.isRequired
 }, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
   bar: _propTypes2.default.number.isRequired

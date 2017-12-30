@@ -39,7 +39,9 @@ var MyComponent = function (_React$Component) {
 
 MyComponent.propTypes = {
   foo: _propTypes2.default.string.isRequired,
-  baz: typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired,
+  baz: function baz() {
+    return (typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired).apply(this, arguments);
+  },
   bar: _propTypes2.default.number.isRequired
 };"
 `;

@@ -32,10 +32,18 @@ var C = function (_React$Component) {
 }(React.Component);
 
 C.propTypes = {
-  an_imported_named_type: typeof _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === 'function' ? _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired,
-  an_imported_default_type: typeof _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType === 'function' ? _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType.isRequired ? _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType.isRequired : _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType : _propTypes2.default.shape(_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType).isRequired,
-  optional_property: typeof _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === 'function' ? _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType),
-  can_be_null_property: typeof _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType === 'function' ? _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType : _propTypes2.default.shape(_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType),
+  an_imported_named_type: function an_imported_named_type() {
+    return (typeof _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === 'function' ? _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired).apply(this, arguments);
+  },
+  an_imported_default_type: function an_imported_default_type() {
+    return (typeof _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType === 'function' ? _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType.isRequired ? _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType.isRequired : _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType : _propTypes2.default.shape(_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType).isRequired).apply(this, arguments);
+  },
+  optional_property: function optional_property() {
+    return (typeof _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === 'function' ? _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType)).apply(this, arguments);
+  },
+  can_be_null_property: function can_be_null_property() {
+    return (typeof _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType === 'function' ? _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType : _propTypes2.default.shape(_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType)).apply(this, arguments);
+  },
   a_global_type: function a_global_type() {
     return (typeof Date === 'function' ? _propTypes2.default.instanceOf(Date).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
   },

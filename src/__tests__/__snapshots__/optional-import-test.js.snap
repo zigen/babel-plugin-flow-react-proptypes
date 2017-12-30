@@ -43,6 +43,8 @@ var MyComp = function (_React$Component) {
 }(_react2.default.Component);
 
 MyComp.propTypes = {
-  values: typeof _values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values === 'function' ? _values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values : _propTypes2.default.shape(_values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values)
+  values: function values() {
+    return (typeof _values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values === 'function' ? _values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values : _propTypes2.default.shape(_values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values)).apply(this, arguments);
+  }
 };"
 `;
