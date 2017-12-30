@@ -85,7 +85,7 @@ module.exports = function flowReactPropTypes(babel) {
         let toAdd = null;
 
         if (type === 'default') {
-          toAdd = impTemplates.default({ LOCAL: tid(local) });
+          toAdd = impTemplates.default({ NAME: tid(local), LOCAL: tid(local) });
         }
         else if (type === 'named') {
           toAdd = impTemplates.named({ LOCAL: tid(local), NAME: tid(name) });
@@ -543,7 +543,7 @@ module.exports = function flowReactPropTypes(babel) {
         //   return;
         // }
         node.specifiers.forEach((specifier) => {
-          if (specifier.importKind !== 'type') return;
+          if (node.importKind !== 'type' && specifier.importKind !== 'type') return;
 
           const typeName = specifier.type === 'ImportDefaultSpecifier'
             ? specifier.local.name
@@ -562,7 +562,7 @@ module.exports = function flowReactPropTypes(babel) {
           // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/129
           if (node.source.value === 'react' && typeName === 'ComponentType') {
 
-            const ptFunc = getFromPropTypesModule('func');
+            const ptFunc = getFromPropTypesModule(path, 'func');
             importedTypes[typeName].accessNode = ptFunc;
             return;
           }
@@ -570,7 +570,7 @@ module.exports = function flowReactPropTypes(babel) {
           importedTypes[typeName].accessNode = t.logicalExpression(
             '||',
             getFromModule(path, { type: 'named', name: getExportNameForType(typeName), location: node.source.value }),
-            getFromPropTypesModule('func'),
+            getFromPropTypesModule(path, 'func'),
           );
         });
       }
