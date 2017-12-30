@@ -19,30 +19,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 
 var Element = window.Element;
 
+var Foo = function (_React$Component) {
+  _inherits(Foo, _React$Component);
+
+  function Foo() {
+    _classCallCheck(this, Foo);
+
+    return _possibleConstructorReturn(this, (Foo.__proto__ || Object.getPrototypeOf(Foo)).apply(this, arguments));
+  }
+
+  _createClass(Foo, [{
+    key: \\"render\\",
+    value: function render() {
+      return null;
+    }
+  }]);
+
+  return Foo;
+}(React.Component);
+
 Foo.propTypes = {
   element: function element() {
     return (typeof Element === \\"function\\" ? _propTypes2.default.instanceOf(Element).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
   }
-};
-
-function () {
-  var Foo = function (_React$Component) {
-    _inherits(Foo, _React$Component);
-
-    function Foo() {
-      _classCallCheck(this, Foo);
-
-      return _possibleConstructorReturn(this, (Foo.__proto__ || Object.getPrototypeOf(Foo)).apply(this, arguments));
-    }
-
-    _createClass(Foo, [{
-      key: \\"render\\",
-      value: function render() {
-        return null;
-      }
-    }]);
-
-    return Foo;
-  }(React.Component);
-}()"
+};"
 `;

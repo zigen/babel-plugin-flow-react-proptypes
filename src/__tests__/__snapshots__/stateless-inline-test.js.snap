@@ -16,6 +16,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var React = require('react');
 
+function Foo(props) {
+  var x = props.a_number;
+  return React.createElement(
+    'div',
+    null,
+    x
+  );
+}
 Foo.propTypes = {
   an_optional_string: _propTypes2.default.string,
   a_number: _propTypes2.default.number.isRequired,
@@ -46,13 +54,5 @@ Foo.propTypes = {
       throw new Error('Invalid prop \`' + propName + '\` of value \`' + props[propName] + '\` passed to \`' + componentName + '\`. Expected undefined or null.');
     }
   }
-};
-function Foo(props) {
-  var x = props.a_number;
-  return React.createElement(
-    'div',
-    null,
-    x
-  );
-}"
+};"
 `;

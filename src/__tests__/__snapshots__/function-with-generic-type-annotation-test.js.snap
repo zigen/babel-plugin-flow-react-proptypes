@@ -9,10 +9,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var C = function C(props) {};
 C.propTypes = {
   name: _propTypes2.default.string.isRequired
-};
-
-
-var C = function C(props) {};"
+};"
 `;

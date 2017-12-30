@@ -21,30 +21,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var C = function (_React$Component) {
+  _inherits(C, _React$Component);
+
+  function C() {
+    _classCallCheck(this, C);
+
+    return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
+  }
+
+  _createClass(C, [{
+    key: \\"render\\",
+    value: function render() {
+      return React.createElement(\\"div\\", null);
+    }
+  }]);
+
+  return C;
+}(React.Component);
+
 C.propTypes = {
   as: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired
 };
-
-function () {
-  var C = function (_React$Component) {
-    _inherits(C, _React$Component);
-
-    function C() {
-      _classCallCheck(this, C);
-
-      return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
-    }
-
-    _createClass(C, [{
-      key: \\"render\\",
-      value: function render() {
-        return React.createElement(\\"div\\", null);
-      }
-    }]);
-
-    return C;
-  }(React.Component);
-}()
-
 exports.default = C;"
 `;

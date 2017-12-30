@@ -3,11 +3,11 @@
 exports[`intersection-nested-with-imported-object 1`] = `
 "'use strict';
 
+var _foo = require('./foo');
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _foo = require('./foo');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17,25 +17,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var C = function (_React$Component) {
+  _inherits(C, _React$Component);
+
+  function C() {
+    _classCallCheck(this, C);
+
+    return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
+  }
+
+  return C;
+}(React.Component);
+
 C.propTypes = {
   foo: _propTypes2.default.string.isRequired,
   bar: _propTypes2.default.number.isRequired,
   baz: _propTypes2.default.shape(Object.assign({}, {
     foo: _propTypes2.default.number.isRequired
   }, _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType)).isRequired
-};
-
-function () {
-  var C = function (_React$Component) {
-    _inherits(C, _React$Component);
-
-    function C() {
-      _classCallCheck(this, C);
-
-      return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
-    }
-
-    return C;
-  }(React.Component);
-}()"
+};"
 `;

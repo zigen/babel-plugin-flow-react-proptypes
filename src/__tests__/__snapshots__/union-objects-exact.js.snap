@@ -15,6 +15,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var React = require('react');
+
 var babelPluginFlowReactPropTypes_proptype_ExactFooProps = {
   someprop: _propTypes2.default.oneOfType([_propTypes2.default.shape({
     a: _propTypes2.default.string.isRequired
@@ -38,9 +40,6 @@ var babelPluginFlowReactPropTypes_proptype_ExactFooProps = {
     }
   })]).isRequired
 };
-
-var React = require('react');
-
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_ExactFooProps', {
   value: babelPluginFlowReactPropTypes_proptype_ExactFooProps,
   configurable: true

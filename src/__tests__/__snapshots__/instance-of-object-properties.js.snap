@@ -3,11 +3,11 @@
 exports[`instance-of 1`] = `
 "'use strict';
 
+var _some_class = require('./some_class');
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _some_class = require('./some_class');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

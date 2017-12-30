@@ -21,23 +21,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 
 var React = require('react');
 
+var Foo = function (_React$Component) {
+  _inherits(Foo, _React$Component);
+
+  function Foo() {
+    _classCallCheck(this, Foo);
+
+    return _possibleConstructorReturn(this, (Foo.__proto__ || Object.getPrototypeOf(Foo)).apply(this, arguments));
+  }
+
+  return Foo;
+}(React.Component);
+
 Foo.propTypes = {
   foo: _propTypes2.default.string
 };
-
-function () {
-  var Foo = function (_React$Component) {
-    _inherits(Foo, _React$Component);
-
-    function Foo() {
-      _classCallCheck(this, Foo);
-
-      return _possibleConstructorReturn(this, (Foo.__proto__ || Object.getPrototypeOf(Foo)).apply(this, arguments));
-    }
-
-    return Foo;
-  }(React.Component);
-}()
-
 exports.default = Foo;"
 `;

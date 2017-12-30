@@ -16,10 +16,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var React = require('react');
 
-Foo.propTypes = {
-  x: _propTypes2.default.number,
-  y: _propTypes2.default.string
-};
 function Foo(_ref) {
   var _ref$x = _ref.x,
       x = _ref$x === undefined ? 1 : _ref$x,
@@ -33,5 +29,9 @@ function Foo(_ref) {
     '/',
     y
   );
-}"
+}
+Foo.propTypes = {
+  x: _propTypes2.default.number,
+  y: _propTypes2.default.string
+};"
 `;

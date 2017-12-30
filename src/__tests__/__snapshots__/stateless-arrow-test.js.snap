@@ -19,11 +19,6 @@ var arrowFunctionWithNoBody = function arrowFunctionWithNoBody() {
   return window.console;
 };
 
-Foo.propTypes = {
-  x: _propTypes2.default.oneOf(['option1', 'option2'])
-};
-
-
 var Foo = function Foo(props) {
   React.createElement(
     'div',
@@ -32,5 +27,8 @@ var Foo = function Foo(props) {
   );
 };
 
+Foo.propTypes = {
+  x: _propTypes2.default.oneOf(['option1', 'option2'])
+};
 exports.default = Foo;"
 `;

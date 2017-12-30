@@ -12,6 +12,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var React = require('react');
 var Element = React.Element;
 
+function Foo(props) {
+  React.createElement(
+    'div',
+    null,
+    props.children
+  );
+}
 Foo.propTypes = {
   children: _propTypes2.default.node.isRequired,
   children2: _propTypes2.default.arrayOf(function () {
@@ -23,14 +30,5 @@ Foo.propTypes = {
   children4: function children4() {
     return (typeof Element === 'function' ? _propTypes2.default.instanceOf(Element).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
   }
-};
-
-
-function Foo(props) {
-  React.createElement(
-    'div',
-    null,
-    props.children
-  );
-}"
+};"
 `;

@@ -17,6 +17,25 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var Foo = function (_Component) {
+  _inherits(Foo, _Component);
+
+  function Foo() {
+    _classCallCheck(this, Foo);
+
+    return _possibleConstructorReturn(this, (Foo.__proto__ || Object.getPrototypeOf(Foo)).apply(this, arguments));
+  }
+
+  _createClass(Foo, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement('div', null);
+    }
+  }]);
+
+  return Foo;
+}(Component);
+
 Foo.propTypes = {
   a_string: _propTypes2.default.oneOf(['str']).isRequired,
   a_number: _propTypes2.default.oneOf([7]).isRequired,
@@ -27,26 +46,5 @@ Foo.propTypes = {
       throw new Error('Invalid prop \`' + propName + '\` of value \`' + props[propName] + '\` passed to \`' + componentName + '\`. Expected undefined or null.');
     }
   }
-};
-
-function () {
-  var Foo = function (_Component) {
-    _inherits(Foo, _Component);
-
-    function Foo() {
-      _classCallCheck(this, Foo);
-
-      return _possibleConstructorReturn(this, (Foo.__proto__ || Object.getPrototypeOf(Foo)).apply(this, arguments));
-    }
-
-    _createClass(Foo, [{
-      key: 'render',
-      value: function render() {
-        return React.createElement('div', null);
-      }
-    }]);
-
-    return Foo;
-  }(Component);
-}()"
+};"
 `;
