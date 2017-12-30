@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var babelPluginFlowReactPropTypes_proptype_T = {
     flag: _propTypes2.default.bool.isRequired,
-    list: _propTypes2.default.arrayOf(typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func) === 'function' ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func)).isRequired
+    list: _propTypes2.default.arrayOf(typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType === 'function' ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType)).isRequired
 };
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_T', {
     value: babelPluginFlowReactPropTypes_proptype_T,

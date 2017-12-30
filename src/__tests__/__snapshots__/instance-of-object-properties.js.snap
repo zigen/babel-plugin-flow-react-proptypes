@@ -17,12 +17,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var babelPluginFlowReactPropTypes_proptype_Fact = typeof (Foo.Bar == null ? {} : Foo.Bar) === 'function' ? _propTypes2.default.instanceOf(Foo.Bar == null ? {} : Foo.Bar) : _propTypes2.default.any;
+var babelPluginFlowReactPropTypes_proptype_Fact = function babelPluginFlowReactPropTypes_proptype_Fact() {
+  return (typeof (Foo.Bar == null ? {} : Foo.Bar) === 'function' ? _propTypes2.default.instanceOf(Foo.Bar == null ? {} : Foo.Bar) : _propTypes2.default.any).apply(this, arguments);
+};
+
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Fact', {
   value: babelPluginFlowReactPropTypes_proptype_Fact,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_FactMap = typeof (Foo.Map == null ? {} : Foo.Map) === 'function' ? _propTypes2.default.instanceOf(Foo.Map == null ? {} : Foo.Map) : _propTypes2.default.any;
+
+var babelPluginFlowReactPropTypes_proptype_FactMap = function babelPluginFlowReactPropTypes_proptype_FactMap() {
+  return (typeof (Foo.Map == null ? {} : Foo.Map) === 'function' ? _propTypes2.default.instanceOf(Foo.Map == null ? {} : Foo.Map) : _propTypes2.default.any).apply(this, arguments);
+};
+
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_FactMap', {
   value: babelPluginFlowReactPropTypes_proptype_FactMap,
   configurable: true
@@ -41,8 +48,14 @@ var MyComponent = function (_React$Component) {
 }(React.Component);
 
 MyComponent.propTypes = {
-  some_class: typeof (_some_class.SomeClass.property == null ? {} : _some_class.SomeClass.property) === 'function' ? _propTypes2.default.instanceOf(_some_class.SomeClass.property == null ? {} : _some_class.SomeClass.property).isRequired : _propTypes2.default.any.isRequired,
-  generics: typeof (_some_class.SomeClass.Map == null ? {} : _some_class.SomeClass.Map) === 'function' ? _propTypes2.default.instanceOf(_some_class.SomeClass.Map == null ? {} : _some_class.SomeClass.Map).isRequired : _propTypes2.default.any.isRequired,
-  deep: typeof (((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar) === 'function' ? _propTypes2.default.instanceOf(((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar).isRequired : _propTypes2.default.any.isRequired
+  some_class: function some_class() {
+    return (typeof (_some_class.SomeClass.property == null ? {} : _some_class.SomeClass.property) === 'function' ? _propTypes2.default.instanceOf(_some_class.SomeClass.property == null ? {} : _some_class.SomeClass.property).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  },
+  generics: function generics() {
+    return (typeof (_some_class.SomeClass.Map == null ? {} : _some_class.SomeClass.Map) === 'function' ? _propTypes2.default.instanceOf(_some_class.SomeClass.Map == null ? {} : _some_class.SomeClass.Map).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  },
+  deep: function deep() {
+    return (typeof (((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar) === 'function' ? _propTypes2.default.instanceOf(((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  }
 };"
 `;

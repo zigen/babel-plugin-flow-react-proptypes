@@ -15,13 +15,14 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+C.propTypes = _types.bpfrp_babelPluginFlowReactPropTypes_proptype_T === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_T;
+
+
 var C = function C(props) {
   _react2.default.createElement(
     'div',
     null,
     props.name
   );
-};
-
-C.propTypes = (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func;"
+};"
 `;

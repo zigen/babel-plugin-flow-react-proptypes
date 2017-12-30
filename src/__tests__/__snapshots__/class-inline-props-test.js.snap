@@ -24,30 +24,32 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var React = require('react');
-
-var Foo = function (_React$Component) {
-  _inherits(Foo, _React$Component);
-
-  function Foo() {
-    _classCallCheck(this, Foo);
-
-    return _possibleConstructorReturn(this, (Foo.__proto__ || Object.getPrototypeOf(Foo)).apply(this, arguments));
-  }
-
-  _createClass(Foo, [{
-    key: 'render',
-    value: function render() {
-      return React.createElement('div', null);
-    }
-  }]);
-
-  return Foo;
-}(React.Component);
-
 Foo.propTypes = {
   a_number: _propTypes2.default.number.isRequired,
-  external: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func) === 'function' ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func).isRequired,
-  externalOptional: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func) === 'function' ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func)
+  external: typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType === 'function' ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType).isRequired,
+  externalOptional: typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType === 'function' ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType)
 };
+
+function () {
+  var Foo = function (_React$Component) {
+    _inherits(Foo, _React$Component);
+
+    function Foo() {
+      _classCallCheck(this, Foo);
+
+      return _possibleConstructorReturn(this, (Foo.__proto__ || Object.getPrototypeOf(Foo)).apply(this, arguments));
+    }
+
+    _createClass(Foo, [{
+      key: 'render',
+      value: function render() {
+        return React.createElement('div', null);
+      }
+    }]);
+
+    return Foo;
+  }(React.Component);
+}()
+
 exports.default = Foo;"
 `;

@@ -22,7 +22,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 var React = require('react');
 
 Foo.propTypes = {
-  foo: typeof T === 'function' ? _propTypes2.default.instanceOf(T) : _propTypes2.default.any
+  foo: function foo() {
+    return (typeof T === 'function' ? _propTypes2.default.instanceOf(T) : _propTypes2.default.any).apply(this, arguments);
+  }
 };
 
 function () {
