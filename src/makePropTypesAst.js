@@ -2,7 +2,12 @@ import {$debug, makeLiteral, PLUGIN_NAME} from './util';
 import * as t from 'babel-types';
 import template from 'babel-template';
 
-const USE_PROPTYPES_PACKAGE = true;
+function makePropTypeImportNode() {
+  return t.callExpression(t.identifier('require'), [makeLiteral('prop-types')]);
+}
+export function setMakePropTypeImportNode(fn) {
+  makePropTypeImportNode = fn;
+}
 
 const dontSetTemplate = template(`
 (props, propName, componentName) => {
@@ -200,15 +205,6 @@ function makeObjectAstForShape(propTypeData) {
   return t.objectExpression(rootProperties);
 }
 
-function makePropTypeImportNode() {
-  if (USE_PROPTYPES_PACKAGE) {
-    return t.callExpression(t.identifier('require'), [makeLiteral('prop-types')]);
-  }
-  else {
-    const reactNode = t.callExpression(t.identifier('require'), [makeLiteral('react')]);
-    return t.memberExpression(reactNode, t.identifier('PropTypes'));
-  }
-}
 function makeFunctionCheckAST(variableNode) {
   return t.binaryExpression('===', t.unaryExpression('typeof', variableNode), t.stringLiteral('function'));
 }
