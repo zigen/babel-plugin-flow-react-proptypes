@@ -9,6 +9,10 @@ Object.defineProperty(exports, \\"__esModule\\", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\\"value\\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -21,44 +25,47 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var AlbumCard = function (_React$Component) {
-  _inherits(AlbumCard, _React$Component);
-
-  function AlbumCard() {
-    _classCallCheck(this, AlbumCard);
-
-    return _possibleConstructorReturn(this, (AlbumCard.__proto__ || Object.getPrototypeOf(AlbumCard)).apply(this, arguments));
-  }
-
-  _createClass(AlbumCard, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(Box, null);
-    }
-  }]);
-
-  return AlbumCard;
-}(_react2.default.Component);
-
 AlbumCard.propTypes = {
-  data: require('prop-types').shape({
-    stats: require('prop-types').shape({
-      images: require('prop-types').number.isRequired,
-      videos: require('prop-types').number.isRequired,
-      reposts: require('prop-types').number.isRequired,
-      shares: require('prop-types').number.isRequired,
-      stashes: require('prop-types').number.isRequired,
-      likes: require('prop-types').number.isRequired,
-      comments: require('prop-types').number.isRequired
+  data: _propTypes2.default.shape({
+    stats: _propTypes2.default.shape({
+      images: _propTypes2.default.number.isRequired,
+      videos: _propTypes2.default.number.isRequired,
+      reposts: _propTypes2.default.number.isRequired,
+      shares: _propTypes2.default.number.isRequired,
+      stashes: _propTypes2.default.number.isRequired,
+      likes: _propTypes2.default.number.isRequired,
+      comments: _propTypes2.default.number.isRequired
     }).isRequired,
-    title: require('prop-types').string.isRequired,
-    coverImage: require('prop-types').shape({
-      id: require('prop-types').string.isRequired,
-      src: require('prop-types').string.isRequired
+    title: _propTypes2.default.string.isRequired,
+    coverImage: _propTypes2.default.shape({
+      id: _propTypes2.default.string.isRequired,
+      src: _propTypes2.default.string.isRequired
     }).isRequired,
-    description: require('prop-types').string.isRequired,
-    userIsFollowing: require('prop-types').oneOf([true, false]).isRequired
+    description: _propTypes2.default.string.isRequired,
+    userIsFollowing: _propTypes2.default.oneOf([true, false]).isRequired
   }).isRequired
 };
+
+function () {
+  var AlbumCard = function (_React$Component) {
+    _inherits(AlbumCard, _React$Component);
+
+    function AlbumCard() {
+      _classCallCheck(this, AlbumCard);
+
+      return _possibleConstructorReturn(this, (AlbumCard.__proto__ || Object.getPrototypeOf(AlbumCard)).apply(this, arguments));
+    }
+
+    _createClass(AlbumCard, [{
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement(Box, null);
+      }
+    }]);
+
+    return AlbumCard;
+  }(_react2.default.Component);
+}()
+
 exports.default = AlbumCard;"
 `;

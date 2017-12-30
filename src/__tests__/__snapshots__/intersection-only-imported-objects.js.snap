@@ -31,5 +31,5 @@ var C = function (_React$Component) {
     return C;
 }(React.Component);
 
-C.propTypes = Object.assign({}, (_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === require('prop-types').any ? {} : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, (_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeOtherType || _propTypes2.default.func) === require('prop-types').any ? {} : _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeOtherType || _propTypes2.default.func);"
+C.propTypes = Object.assign({}, (_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, (_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeOtherType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeOtherType || _propTypes2.default.func);"
 `;

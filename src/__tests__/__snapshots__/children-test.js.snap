@@ -3,8 +3,22 @@
 exports[`children 1`] = `
 "'use strict';
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var React = require('react');
 var Element = React.Element;
+
+Foo.propTypes = {
+  children: _propTypes2.default.node.isRequired,
+  children2: _propTypes2.default.arrayOf(typeof Element === 'function' ? _propTypes2.default.instanceOf(Element) : _propTypes2.default.any).isRequired,
+  children3: typeof Element === 'function' ? _propTypes2.default.instanceOf(Element).isRequired : _propTypes2.default.any.isRequired,
+  children4: typeof Element === 'function' ? _propTypes2.default.instanceOf(Element).isRequired : _propTypes2.default.any.isRequired
+};
+
 
 function Foo(props) {
   React.createElement(
@@ -12,11 +26,5 @@ function Foo(props) {
     null,
     props.children
   );
-}
-Foo.propTypes = {
-  children: require('prop-types').node.isRequired,
-  children2: require('prop-types').arrayOf(typeof Element === 'function' ? require('prop-types').instanceOf(Element) : require('prop-types').any).isRequired,
-  children3: typeof Element === 'function' ? require('prop-types').instanceOf(Element).isRequired : require('prop-types').any.isRequired,
-  children4: typeof Element === 'function' ? require('prop-types').instanceOf(Element).isRequired : require('prop-types').any.isRequired
-};"
+}"
 `;

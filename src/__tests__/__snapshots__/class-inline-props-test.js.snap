@@ -45,9 +45,9 @@ var Foo = function (_React$Component) {
 }(React.Component);
 
 Foo.propTypes = {
-  a_number: require('prop-types').number.isRequired,
-  external: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func) === 'function' ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func : require('prop-types').shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func).isRequired,
-  externalOptional: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func) === 'function' ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func : require('prop-types').shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func)
+  a_number: _propTypes2.default.number.isRequired,
+  external: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func) === 'function' ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func).isRequired,
+  externalOptional: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func) === 'function' ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType || _propTypes2.default.func)
 };
 exports.default = Foo;"
 `;

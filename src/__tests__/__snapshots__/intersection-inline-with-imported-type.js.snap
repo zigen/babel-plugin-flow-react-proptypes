@@ -30,6 +30,6 @@ var MyComponent = function (_React$Component) {
 }(React.Component);
 
 MyComponent.propTypes = Object.assign({}, {
-  foo: require(\\"prop-types\\").string.isRequired
-}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === require(\\"prop-types\\").any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func);"
+  foo: _propTypes2.default.string.isRequired
+}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func);"
 `;

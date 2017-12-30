@@ -18,7 +18,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var babelPluginFlowReactPropTypes_proptype_ExportedType = {
-  bar: require(\\"prop-types\\").number.isRequired
+  bar: _propTypes2.default.number.isRequired
 };
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_ExportedType\\", {
   value: babelPluginFlowReactPropTypes_proptype_ExportedType,
@@ -38,8 +38,8 @@ var MyComponent = function (_React$Component) {
 }(React.Component);
 
 MyComponent.propTypes = {
-  foo: require(\\"prop-types\\").string.isRequired,
-  baz: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === \\"function\\" ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func : require(\\"prop-types\\").shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired,
-  bar: require(\\"prop-types\\").number.isRequired
+  foo: _propTypes2.default.string.isRequired,
+  baz: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === \\"function\\" ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired,
+  bar: _propTypes2.default.number.isRequired
 };"
 `;

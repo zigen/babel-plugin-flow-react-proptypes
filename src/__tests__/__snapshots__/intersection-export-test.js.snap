@@ -23,8 +23,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 
 var React = require('react');
 
-var babelPluginFlowReactPropTypes_proptype_U = Object.assign({}, (_T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func) === require('prop-types').any ? {} : _T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func, {
-  foo: require('prop-types').string.isRequired
+var babelPluginFlowReactPropTypes_proptype_U = Object.assign({}, (_T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func) === _propTypes2.default.any ? {} : _T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func, {
+  foo: _propTypes2.default.string.isRequired
 });
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_U', {
   value: babelPluginFlowReactPropTypes_proptype_U,
@@ -43,8 +43,8 @@ var C = function (_React$Component) {
   return C;
 }(React.Component);
 
-C.propTypes = Object.assign({}, (_T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func) === require('prop-types').any ? {} : _T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func, {
-  foo: require('prop-types').string.isRequired
+C.propTypes = Object.assign({}, (_T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func) === _propTypes2.default.any ? {} : _T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func, {
+  foo: _propTypes2.default.string.isRequired
 });
 exports.default = C;"
 `;
