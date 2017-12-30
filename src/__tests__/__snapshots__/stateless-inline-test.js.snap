@@ -22,7 +22,9 @@ Foo.propTypes = {
   a_boolean: _propTypes2.default.bool.isRequired,
   a_generic_object: _propTypes2.default.object.isRequired,
   array_of_strings: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
-  instance_of_Bar: typeof Bar === 'function' ? _propTypes2.default.instanceOf(Bar).isRequired : _propTypes2.default.any.isRequired,
+  instance_of_Bar: function instance_of_Bar() {
+    return (typeof Bar === 'function' ? _propTypes2.default.instanceOf(Bar).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  },
   anything: function anything(props, propName, componentName) {
     if (!Object.prototype.hasOwnProperty.call(props, propName)) {
       throw new Error('Prop \`' + propName + '\` has type \\\\'any\\\\' or \\\\'mixed\\\\', but was not provided to \`' + componentName + '\`. Pass undefined or any other value.');

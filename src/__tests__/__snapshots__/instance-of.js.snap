@@ -24,10 +24,18 @@ var SomeOtherClass = function SomeOtherClass() {
 };
 
 MyComponent.propTypes = {
-  some_class: typeof _some_class2.default === 'function' ? _propTypes2.default.instanceOf(_some_class2.default).isRequired : _propTypes2.default.any.isRequired,
-  some_other_class: typeof SomeOtherClass === 'function' ? _propTypes2.default.instanceOf(SomeOtherClass).isRequired : _propTypes2.default.any.isRequired,
-  key_can_be_omitted: typeof _some_class2.default === 'function' ? _propTypes2.default.instanceOf(_some_class2.default) : _propTypes2.default.any,
-  value_can_be_null: typeof SomeOtherClass === 'function' ? _propTypes2.default.instanceOf(SomeOtherClass) : _propTypes2.default.any
+  some_class: function some_class() {
+    return (typeof _some_class2.default === 'function' ? _propTypes2.default.instanceOf(_some_class2.default).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  },
+  some_other_class: function some_other_class() {
+    return (typeof SomeOtherClass === 'function' ? _propTypes2.default.instanceOf(SomeOtherClass).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  },
+  key_can_be_omitted: function key_can_be_omitted() {
+    return (typeof _some_class2.default === 'function' ? _propTypes2.default.instanceOf(_some_class2.default) : _propTypes2.default.any).apply(this, arguments);
+  },
+  value_can_be_null: function value_can_be_null() {
+    return (typeof SomeOtherClass === 'function' ? _propTypes2.default.instanceOf(SomeOtherClass) : _propTypes2.default.any).apply(this, arguments);
+  }
 };
 
 function () {

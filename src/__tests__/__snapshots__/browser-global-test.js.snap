@@ -20,7 +20,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 var Element = window.Element;
 
 Foo.propTypes = {
-  element: typeof Element === \\"function\\" ? _propTypes2.default.instanceOf(Element).isRequired : _propTypes2.default.any.isRequired
+  element: function element() {
+    return (typeof Element === \\"function\\" ? _propTypes2.default.instanceOf(Element).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  }
 };
 
 function () {

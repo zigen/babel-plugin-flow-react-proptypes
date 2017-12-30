@@ -3,11 +3,11 @@
 exports[`import-object 1`] = `
 "'use strict';
 
-var _bar = require('./bar');
-
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _bar = require('./bar');
 
 var _foo = require('./foo');
 
@@ -19,25 +19,32 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var C = function (_React$Component) {
-  _inherits(C, _React$Component);
-
-  function C() {
-    _classCallCheck(this, C);
-
-    return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
-  }
-
-  return C;
-}(React.Component);
-
 C.propTypes = {
-  an_imported_named_type: typeof (_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === 'function' ? (_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired ? (_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func : _propTypes2.default.shape(_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired,
-  an_imported_default_type: typeof (_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType || _propTypes2.default.func) === 'function' ? (_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType || _propTypes2.default.func).isRequired ? (_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType || _propTypes2.default.func).isRequired : _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType || _propTypes2.default.func : _propTypes2.default.shape(_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType || _propTypes2.default.func).isRequired,
-  optional_property: typeof (_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === 'function' ? _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func : _propTypes2.default.shape(_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func),
-  can_be_null_property: typeof (_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType || _propTypes2.default.func) === 'function' ? _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType || _propTypes2.default.func : _propTypes2.default.shape(_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType || _propTypes2.default.func),
-  a_global_type: typeof Date === 'function' ? _propTypes2.default.instanceOf(Date).isRequired : _propTypes2.default.any.isRequired,
-  a_undefined_type: typeof FooBarBaz === 'function' ? _propTypes2.default.instanceOf(FooBarBaz).isRequired : _propTypes2.default.any.isRequired
+  an_imported_named_type: typeof _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === 'function' ? _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired,
+  an_imported_default_type: typeof _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType === 'function' ? _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType.isRequired ? _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType.isRequired : _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType : _propTypes2.default.shape(_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType).isRequired,
+  optional_property: typeof _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === 'function' ? _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType),
+  can_be_null_property: typeof _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType === 'function' ? _bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType : _propTypes2.default.shape(_bar.bpfrp_babelPluginFlowReactPropTypes_proptype_DefaultType),
+  a_global_type: function a_global_type() {
+    return (typeof Date === 'function' ? _propTypes2.default.instanceOf(Date).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  },
+  a_undefined_type: function a_undefined_type() {
+    return (typeof FooBarBaz === 'function' ? _propTypes2.default.instanceOf(FooBarBaz).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
+  }
 };
+
+function () {
+  var C = function (_React$Component) {
+    _inherits(C, _React$Component);
+
+    function C() {
+      _classCallCheck(this, C);
+
+      return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
+    }
+
+    return C;
+  }(React.Component);
+}()
+
 ;"
 `;

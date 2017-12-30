@@ -23,26 +23,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 
 var React = require('react');
 
-var D = function (_React$Component) {
-  _inherits(D, _React$Component);
-
-  function D() {
-    _classCallCheck(this, D);
-
-    return _possibleConstructorReturn(this, (D.__proto__ || Object.getPrototypeOf(D)).apply(this, arguments));
-  }
-
-  return D;
-}(React.Component);
-
-D.propTypes = Object.assign({}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
+D.propTypes = Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
   foo: _propTypes2.default.number.isRequired,
-  bar: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === \\"function\\" ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired,
-  baz: _propTypes2.default.shape(Object.assign({}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
+  bar: typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired,
+  baz: _propTypes2.default.shape(Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
     foo: _propTypes2.default.oneOf([\\"number\\"]).isRequired,
-    bar: _propTypes2.default.shape(Object.assign({}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func)).isRequired
-  }, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func)).isRequired
+    bar: _propTypes2.default.shape(Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType)).isRequired
+  }, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType)).isRequired
 });
+
+function () {
+  var D = function (_React$Component) {
+    _inherits(D, _React$Component);
+
+    function D() {
+      _classCallCheck(this, D);
+
+      return _possibleConstructorReturn(this, (D.__proto__ || Object.getPrototypeOf(D)).apply(this, arguments));
+    }
+
+    return D;
+  }(React.Component);
+}()
+
 ;
 
 exports.default = D;"

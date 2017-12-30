@@ -23,26 +23,28 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MyComp = function (_React$Component) {
-  _inherits(MyComp, _React$Component);
-
-  function MyComp() {
-    _classCallCheck(this, MyComp);
-
-    return _possibleConstructorReturn(this, (MyComp.__proto__ || Object.getPrototypeOf(MyComp)).apply(this, arguments));
-  }
-
-  _createClass(MyComp, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement('div', null);
-    }
-  }]);
-
-  return MyComp;
-}(_react2.default.Component);
-
 MyComp.propTypes = {
-  values: typeof (_values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values || _propTypes2.default.func) === 'function' ? _values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values || _propTypes2.default.func : _propTypes2.default.shape(_values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values || _propTypes2.default.func)
-};"
+  values: typeof _values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values === 'function' ? _values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values : _propTypes2.default.shape(_values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values)
+};
+
+function () {
+  var MyComp = function (_React$Component) {
+    _inherits(MyComp, _React$Component);
+
+    function MyComp() {
+      _classCallCheck(this, MyComp);
+
+      return _possibleConstructorReturn(this, (MyComp.__proto__ || Object.getPrototypeOf(MyComp)).apply(this, arguments));
+    }
+
+    _createClass(MyComp, [{
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement('div', null);
+      }
+    }]);
+
+    return MyComp;
+  }(_react2.default.Component);
+}()"
 `;

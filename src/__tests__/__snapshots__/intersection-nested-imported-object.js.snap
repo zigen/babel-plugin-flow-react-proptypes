@@ -17,23 +17,25 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var C = function (_React$Component) {
-  _inherits(C, _React$Component);
-
-  function C() {
-    _classCallCheck(this, C);
-
-    return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
-  }
-
-  return C;
-}(React.Component);
-
 C.propTypes = {
   foo: _propTypes2.default.string.isRequired,
   bar: _propTypes2.default.number.isRequired,
   baz: _propTypes2.default.shape(Object.assign({}, {
     foo: _propTypes2.default.number.isRequired
-  }, (_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func)).isRequired
-};"
+  }, _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType)).isRequired
+};
+
+function () {
+  var C = function (_React$Component) {
+    _inherits(C, _React$Component);
+
+    function C() {
+      _classCallCheck(this, C);
+
+      return _possibleConstructorReturn(this, (C.__proto__ || Object.getPrototypeOf(C)).apply(this, arguments));
+    }
+
+    return C;
+  }(React.Component);
+}()"
 `;
