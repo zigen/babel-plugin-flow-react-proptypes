@@ -98,7 +98,9 @@ function makeAnyPropTypeAST() {
 }
 
 function makeObjectAstForRaw(propTypeSpec, propTypeObjects) {
-  let propTypeObject = t.identifier(propTypeSpec.value);
+  let propTypeObject = typeof propTypeSpec.value === 'string'
+    ? t.identifier(propTypeSpec.value)
+    : propTypeSpec.value;
 
   // This will just be a variable, referencing an import we
   // generated above. This variable may contain prop-types.any,
@@ -146,7 +148,6 @@ function makeObjectMergeAstForShapeIntersectRuntime(propTypeData) {
   propTypeData.properties.forEach(propTypeSpec => {
     if (propTypeSpec.type === 'raw') {
       propTypeObjects.push(makeObjectAstForRaw(propTypeSpec));
-
     }
     else if (propTypeSpec.type === 'shape') {
       propTypeObjects.push(makeObjectAstForShape(propTypeSpec));
