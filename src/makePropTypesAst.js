@@ -311,6 +311,7 @@ function makePropType(data, isExact) {
     }
     const functionCheckNode = makeFunctionCheckAST(originalVariableNode);
     node = t.conditionalExpression(functionCheckNode, variableNode, shapeNode);
+    node = deferTpl({ NODE: node }).expression;
   }
   else if (method === 'shape') {
     const shapeObjectProperties = data.properties.map(({key, value, leadingComments}) => {
