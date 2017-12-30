@@ -14,6 +14,9 @@ let internalTypes = {};
 // maps between type alias to import alias
 let importedTypes = {};
 
+// maps from imported-name+location to the local name
+let addedImports = {};
+
 let exportedTypes = {};
 let suppress = false;
 let omitRuntimeTypeExport = false;
@@ -58,6 +61,65 @@ module.exports = function flowReactPropTypes(babel) {
   const t = babel.types;
 
   let opts = {};
+
+  function shouldUseImport() {
+    return !opts.deadCode;
+  }
+
+  const impTemplates = {
+    named: babel.template(`import { LOCAL } from 'change me'`, { sourceType: 'module' }),
+    default: babel.template(`import NAME from 'change me'`,  { sourceType: 'module' }),
+    requireDefault: babel.template(`require(PATH)`),
+    requireNamed: babel.template(`require(PATH).NAME`),
+  };
+  function getFromModule(path, { type = 'default', name, location }) {
+    const tid = t.identifier;
+    const tstr = t.stringLiteral;
+    const key = `name:${location}`;
+
+    if (shouldUseImport()) {
+      if (!addedImports[key]) {
+        const local = `bpfrp_${name.replace(/[^a-zA-Z0-9]+/g, '_')}`;
+        addedImports[key] = local;
+
+        let toAdd = null;
+
+        if (type === 'default') {
+          toAdd = impTemplates.default({ LOCAL: tid(local) });
+        }
+        else if (type === 'named') {
+          toAdd = impTemplates.named({ LOCAL: tid(local), NAME: tid(name) });
+        }
+        if (toAdd) {
+          toAdd.source.value = location;
+          let ppath = path;
+          do  {
+            if (ppath.node && ppath.node.type === 'Program') break;
+          } while (ppath = ppath.parentPath);
+          if (ppath && ppath.node.body) {
+            ppath.node.body.unshift(toAdd);
+          }
+        }
+      }
+      return tid(addedImports[key]);
+    }
+    else {
+      if (type === 'default') {
+        return impTemplates.requireDefault({ PATH: tstr(location) }).expression;
+      }
+      else if (type === 'named') {
+        return impTemplates.requireNamed({ PATH: tstr(location), NAME: tid(name) }).expression;
+      }
+    }
+  }
+
+  function getFromPropTypesModule(path, name, isRequired) {
+    const ptNode = getFromModule(path, { type: 'default', name: 'PropTypes', location: 'prop-types'});
+    if (!name) return ptNode;
+    const ptOptional = t.memberExpression(ptNode, t.identifier(name));
+    if (!isRequired) return ptOptional;
+    return t.memberExpression(ptOptional, t.identifier('isRequired'));
+  }
 
   const _templateCache = {};
   function getDcePredicate() {
@@ -266,6 +328,7 @@ module.exports = function flowReactPropTypes(babel) {
         internalTypes = {};
         importedTypes = {};
         exportedTypes = {};
+        addedImports = {};
         suppress = false;
         omitRuntimeTypeExport = opts.omitRuntimeTypeExport || false;
         const directives = path.node.directives;
@@ -348,7 +411,7 @@ module.exports = function flowReactPropTypes(babel) {
         if (secondSuperParam && secondSuperParam.type === 'GenericTypeAnnotation') {
           const typeAliasName = secondSuperParam.id.name;
           if (typeAliasName === 'Object') return;
-          const props = internalTypes[typeAliasName] || importedTypes[typeAliasName];
+          const props = internalTypes[typeAliasName] || (importedTypes[typeAliasName] && importedTypes[typeAliasName].accessNode);
           if (!props) {
             throw new TypeError(`Couldn't find type "${typeAliasName}"`);
           }
@@ -364,7 +427,7 @@ module.exports = function flowReactPropTypes(babel) {
         if (thirdSuperParam && thirdSuperParam.type === 'GenericTypeAnnotation') {
           const typeAliasName = thirdSuperParam.id.name;
           if (typeAliasName === 'Object') return;
-          const props = internalTypes[typeAliasName] || importedTypes[typeAliasName];
+          const props = internalTypes[typeAliasName] || (importedTypes[typeAliasName] && importedTypes[typeAliasName].accessNode);
           if (!props) {
             throw new TypeError(`Couldn't find type "${typeAliasName}"`);
           }
@@ -472,80 +535,44 @@ module.exports = function flowReactPropTypes(babel) {
       },
       ImportDeclaration(path) {
         if (suppress) return;
+
         const {node} = path;
 
         // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/62
         // if (node.source.value[0] !== '.') {
         //   return;
         // }
-        if (node.importKind === 'type') {
-          node.specifiers.forEach((specifier) => {
-            const typeName = specifier.type === 'ImportDefaultSpecifier'
-              ? specifier.local.name
-              : specifier.imported.name;
-            // Store the name the type so we can use it later. We do
-            // mark it as importedTypes because we do handle these
-            // differently than internalTypes.
-            // imported types are basically realized as imports;
-            // because we can be somewhat sure that we generated
-            // the proper exported propTypes in the imported file
-            // Later, we will check importedTypes to determine if
-            // we want to put this as a 'raw' type in our internal
-            // representation
-            importedTypes[typeName] = getExportNameForType(typeName);
+        node.specifiers.forEach((specifier) => {
+          if (specifier.importKind !== 'type') return;
 
-            // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/129
-            if (node.source.value === 'react' && typeName === 'ComponentType') {
-              const ast = t.variableDeclaration(
-                'var',
-                [
-                  t.variableDeclarator(
-                    t.identifier(getExportNameForType(typeName)),
-                    t.memberExpression(
-                      t.callExpression(
-                        t.identifier('require'),
-                        [
-                          t.stringLiteral('prop-types'),
-                        ],
-                      ),
-                      t.identifier('func'),
-                    ),
-                  ),
-                ],
-              );
-              path.insertAfter(ast);
-              return;
-            }
+          const typeName = specifier.type === 'ImportDefaultSpecifier'
+            ? specifier.local.name
+            : specifier.imported.name;
+          // Store the name the type so we can use it later. We do
+          // mark it as importedTypes because we do handle these
+          // differently than internalTypes.
+          // imported types are basically realized as imports;
+          // because we can be somewhat sure that we generated
+          // the proper exported propTypes in the imported file
+          // Later, we will check importedTypes to determine if
+          // we want to put this as a 'raw' type in our internal
+          // representation
+          importedTypes[typeName] = { exportName: getExportNameForType(typeName), accessNode: null };
 
-            const variableDeclarationAst = t.variableDeclaration(
-              'var',
-              [
-                t.variableDeclarator(
-                  // TODO: use local import name?
-                  t.identifier(getExportNameForType(typeName)),
-                  t.logicalExpression(
-                    '||',
-                    t.memberExpression(
-                      t.callExpression(
-                        t.identifier('require'),
-                        [t.stringLiteral(node.source.value)]
-                      ),
-                      t.identifier(getExportNameForType(typeName))
-                    ),
-                    t.memberExpression(
-                      t.callExpression(
-                        t.identifier('require'),
-                        [t.stringLiteral('prop-types')]
-                      ),
-                      t.identifier('any')
-                    )
-                  ),
-                )
-              ]
-            );
-            path.insertAfter(variableDeclarationAst);
-          });
-        }
+          // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/129
+          if (node.source.value === 'react' && typeName === 'ComponentType') {
+
+            const ptFunc = getFromPropTypesModule('func');
+            importedTypes[typeName].accessNode = ptFunc;
+            return;
+          }
+
+          importedTypes[typeName].accessNode = t.logicalExpression(
+            '||',
+            getFromModule(path, { type: 'named', name: getExportNameForType(typeName), location: node.source.value }),
+            getFromPropTypesModule('func'),
+          );
+        });
       }
     }
   };

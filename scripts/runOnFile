@@ -44,6 +44,10 @@ else {
   };
 }
 
+if (process.argv.includes('--leave-esm')) {
+  babelConfig.presets.splice(babelConfig.presets.indexOf('es2015'), 1);
+}
+
 const input = fs.readFileSync(process.argv[2], 'utf-8');
 const res = babel.transform(input, babelConfig).code;
 console.log(res);

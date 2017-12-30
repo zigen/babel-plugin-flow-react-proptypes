@@ -81,7 +81,7 @@ function convertGenericToPropTypes(node, typeParamMapping, importedTypes, intern
 export default function convertToPropTypes(node, importedTypes, internalTypes) {
   $debug('convertToPropTypes', node);
   let resultPropType;
-  
+
   if (node.type === 'TypeAlias' && node.typeParameters) {
     return (types) => {
       const typeParams = node.typeParameters.params.map(t => t.name);
@@ -273,7 +273,7 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
       resultPropType = Object.assign({}, internalTypes[node.id.name]);
     }
     else if (node.id && node.id.name && importedTypes[node.id.name]) {
-      resultPropType = {type: 'raw', value: importedTypes[node.id.name]};
+      resultPropType = {type: 'raw', value: importedTypes[node.id.name].accessNode};
     }
     else if (node.id.name === 'Object') {
       resultPropType = {type: 'object'};
