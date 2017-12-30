@@ -5,6 +5,12 @@ exports[`function-types 1`] = `
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\\"value\\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _values = require('./values');
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -16,8 +22,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\\"this hasn't been initialised - super() hasn't been called\\"); } return call && (typeof call === \\"object\\" || typeof call === \\"function\\") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var babelPluginFlowReactPropTypes_proptype_Values = require('./values').babelPluginFlowReactPropTypes_proptype_Values || require('prop-types').any;
 
 var MyComp = function (_React$Component) {
   _inherits(MyComp, _React$Component);
@@ -39,6 +43,6 @@ var MyComp = function (_React$Component) {
 }(_react2.default.Component);
 
 MyComp.propTypes = {
-  values: typeof babelPluginFlowReactPropTypes_proptype_Values === 'function' ? babelPluginFlowReactPropTypes_proptype_Values : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_Values)
+  values: typeof (_values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values || _propTypes2.default.func) === 'function' ? _values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values || _propTypes2.default.func : require('prop-types').shape(_values.bpfrp_babelPluginFlowReactPropTypes_proptype_Values || _propTypes2.default.func)
 };"
 `;

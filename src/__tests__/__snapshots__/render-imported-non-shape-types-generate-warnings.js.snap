@@ -1,19 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`imported-non-shape-generates-warnings: correct types, no warning types given 1`] = `Array []`;
+exports[`imported-non-shape-generates-warnings: correct types, no warning types given 1`] = `
+Array [
+  Array [
+    "Warning: Failed prop type: Invalid prop \`stringValue\` of type \`string\` supplied to \`C\`, expected \`function\`.
+    in C",
+  ],
+  Array [
+    "Warning: Failed prop type: Invalid prop \`numberValue\` of type \`number\` supplied to \`C\`, expected \`function\`.
+    in C",
+  ],
+]
+`;
 
 exports[`imported-non-shape-generates-warnings: incorrect types given 1`] = `
 Array [
   Array [
-    "Warning: Failed prop type: Invalid prop \`stringValue\` of type \`number\` supplied to \`C\`, expected \`string\`.
+    "Warning: Failed prop type: Invalid prop \`stringValue\` of type \`number\` supplied to \`C\`, expected \`function\`.
     in C",
   ],
   Array [
-    "Warning: Failed prop type: Invalid prop \`numberValue\` of type \`string\` supplied to \`C\`, expected \`number\`.
+    "Warning: Failed prop type: Invalid prop \`numberValue\` of type \`string\` supplied to \`C\`, expected \`function\`.
     in C",
   ],
   Array [
-    "Warning: Failed prop type: Invalid prop \`enumStringValue\` of value \`incorrect\` supplied to \`C\`, expected one of [\\"yes\\",\\"no\\"].
+    "Warning: Failed prop type: Invalid prop \`enumStringValue\` of type \`string\` supplied to \`C\`, expected \`function\`.
     in C",
   ],
 ]

@@ -7,6 +7,14 @@ Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _T = require('./T');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\\"Cannot call a class as a function\\"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\\"this hasn't been initialised - super() hasn't been called\\"); } return call && (typeof call === \\"object\\" || typeof call === \\"function\\") ? call : self; }
@@ -15,9 +23,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 
 var React = require('react');
 
-var babelPluginFlowReactPropTypes_proptype_T = require('./T').babelPluginFlowReactPropTypes_proptype_T || require('prop-types').any;
-
-var babelPluginFlowReactPropTypes_proptype_U = Object.assign({}, babelPluginFlowReactPropTypes_proptype_T === require('prop-types').any ? {} : babelPluginFlowReactPropTypes_proptype_T, {
+var babelPluginFlowReactPropTypes_proptype_U = Object.assign({}, (_T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func) === require('prop-types').any ? {} : _T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func, {
   foo: require('prop-types').string.isRequired
 });
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_U', {
@@ -37,7 +43,7 @@ var C = function (_React$Component) {
   return C;
 }(React.Component);
 
-C.propTypes = Object.assign({}, babelPluginFlowReactPropTypes_proptype_T === require('prop-types').any ? {} : babelPluginFlowReactPropTypes_proptype_T, {
+C.propTypes = Object.assign({}, (_T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func) === require('prop-types').any ? {} : _T.bpfrp_babelPluginFlowReactPropTypes_proptype_T || _propTypes2.default.func, {
   foo: require('prop-types').string.isRequired
 });
 exports.default = C;"
