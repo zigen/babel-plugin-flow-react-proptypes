@@ -6,7 +6,7 @@ import {
   hasReactElementTypeAnnotationReturn,
 } from './util';
 import convertToPropTypes from './convertToPropTypes';
-import {makePropTypesAstForExport, makePropTypesAstForPropTypesAssignment} from './makePropTypesAst';
+import {makePropTypesAstForExport, makePropTypesAstForPropTypesAssignment, setMakePropTypeImportNode} from './makePropTypesAst';
 
 // maps between type alias name to prop types
 let internalTypes = {};
@@ -329,6 +329,9 @@ module.exports = function flowReactPropTypes(babel) {
         importedTypes = {};
         exportedTypes = {};
         addedImports = {};
+
+        setMakePropTypeImportNode(() => getFromPropTypesModule(path));
+
         suppress = false;
         omitRuntimeTypeExport = opts.omitRuntimeTypeExport || false;
         const directives = path.node.directives;
