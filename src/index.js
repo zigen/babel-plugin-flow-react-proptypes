@@ -570,11 +570,11 @@ module.exports = function flowReactPropTypes(babel) {
             return;
           }
 
-          importedTypes[typeName].accessNode = t.logicalExpression(
-            '||',
-            getFromModule(path, { type: 'named', name: getExportNameForType(typeName), location: node.source.value }),
-            getFromPropTypesModule(path, 'func'),
-          );
+          importedTypes[typeName].accessNode = getFromModule(path, {
+            type: 'named',
+            name: getExportNameForType(typeName),
+            location: node.source.value,
+          });
         });
       }
     }
