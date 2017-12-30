@@ -28,13 +28,24 @@ if (process.argv.includes('--rn')) {
 */
 
 }
-else {
+else if (process.argv.includes('--dead')) {
   console.error(`Running in default config`);
+  babelConfig = {
+    babelrc: false,
+    presets: ['es2015', 'stage-1', 'react'],
+    plugins: ['syntax-flow', [self, { deadCode: true }]],
+  };
+}
+else {
   babelConfig = {
     babelrc: false,
     presets: ['es2015', 'stage-1', 'react'],
     plugins: ['syntax-flow', [self, {}]],
   };
+}
+
+if (process.argv.includes('--leave-esm')) {
+  babelConfig.presets.splice(babelConfig.presets.indexOf('es2015'), 1);
 }
 
 const input = fs.readFileSync(process.argv[2], 'utf-8');

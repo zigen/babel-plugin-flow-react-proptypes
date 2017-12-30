@@ -291,7 +291,7 @@ function makePropType(data, isExact) {
     // In 'raw', we handle variables - typically derived from imported types.
     // These are either - at run-time - objects or functions. Objects are wrapped in a shape;
     // for functions, we assume that the variable already contains a proptype assertion
-    let variableNode = t.identifier(data.value);
+    let variableNode = typeof data.value === 'string' ? t.identifier(data.value) : data.value;
     const originalVariableNode = variableNode;
     let shapeNode = t.callExpression(
       t.memberExpression(
