@@ -24,26 +24,26 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 var React = require('react');
 
 var babelPluginFlowReactPropTypes_proptype_T = {
-  foo: require(\\"prop-types\\").string.isRequired
+  foo: _propTypes2.default.string.isRequired
 };
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_T\\", {
   value: babelPluginFlowReactPropTypes_proptype_T,
   configurable: true
 });
 var babelPluginFlowReactPropTypes_proptype_U = {
-  bar: require(\\"prop-types\\").number.isRequired
+  bar: _propTypes2.default.number.isRequired
 };
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_U\\", {
   value: babelPluginFlowReactPropTypes_proptype_U,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_X = Object.assign({}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === require(\\"prop-types\\").any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
-  a: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === \\"function\\" ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func : require(\\"prop-types\\").shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired,
-  b: require(\\"prop-types\\").string.isRequired
-}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === require(\\"prop-types\\").any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
-  bar: require(\\"prop-types\\").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_X = Object.assign({}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
+  a: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === \\"function\\" ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired,
+  b: _propTypes2.default.string.isRequired
+}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
+  bar: _propTypes2.default.number.isRequired
 }, {
-  foo: require(\\"prop-types\\").string.isRequired
+  foo: _propTypes2.default.string.isRequired
 });
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_X\\", {
   value: babelPluginFlowReactPropTypes_proptype_X,
@@ -63,20 +63,20 @@ var C = function (_React$Component) {
 }(React.Component);
 
 C.propTypes = {
-  qux: require(\\"prop-types\\").string.isRequired,
-  quy: require(\\"prop-types\\").shape(Object.assign({}, {
-    foo: require(\\"prop-types\\").string.isRequired
-  }, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === require(\\"prop-types\\").any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
-    XXX: require(\\"prop-types\\").string.isRequired,
-    YYY: require(\\"prop-types\\").shape(Object.assign({}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === require(\\"prop-types\\").any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
-      ZZZ: require(\\"prop-types\\").number.isRequired
+  qux: _propTypes2.default.string.isRequired,
+  quy: _propTypes2.default.shape(Object.assign({}, {
+    foo: _propTypes2.default.string.isRequired
+  }, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
+    XXX: _propTypes2.default.string.isRequired,
+    YYY: _propTypes2.default.shape(Object.assign({}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
+      ZZZ: _propTypes2.default.number.isRequired
     })).isRequired
   })).isRequired,
-  quz: require(\\"prop-types\\").shape(Object.assign({}, {
-    bar: require(\\"prop-types\\").number.isRequired
-  }, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === require(\\"prop-types\\").any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func)).isRequired,
-  bar: require(\\"prop-types\\").number.isRequired,
-  foo: require(\\"prop-types\\").string.isRequired
+  quz: _propTypes2.default.shape(Object.assign({}, {
+    bar: _propTypes2.default.number.isRequired
+  }, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func)).isRequired,
+  bar: _propTypes2.default.number.isRequired,
+  foo: _propTypes2.default.string.isRequired
 };
 
 var D = function (_React$Component2) {
@@ -92,15 +92,15 @@ var D = function (_React$Component2) {
 }(React.Component);
 
 D.propTypes = Object.assign({}, {
-  c: require(\\"prop-types\\").string.isRequired,
-  b: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === \\"function\\" ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func : require(\\"prop-types\\").shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired
-}, Object.assign({}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === require(\\"prop-types\\").any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
-  a: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === \\"function\\" ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func : require(\\"prop-types\\").shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired,
-  b: require(\\"prop-types\\").string.isRequired
-}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === require(\\"prop-types\\").any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
-  bar: require(\\"prop-types\\").number.isRequired
+  c: _propTypes2.default.string.isRequired,
+  b: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === \\"function\\" ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired
+}, Object.assign({}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
+  a: typeof (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === \\"function\\" ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired ? (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func).isRequired,
+  b: _propTypes2.default.string.isRequired
+}, (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func, {
+  bar: _propTypes2.default.number.isRequired
 }, {
-  foo: require(\\"prop-types\\").string.isRequired
+  foo: _propTypes2.default.string.isRequired
 }));
 exports.default = C;"
 `;

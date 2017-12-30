@@ -3,7 +3,13 @@
 exports[`instance-of 1`] = `
 "'use strict';
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _some_class = require('./some_class');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\\"Cannot call a class as a function\\"); } }
 
@@ -11,12 +17,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var babelPluginFlowReactPropTypes_proptype_Fact = typeof (Foo.Bar == null ? {} : Foo.Bar) === 'function' ? require('prop-types').instanceOf(Foo.Bar == null ? {} : Foo.Bar) : require('prop-types').any;
+var babelPluginFlowReactPropTypes_proptype_Fact = typeof (Foo.Bar == null ? {} : Foo.Bar) === 'function' ? _propTypes2.default.instanceOf(Foo.Bar == null ? {} : Foo.Bar) : _propTypes2.default.any;
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Fact', {
   value: babelPluginFlowReactPropTypes_proptype_Fact,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_FactMap = typeof (Foo.Map == null ? {} : Foo.Map) === 'function' ? require('prop-types').instanceOf(Foo.Map == null ? {} : Foo.Map) : require('prop-types').any;
+var babelPluginFlowReactPropTypes_proptype_FactMap = typeof (Foo.Map == null ? {} : Foo.Map) === 'function' ? _propTypes2.default.instanceOf(Foo.Map == null ? {} : Foo.Map) : _propTypes2.default.any;
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_FactMap', {
   value: babelPluginFlowReactPropTypes_proptype_FactMap,
   configurable: true
@@ -35,8 +41,8 @@ var MyComponent = function (_React$Component) {
 }(React.Component);
 
 MyComponent.propTypes = {
-  some_class: typeof (_some_class.SomeClass.property == null ? {} : _some_class.SomeClass.property) === 'function' ? require('prop-types').instanceOf(_some_class.SomeClass.property == null ? {} : _some_class.SomeClass.property).isRequired : require('prop-types').any.isRequired,
-  generics: typeof (_some_class.SomeClass.Map == null ? {} : _some_class.SomeClass.Map) === 'function' ? require('prop-types').instanceOf(_some_class.SomeClass.Map == null ? {} : _some_class.SomeClass.Map).isRequired : require('prop-types').any.isRequired,
-  deep: typeof (((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar) === 'function' ? require('prop-types').instanceOf(((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar).isRequired : require('prop-types').any.isRequired
+  some_class: typeof (_some_class.SomeClass.property == null ? {} : _some_class.SomeClass.property) === 'function' ? _propTypes2.default.instanceOf(_some_class.SomeClass.property == null ? {} : _some_class.SomeClass.property).isRequired : _propTypes2.default.any.isRequired,
+  generics: typeof (_some_class.SomeClass.Map == null ? {} : _some_class.SomeClass.Map) === 'function' ? _propTypes2.default.instanceOf(_some_class.SomeClass.Map == null ? {} : _some_class.SomeClass.Map).isRequired : _propTypes2.default.any.isRequired,
+  deep: typeof (((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar) === 'function' ? _propTypes2.default.instanceOf(((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar).isRequired : _propTypes2.default.any.isRequired
 };"
 `;

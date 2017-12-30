@@ -3,8 +3,14 @@
 exports[`export-object 1`] = `
 "'use strict';
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var babelPluginFlowReactPropTypes_proptype_Foo = {
-  a_string: require('prop-types').string.isRequired
+  a_string: _propTypes2.default.string.isRequired
 };
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Foo', {
   value: babelPluginFlowReactPropTypes_proptype_Foo,

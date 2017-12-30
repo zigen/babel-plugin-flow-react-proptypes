@@ -3,15 +3,18 @@
 exports[`export-intersection-type 1`] = `
 "\\"use strict\\";
 
-var babelPluginFlowReactPropTypes_proptype_T = require(\\"prop-types\\").string;
+var _propTypes = require(\\"prop-types\\");
 
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var babelPluginFlowReactPropTypes_proptype_T = _propTypes2.default.string;
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_T\\", {
   value: babelPluginFlowReactPropTypes_proptype_T,
   configurable: true
 });
-
-var babelPluginFlowReactPropTypes_proptype_TOptional = require(\\"prop-types\\").string;
-
+var babelPluginFlowReactPropTypes_proptype_TOptional = _propTypes2.default.string;
 if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_TOptional\\", {
   value: babelPluginFlowReactPropTypes_proptype_TOptional,
   configurable: true

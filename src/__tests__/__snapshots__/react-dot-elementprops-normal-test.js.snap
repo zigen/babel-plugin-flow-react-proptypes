@@ -3,13 +3,20 @@
 exports[`react-dot-elementprops-normal 1`] = `
 "'use strict';
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var React = require('react');
 var MenuItem = require('./MenuItem');
 
+C.propTypes = {
+  foo: _propTypes2.default.shape(MenuItem.propTypes).isRequired
+};
+
 var C = function C(props) {
   return React.createElement('div', null);
-};
-C.propTypes = {
-  foo: require('prop-types').shape(MenuItem.propTypes).isRequired
 };"
 `;

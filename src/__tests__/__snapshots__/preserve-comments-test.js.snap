@@ -7,23 +7,31 @@ Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var React = require('react');
+
+C.propTypes = {
+  /** foo comment */
+  foo: _propTypes2.default.string.isRequired,
+
+
+  // bar comment
+  bar: _propTypes2.default.string.isRequired,
+  baz: _propTypes2.default.shape({
+    // subbar comment
+    subbar: _propTypes2.default.number.isRequired
+  }).isRequired
+};
+
 
 var C = function C(props) {
   return React.createElement('div', null);
 };
 
-C.propTypes = {
-  /** foo comment */
-  foo: require('prop-types').string.isRequired,
-
-
-  // bar comment
-  bar: require('prop-types').string.isRequired,
-  baz: require('prop-types').shape({
-    // subbar comment
-    subbar: require('prop-types').number.isRequired
-  }).isRequired
-};
 exports.default = C;"
 `;

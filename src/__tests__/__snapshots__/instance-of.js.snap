@@ -3,6 +3,10 @@
 exports[`instance-of 1`] = `
 "'use strict';
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _some_class = require('./some_class');
 
 var _some_class2 = _interopRequireDefault(_some_class);
@@ -19,22 +23,24 @@ var SomeOtherClass = function SomeOtherClass() {
   _classCallCheck(this, SomeOtherClass);
 };
 
-var MyComponent = function (_React$Component) {
-  _inherits(MyComponent, _React$Component);
-
-  function MyComponent() {
-    _classCallCheck(this, MyComponent);
-
-    return _possibleConstructorReturn(this, (MyComponent.__proto__ || Object.getPrototypeOf(MyComponent)).apply(this, arguments));
-  }
-
-  return MyComponent;
-}(React.Component);
-
 MyComponent.propTypes = {
-  some_class: typeof _some_class2.default === 'function' ? require('prop-types').instanceOf(_some_class2.default).isRequired : require('prop-types').any.isRequired,
-  some_other_class: typeof SomeOtherClass === 'function' ? require('prop-types').instanceOf(SomeOtherClass).isRequired : require('prop-types').any.isRequired,
-  key_can_be_omitted: typeof _some_class2.default === 'function' ? require('prop-types').instanceOf(_some_class2.default) : require('prop-types').any,
-  value_can_be_null: typeof SomeOtherClass === 'function' ? require('prop-types').instanceOf(SomeOtherClass) : require('prop-types').any
-};"
+  some_class: typeof _some_class2.default === 'function' ? _propTypes2.default.instanceOf(_some_class2.default).isRequired : _propTypes2.default.any.isRequired,
+  some_other_class: typeof SomeOtherClass === 'function' ? _propTypes2.default.instanceOf(SomeOtherClass).isRequired : _propTypes2.default.any.isRequired,
+  key_can_be_omitted: typeof _some_class2.default === 'function' ? _propTypes2.default.instanceOf(_some_class2.default) : _propTypes2.default.any,
+  value_can_be_null: typeof SomeOtherClass === 'function' ? _propTypes2.default.instanceOf(SomeOtherClass) : _propTypes2.default.any
+};
+
+function () {
+  var MyComponent = function (_React$Component) {
+    _inherits(MyComponent, _React$Component);
+
+    function MyComponent() {
+      _classCallCheck(this, MyComponent);
+
+      return _possibleConstructorReturn(this, (MyComponent.__proto__ || Object.getPrototypeOf(MyComponent)).apply(this, arguments));
+    }
+
+    return MyComponent;
+  }(React.Component);
+}()"
 `;

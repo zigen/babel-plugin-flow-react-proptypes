@@ -52,6 +52,6 @@ var Test = function (_Component) {
   return Test;
 }(_react.Component);
 
-Test.propTypes = (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_Data || _propTypes2.default.func) === require('prop-types').any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_Data || _propTypes2.default.func;
+Test.propTypes = (_types.bpfrp_babelPluginFlowReactPropTypes_proptype_Data || _propTypes2.default.func) === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_Data || _propTypes2.default.func;
 exports.default = Test;"
 `;

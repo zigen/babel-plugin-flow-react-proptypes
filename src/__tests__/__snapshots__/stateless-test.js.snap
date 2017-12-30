@@ -8,36 +8,39 @@ Object.defineProperty(exports, \\"__esModule\\", {
 });
 exports.default = Foo;
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var React = require('react');
 
-function Foo(props) {
-  React.createElement('div', null);
-}
 Foo.propTypes = {
-  an_optional_string: require('prop-types').string,
-  an_optional_string_1: require('prop-types').string,
-  an_optional_union: require('prop-types').oneOf([1, 10, 'foo']),
-  an_optional_union_1: require('prop-types').oneOf([1, 10, 'foo']),
-  an_optional_union_2: require('prop-types').oneOfType([require('prop-types').string, require('prop-types').number]),
-  a_number: require('prop-types').number.isRequired,
-  a_boolean: require('prop-types').bool.isRequired,
-  a_generic_object: require('prop-types').object.isRequired,
-  array_of_strings: require('prop-types').arrayOf(require('prop-types').string).isRequired,
-  instance_of_Bar: typeof Bar === 'function' ? require('prop-types').instanceOf(Bar).isRequired : require('prop-types').any.isRequired,
+  an_optional_string: _propTypes2.default.string,
+  an_optional_string_1: _propTypes2.default.string,
+  an_optional_union: _propTypes2.default.oneOf([1, 10, 'foo']),
+  an_optional_union_1: _propTypes2.default.oneOf([1, 10, 'foo']),
+  an_optional_union_2: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
+  a_number: _propTypes2.default.number.isRequired,
+  a_boolean: _propTypes2.default.bool.isRequired,
+  a_generic_object: _propTypes2.default.object.isRequired,
+  array_of_strings: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
+  instance_of_Bar: typeof Bar === 'function' ? _propTypes2.default.instanceOf(Bar).isRequired : _propTypes2.default.any.isRequired,
   anything: function anything(props, propName, componentName) {
     if (!Object.prototype.hasOwnProperty.call(props, propName)) {
       throw new Error('Prop \`' + propName + '\` has type \\\\'any\\\\' or \\\\'mixed\\\\', but was not provided to \`' + componentName + '\`. Pass undefined or any other value.');
     }
   },
-  one_of: require('prop-types').oneOf(['QUACK', 'BARK', 5]).isRequired,
-  onw_of_type: require('prop-types').oneOfType([require('prop-types').number, require('prop-types').string]).isRequired,
-  nested_object_level_1: require('prop-types').shape({
-    string_property_1: require('prop-types').string.isRequired,
-    nested_object_level_2: require('prop-types').shape({
-      nested_object_level_3: require('prop-types').shape({
-        string_property_3: require('prop-types').string.isRequired
+  one_of: _propTypes2.default.oneOf(['QUACK', 'BARK', 5]).isRequired,
+  onw_of_type: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]).isRequired,
+  nested_object_level_1: _propTypes2.default.shape({
+    string_property_1: _propTypes2.default.string.isRequired,
+    nested_object_level_2: _propTypes2.default.shape({
+      nested_object_level_3: _propTypes2.default.shape({
+        string_property_3: _propTypes2.default.string.isRequired
       }).isRequired,
-      string_property_2: require('prop-types').string.isRequired
+      string_property_2: _propTypes2.default.string.isRequired
     }).isRequired
   }).isRequired,
   should_error_if_provided: function should_error_if_provided(props, propName, componentName) {
@@ -45,5 +48,8 @@ Foo.propTypes = {
       throw new Error('Invalid prop \`' + propName + '\` of value \`' + props[propName] + '\` passed to \`' + componentName + '\`. Expected undefined or null.');
     }
   }
-};"
+};
+function Foo(props) {
+  React.createElement('div', null);
+}"
 `;

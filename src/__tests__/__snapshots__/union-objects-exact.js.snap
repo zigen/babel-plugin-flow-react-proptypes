@@ -3,19 +3,23 @@
 exports[`union-objects-exact 1`] = `
 "'use strict';
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\\"Cannot call a class as a function\\"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\\"this hasn't been initialised - super() hasn't been called\\"); } return call && (typeof call === \\"object\\" || typeof call === \\"function\\") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = require('react');
-
 var babelPluginFlowReactPropTypes_proptype_ExactFooProps = {
-  someprop: require('prop-types').oneOfType([require('prop-types').shape({
-    a: require('prop-types').string.isRequired
-  }), require('prop-types').shape({
-    b: require('prop-types').number.isRequired,
+  someprop: _propTypes2.default.oneOfType([_propTypes2.default.shape({
+    a: _propTypes2.default.string.isRequired
+  }), _propTypes2.default.shape({
+    b: _propTypes2.default.number.isRequired,
     __exact__: function __exact__(values, prop, displayName) {
       var props = {
         b: true
@@ -34,6 +38,9 @@ var babelPluginFlowReactPropTypes_proptype_ExactFooProps = {
     }
   })]).isRequired
 };
+
+var React = require('react');
+
 if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_ExactFooProps', {
   value: babelPluginFlowReactPropTypes_proptype_ExactFooProps,
   configurable: true
@@ -52,10 +59,10 @@ var Foo = function (_React$Component) {
 }(React.Component);
 
 Foo.propTypes = {
-  someprop: require('prop-types').oneOfType([require('prop-types').shape({
-    a: require('prop-types').string.isRequired
-  }), require('prop-types').shape({
-    b: require('prop-types').number.isRequired,
+  someprop: _propTypes2.default.oneOfType([_propTypes2.default.shape({
+    a: _propTypes2.default.string.isRequired
+  }), _propTypes2.default.shape({
+    b: _propTypes2.default.number.isRequired,
     __exact__: function __exact__(values, prop, displayName) {
       var props = {
         b: true
@@ -88,10 +95,10 @@ var ExactFoo = function (_React$Component2) {
 }(React.Component);
 
 ExactFoo.propTypes = {
-  someprop: require('prop-types').oneOfType([require('prop-types').shape({
-    a: require('prop-types').string.isRequired
-  }), require('prop-types').shape({
-    b: require('prop-types').number.isRequired,
+  someprop: _propTypes2.default.oneOfType([_propTypes2.default.shape({
+    a: _propTypes2.default.string.isRequired
+  }), _propTypes2.default.shape({
+    b: _propTypes2.default.number.isRequired,
     __exact__: function __exact__(values, prop, displayName) {
       var props = {
         b: true

@@ -30,10 +30,10 @@ var C = function (_React$Component) {
 }(React.Component);
 
 C.propTypes = {
-  foo: require('prop-types').string.isRequired,
-  bar: require('prop-types').number.isRequired,
-  baz: require('prop-types').shape(Object.assign({}, {
-    foo: require('prop-types').number.isRequired
-  }, (_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === require('prop-types').any ? {} : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func)).isRequired
+  foo: _propTypes2.default.string.isRequired,
+  bar: _propTypes2.default.number.isRequired,
+  baz: _propTypes2.default.shape(Object.assign({}, {
+    foo: _propTypes2.default.number.isRequired
+  }, (_foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func) === _propTypes2.default.any ? {} : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType || _propTypes2.default.func)).isRequired
 };"
 `;
