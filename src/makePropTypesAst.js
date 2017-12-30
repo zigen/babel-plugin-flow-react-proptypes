@@ -40,6 +40,8 @@ const anyTemplate = template(`
 }
 `);
 
+const deferTpl = template(`(function() { return (NODE).apply(this, arguments); })`);
+
 /**
  * Top-level function to generate prop-types AST.
  *
@@ -400,6 +402,9 @@ function makePropType(data, isExact) {
 
     // Don't add .required on the full expression; we already handled this ourselves
     // for any proptypes we generated
+
+    // Wrap it in a function for ES6 imports with circular dependencies
+    node = deferTpl({ NODE: node }).expression;
   }
   else {
     const bugData = JSON.stringify(data, null, 2);
