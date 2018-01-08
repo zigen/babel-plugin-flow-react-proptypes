@@ -276,14 +276,14 @@ function makePropType(data, isExact) {
       method === 'array' || method === 'func' || method === 'node') {
     node = t.memberExpression(node, t.identifier(method));
   }
-  else if (method === 'any') {
+  else if (method === 'any' || !method) {
     markFullExpressionAsRequired = false;
 
     if (data.isRequired) {
       node = anyTemplate().expression;
     }
     else {
-      node = t.memberExpression(node, t.identifier(method));
+      node = t.memberExpression(node, t.identifier('any'));
     }
   }
   else if (method === 'raw') {
