@@ -111,6 +111,10 @@ export { babelPluginFlowReactPropTypes_proptype_Qux };
 import { bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType } from './types';
 ```
 
+## Versions
+
+Starting in 14.0.0, we output ES6 import/export statements by default. The `deadCode` option (explained below) will cause it to use common.js modules instead.
+
 ## Usage
 
 This plugin searches for a React components using type declaration. Works with functional components and ES6 classes. `React.createClass` is not currently supported.
