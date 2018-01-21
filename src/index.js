@@ -33,6 +33,10 @@ const DEFAULT_DCE = `process.env.NODE_ENV === 'production'`;
 // Convert to intermediate representation via convertToPropTypes.js
 // Convert to prop-types AST in makePropTypesAst.js
 
+// Indicates we shouldn't handle a node again
+// TODO: use a Symbol or WeakMap
+const SKIP = `BPFRPT_SKIP`;
+
 const convertNodeToPropTypes = node => convertToPropTypes(
   node,
   importedTypes,
@@ -364,8 +368,8 @@ module.exports = function flowReactPropTypes(babel) {
       "ClassExpression|ClassDeclaration"(path) {
         if (opts.noStatic && path.node.type === 'ClassExpression') return;
 
-        if (path.node.BPFRP_HIT_FOR_CLASS_ANNOTATION) return;
-        path.node.BPFRP_HIT_FOR_CLASS_ANNOTATION = true;
+        if (path.node[SKIP]) return;
+        path.node[SKIP] = true;
 
         if (suppress) return;
         const {superClass} = path.node;
@@ -497,43 +501,63 @@ module.exports = function flowReactPropTypes(babel) {
         );
         path.insertBefore(variableDeclarationAst);
 
+        const exportName = getExportNameForType(name);
         if (!omitRuntimeTypeExport) {
-          // add the variable to the exports
-          const exportAst = t.expressionStatement(t.callExpression(
-            t.memberExpression(t.identifier('Object'), t.identifier('defineProperty')),
-            [
-              t.identifier('exports'),
-              t.stringLiteral(getExportNameForType(name)),
-              t.objectExpression([
-                t.objectProperty(t.identifier('value'), t.identifier(exportedName)),
-                t.objectProperty(t.identifier('configurable'), t.booleanLiteral(true)),
-              ]),
-            ]
-          ));
-          const exportsDefinedCondition = t.binaryExpression(
-            '!==',
-            t.unaryExpression(
-              'typeof',
-              t.identifier('exports')
-            ),
-            t.stringLiteral('undefined')
-          );
+          if (path.node[SKIP]) return;
 
-          let ifCond = exportsDefinedCondition;
-          if (opts.deadCode) {
-            const dceConditional = t.unaryExpression('!', getDcePredicate());
-            ifCond = t.logicalExpression(
-              '&&',
-              dceConditional,
-              ifCond,
+          if (!opts.deadCode) {
+            if (!path.parentPath.isProgram()) return;
+            const body = path.parentPath.node.body;
+            const exportAst = t.exportNamedDeclaration(
+              null,
+              [
+                t.exportSpecifier(
+                  t.identifier(exportName),
+                  t.identifier(exportName)
+                )
+              ],
             );
+            exportAst[SKIP] = true;
+            body.push(exportAst);
           }
+          else {
+            // add the variable to the exports
+            const exportAst = t.expressionStatement(t.callExpression(
+              t.memberExpression(t.identifier('Object'), t.identifier('defineProperty')),
+              [
+                t.identifier('exports'),
+                t.stringLiteral(exportName),
+                t.objectExpression([
+                  t.objectProperty(t.identifier('value'), t.identifier(exportedName)),
+                  t.objectProperty(t.identifier('configurable'), t.booleanLiteral(true)),
+                ]),
+              ]
+            ));
+            const exportsDefinedCondition = t.binaryExpression(
+              '!==',
+              t.unaryExpression(
+                'typeof',
+                t.identifier('exports')
+              ),
+              t.stringLiteral('undefined')
+            );
 
-          const conditionalExportsAst = t.ifStatement(
-            ifCond,
-            exportAst
-          );
-          path.insertAfter(conditionalExportsAst);
+            let ifCond = exportsDefinedCondition;
+            if (opts.deadCode) {
+              const dceConditional = t.unaryExpression('!', getDcePredicate());
+              ifCond = t.logicalExpression(
+                '&&',
+                dceConditional,
+                ifCond,
+              );
+            }
+
+            const conditionalExportsAst = t.ifStatement(
+              ifCond,
+              exportAst
+            );
+            path.insertAfter(conditionalExportsAst);
+          }
         }
       },
       ImportDeclaration(path) {
