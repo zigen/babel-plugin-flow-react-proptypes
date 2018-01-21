@@ -53,79 +53,67 @@ The output will be:
 ```js
 var React = require('react');
 
-if (typeof exports !== 'undefined')
-  Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Qux', {
-    value: {
-      baz: require('prop-types').oneOf(['literal']).isRequired,
-    },
-  });
-
-var babelPluginFlowReactPropTypes_proptype_SomeExternalType = require('./types').babelPluginFlowReactPropTypes_proptype_SomeExternalType ||
-  require('prop-types').any;
-
-var Foo = (function(_React$Component) {
-  // babel class boilerplate
-})(React.Component);
-
-Foo.propTypes = {
-  an_optional_string: require('prop-types').string,
-  a_number: require('prop-types').number.isRequired,
-  a_boolean: require('prop-types').bool.isRequired,
-  a_generic_object: require('prop-types').object.isRequired,
-  array_of_strings: require('prop-types').arrayOf(require('prop-types').string).isRequired,
-  instance_of_Bar: typeof Bar === 'function'
-    ? require('prop-types').instanceOf(Bar).isRequired
-    : require('prop-types').any.isRequired,
-  anything: require('prop-types').any.isRequired,
-  mixed: require('prop-types').any.isRequired,
-  one_of: require('prop-types').oneOf(['QUACK', 'BARK', 5]).isRequired,
-  one_of_type: require('prop-types').oneOfType([require('prop-types').number, require('prop-types').string]).isRequired,
-  nested_object_level_1: require('prop-types').shape({
-    string_property_1: require('prop-types').string.isRequired,
-    nested_object_level_2: require('prop-types').shape({
-      nested_object_level_3: require('prop-types').shape({
-        string_property_3: require('prop-types').string.isRequired,
-      }).isRequired,
-      string_property_2: require('prop-types').string.isRequired,
-    }).isRequired,
-  }).isRequired,
-  should_error_if_provided: function should_error_if_provided(props, propName, componentName) {
-    if (props[propName] != null)
-      return new Error(
-        'Invalid prop `' +
-          propName +
-          '` of value `' +
-          value +
-          '` passed to `' +
-          componentName +
-          '`. Expected undefined or null.'
-      );
-  },
-  intersection: require('prop-types').shape({
-    foo: require('prop-types').string.isRequired,
-    bar: require('prop-types').number.isRequired,
-    baz: require('prop-types').oneOf(['literal']).isRequired,
-  }).isRequired,
-  some_external_type: typeof babelPluginFlowReactPropTypes_proptype_SomeExternalType === 'function'
-    ? babelPluginFlowReactPropTypes_proptype_SomeExternalType
-    : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_SomeExternalType).isRequired,
-  some_external_type_intersection: require('prop-types').shape(
-    Object.assign(
-      {},
-      {foo: require('prop-types').string.isRequired,},
-      babelPluginFlowReactPropTypes_proptype_SomeExternalType === require('prop-types').any
-        ? {}
-        : babelPluginFlowReactPropTypes_proptype_SomeExternalType
-    )
-  ).isRequired,
+var babelPluginFlowReactPropTypes_proptype_Qux = {
+  baz: bpfrp_PropTypes.oneOf(['literal']).isRequired
 };
-exports.default = Foo;
+
+
+export default class Foo extends React.Component {}
+Foo.propTypes = {
+  an_optional_string: bpfrp_PropTypes.string,
+  a_number: bpfrp_PropTypes.number.isRequired,
+  a_boolean: bpfrp_PropTypes.bool.isRequired,
+  a_generic_object: bpfrp_PropTypes.object.isRequired,
+  array_of_strings: bpfrp_PropTypes.arrayOf(bpfrp_PropTypes.string).isRequired,
+  instance_of_Bar: function () {
+    return (typeof Bar === 'function' ? bpfrp_PropTypes.instanceOf(Bar).isRequired : bpfrp_PropTypes.any.isRequired).apply(this, arguments);
+  },
+  anything: (props, propName, componentName) => {
+    if (!Object.prototype.hasOwnProperty.call(props, propName)) {
+      throw new Error(`Prop \`${propName}\` has type 'any' or 'mixed', but was not provided to \`${componentName}\`. Pass undefined or any other value.`);
+    }
+  },
+  mixed: (props, propName, componentName) => {
+    if (!Object.prototype.hasOwnProperty.call(props, propName)) {
+      throw new Error(`Prop \`${propName}\` has type 'any' or 'mixed', but was not provided to \`${componentName}\`. Pass undefined or any other value.`);
+    }
+  },
+  one_of: bpfrp_PropTypes.oneOf(['QUACK', 'BARK', 5]).isRequired,
+  one_of_type: bpfrp_PropTypes.oneOfType([bpfrp_PropTypes.number, bpfrp_PropTypes.string]).isRequired,
+  nested_object_level_1: bpfrp_PropTypes.shape({
+    string_property_1: bpfrp_PropTypes.string.isRequired,
+    nested_object_level_2: bpfrp_PropTypes.shape({
+      nested_object_level_3: bpfrp_PropTypes.shape({
+        string_property_3: bpfrp_PropTypes.string.isRequired
+      }).isRequired,
+      string_property_2: bpfrp_PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired,
+  should_error_if_provided: (props, propName, componentName) => {
+    if (props[propName] != null) {
+      throw new Error(`Invalid prop \`${propName}\` of value \`${props[propName]}\` passed to \`${componentName}\`. Expected undefined or null.`);
+    }
+  },
+  intersection: bpfrp_PropTypes.shape({
+    foo: bpfrp_PropTypes.string.isRequired,
+    bar: bpfrp_PropTypes.number.isRequired,
+    baz: bpfrp_PropTypes.oneOf(['literal']).isRequired
+  }).isRequired,
+  some_external_type: function () {
+    return (typeof bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType === 'function' ? bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType.isRequired ? bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType.isRequired : bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType : bpfrp_PropTypes.shape(bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType).isRequired).apply(this, arguments);
+  },
+  some_external_type_intersection: bpfrp_PropTypes.shape(Object.assign({}, {
+    foo: bpfrp_PropTypes.string.isRequired
+  }, bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType === bpfrp_PropTypes.any ? {} : bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType)).isRequired
+};
+import bpfrp_PropTypes from 'prop-types';
+export { babelPluginFlowReactPropTypes_proptype_Qux };
+import { bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType } from './types';
 ```
 
 ## Usage
 
 This plugin searches for a React components using type declaration. Works with functional components and ES6 classes. `React.createClass` is not currently supported.
-
 
 ## Install
 
@@ -177,6 +165,8 @@ this also works for packages published to npm.
 The value of `true` is short for `process.env.NODE_ENV === 'production'`. You can alternatively pass any JavaScript expression. If the expression
 returns a truthy value, then the propTypes will be removed. This works because e.g. webpack will subsitute the value of `process.env.NODE_ENV` with `'production'`, resulting in the condition being `'production' === 'production'`, and then a minifer sees that the code we're generating can't be executed, and strips it, and the `require('prop-types')` code out of the final bundle.
 
+**Note:** In dead code mode, we use `require/module.exports` instead of ES6 modules.
+
 Example of specifying a custom expression:
 
 ```json
@@ -207,28 +197,3 @@ If you already have other plugins in plugins section. It is important to place
 
 If you're using the 'react' or 'flow' presets, you don't need to do anything special.
 
-## Minimizing production bundle size
-In production, omitting props and minimizing bundle size can be done with the additon of two things:
-1. Add the [transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) plugin
-2. Omit exported types to allow for dead code pruning
-
-There are cases where a library wishes to `export type` making types available in `*.js.flow` shadow files,
-but these may have no other purpose during runtime.  If you wish to omit the corresponding export of
-the generated flow types, using this option with the
-[transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types)
-plugin will allow for the smallest production bundle size.
-
-An example snippet from a `.babelrc`:
-```json
-"production": {
-  "plugins": [
-    ["transform-react-remove-prop-types", {
-      "mode": "wrap",
-      "plugins": [
-        ["babel-plugin-flow-react-proptypes", {"omitRuntimeTypeExport": true}],
-        "babel-plugin-transform-flow-strip-types",
-      ]
-    }]
-  ]
-}
-```
