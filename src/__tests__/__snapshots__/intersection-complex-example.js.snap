@@ -6,6 +6,7 @@ exports[`intersection-exported-type-alias-unexported-object-literal 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
+exports.babelPluginFlowReactPropTypes_proptype_X = exports.babelPluginFlowReactPropTypes_proptype_U = exports.babelPluginFlowReactPropTypes_proptype_T = undefined;
 
 var _types = require(\\"./types\\");
 
@@ -26,17 +27,9 @@ var React = require('react');
 var babelPluginFlowReactPropTypes_proptype_T = {
   foo: _propTypes2.default.string.isRequired
 };
-if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_T\\", {
-  value: babelPluginFlowReactPropTypes_proptype_T,
-  configurable: true
-});
 var babelPluginFlowReactPropTypes_proptype_U = {
   bar: _propTypes2.default.number.isRequired
 };
-if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_U\\", {
-  value: babelPluginFlowReactPropTypes_proptype_U,
-  configurable: true
-});
 var babelPluginFlowReactPropTypes_proptype_X = Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
   a: function a() {
     return (typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired).apply(this, arguments);
@@ -46,10 +39,6 @@ var babelPluginFlowReactPropTypes_proptype_X = Object.assign({}, _types.bpfrp_ba
   bar: _propTypes2.default.number.isRequired
 }, {
   foo: _propTypes2.default.string.isRequired
-});
-if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_X\\", {
-  value: babelPluginFlowReactPropTypes_proptype_X,
-  configurable: true
 });
 
 var C = function (_React$Component) {
@@ -108,5 +97,8 @@ D.propTypes = Object.assign({}, {
 }, {
   foo: _propTypes2.default.string.isRequired
 }));
-exports.default = C;"
+exports.default = C;
+exports.babelPluginFlowReactPropTypes_proptype_T = babelPluginFlowReactPropTypes_proptype_T;
+exports.babelPluginFlowReactPropTypes_proptype_U = babelPluginFlowReactPropTypes_proptype_U;
+exports.babelPluginFlowReactPropTypes_proptype_X = babelPluginFlowReactPropTypes_proptype_X;"
 `;

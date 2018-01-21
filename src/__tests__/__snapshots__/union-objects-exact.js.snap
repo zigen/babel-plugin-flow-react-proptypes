@@ -3,6 +3,11 @@
 exports[`union-objects-exact 1`] = `
 "'use strict';
 
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.babelPluginFlowReactPropTypes_proptype_ExactFooProps = undefined;
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -40,10 +45,6 @@ var babelPluginFlowReactPropTypes_proptype_ExactFooProps = {
     }
   })]).isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_ExactFooProps', {
-  value: babelPluginFlowReactPropTypes_proptype_ExactFooProps,
-  configurable: true
-});
 
 var Foo = function (_React$Component) {
   _inherits(Foo, _React$Component);
@@ -115,5 +116,6 @@ ExactFoo.propTypes = {
       }
     }
   })]).isRequired
-};"
+};
+exports.babelPluginFlowReactPropTypes_proptype_ExactFooProps = babelPluginFlowReactPropTypes_proptype_ExactFooProps;"
 `;

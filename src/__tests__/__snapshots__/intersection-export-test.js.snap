@@ -6,6 +6,7 @@ exports[`interesection-export 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
+exports.babelPluginFlowReactPropTypes_proptype_U = undefined;
 
 var _T = require('./T');
 
@@ -26,10 +27,6 @@ var React = require('react');
 var babelPluginFlowReactPropTypes_proptype_U = Object.assign({}, _T.bpfrp_babelPluginFlowReactPropTypes_proptype_T === _propTypes2.default.any ? {} : _T.bpfrp_babelPluginFlowReactPropTypes_proptype_T, {
   foo: _propTypes2.default.string.isRequired
 });
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_U', {
-  value: babelPluginFlowReactPropTypes_proptype_U,
-  configurable: true
-});
 
 var C = function (_React$Component) {
   _inherits(C, _React$Component);
@@ -46,5 +43,6 @@ var C = function (_React$Component) {
 C.propTypes = Object.assign({}, _T.bpfrp_babelPluginFlowReactPropTypes_proptype_T === _propTypes2.default.any ? {} : _T.bpfrp_babelPluginFlowReactPropTypes_proptype_T, {
   foo: _propTypes2.default.string.isRequired
 });
-exports.default = C;"
+exports.default = C;
+exports.babelPluginFlowReactPropTypes_proptype_U = babelPluginFlowReactPropTypes_proptype_U;"
 `;

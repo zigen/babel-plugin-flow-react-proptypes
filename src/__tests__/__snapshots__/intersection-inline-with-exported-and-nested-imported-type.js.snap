@@ -3,6 +3,11 @@
 exports[`intersection inline with exported and nested imported type 1`] = `
 "\\"use strict\\";
 
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.babelPluginFlowReactPropTypes_proptype_ExportedType = undefined;
+
 var _types = require(\\"./types\\");
 
 var _propTypes = require(\\"prop-types\\");
@@ -20,10 +25,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 var babelPluginFlowReactPropTypes_proptype_ExportedType = {
   bar: _propTypes2.default.number.isRequired
 };
-if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_ExportedType\\", {
-  value: babelPluginFlowReactPropTypes_proptype_ExportedType,
-  configurable: true
-});
 
 var MyComponent = function (_React$Component) {
   _inherits(MyComponent, _React$Component);
@@ -43,5 +44,6 @@ MyComponent.propTypes = {
     return (typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired).apply(this, arguments);
   },
   bar: _propTypes2.default.number.isRequired
-};"
+};
+exports.babelPluginFlowReactPropTypes_proptype_ExportedType = babelPluginFlowReactPropTypes_proptype_ExportedType;"
 `;

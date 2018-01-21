@@ -3,6 +3,11 @@
 exports[`export-non-object-types 1`] = `
 "\\"use strict\\";
 
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.babelPluginFlowReactPropTypes_proptype_Answer = undefined;
+
 var _propTypes = require(\\"prop-types\\");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -11,8 +16,5 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var babelPluginFlowReactPropTypes_proptype_Answer = _propTypes2.default.oneOf([\\"Yes\\", \\"No\\"]);
 
-if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_Answer\\", {
-  value: babelPluginFlowReactPropTypes_proptype_Answer,
-  configurable: true
-});"
+exports.babelPluginFlowReactPropTypes_proptype_Answer = babelPluginFlowReactPropTypes_proptype_Answer;"
 `;

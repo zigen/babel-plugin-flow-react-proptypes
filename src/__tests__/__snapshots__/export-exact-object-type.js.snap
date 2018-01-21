@@ -3,6 +3,11 @@
 exports[`export-exact-object-type 1`] = `
 "'use strict';
 
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.babelPluginFlowReactPropTypes_proptype_VendorProps = undefined;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -16,8 +21,5 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var babelPluginFlowReactPropTypes_proptype_VendorProps = {
   test: _propTypes2.default.string.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_VendorProps', {
-  value: babelPluginFlowReactPropTypes_proptype_VendorProps,
-  configurable: true
-});"
+exports.babelPluginFlowReactPropTypes_proptype_VendorProps = babelPluginFlowReactPropTypes_proptype_VendorProps;"
 `;

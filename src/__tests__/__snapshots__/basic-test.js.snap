@@ -6,6 +6,7 @@ exports[`basic 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
+exports.babelPluginFlowReactPropTypes_proptype_Qux = undefined;
 
 var _propTypes = require('prop-types');
 
@@ -26,10 +27,6 @@ var React = require('react');
 var babelPluginFlowReactPropTypes_proptype_Qux = {
   baz: _propTypes2.default.oneOf(['literal']).isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Qux', {
-  value: babelPluginFlowReactPropTypes_proptype_Qux,
-  configurable: true
-});
 
 var Foo = function (_React$Component) {
   _inherits(Foo, _React$Component);
@@ -90,5 +87,6 @@ Foo.propTypes = {
     foo: _propTypes2.default.string.isRequired
   }, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType)).isRequired
 };
-exports.default = Foo;"
+exports.default = Foo;
+exports.babelPluginFlowReactPropTypes_proptype_Qux = babelPluginFlowReactPropTypes_proptype_Qux;"
 `;

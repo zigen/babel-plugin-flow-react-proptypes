@@ -3,6 +3,11 @@
 exports[`string-literal-property 1`] = `
 "'use strict';
 
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.babelPluginFlowReactPropTypes_proptype_T = undefined;
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -13,8 +18,5 @@ var babelPluginFlowReactPropTypes_proptype_T = {
   \\"read-only\\": _propTypes2.default.oneOf([true]).isRequired,
   regular: _propTypes2.default.oneOf([true]).isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_T', {
-  value: babelPluginFlowReactPropTypes_proptype_T,
-  configurable: true
-});"
+exports.babelPluginFlowReactPropTypes_proptype_T = babelPluginFlowReactPropTypes_proptype_T;"
 `;

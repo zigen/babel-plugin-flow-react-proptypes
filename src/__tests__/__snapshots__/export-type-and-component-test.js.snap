@@ -6,6 +6,7 @@ exports[`export-type-and-component 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
+exports.babelPluginFlowReactPropTypes_proptype_T = undefined;
 
 var _react = require('react');
 
@@ -22,10 +23,6 @@ var babelPluginFlowReactPropTypes_proptype_T = {
   i: _propTypes2.default.number.isRequired,
   x: _propTypes2.default.oneOf(['foo', 'baz']).isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_T', {
-  value: babelPluginFlowReactPropTypes_proptype_T,
-  configurable: true
-});
 
 
 var C = function C(_ref) {
@@ -35,5 +32,6 @@ var C = function C(_ref) {
 };
 
 C.propTypes = babelPluginFlowReactPropTypes_proptype_T;
-exports.default = C;"
+exports.default = C;
+exports.babelPluginFlowReactPropTypes_proptype_T = babelPluginFlowReactPropTypes_proptype_T;"
 `;
