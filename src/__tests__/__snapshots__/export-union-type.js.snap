@@ -3,6 +3,11 @@
 exports[`export-union-type 1`] = `
 "\\"use strict\\";
 
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.babelPluginFlowReactPropTypes_proptype_A = undefined;
+
 var _propTypes = require(\\"prop-types\\");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -11,8 +16,5 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var babelPluginFlowReactPropTypes_proptype_A = _propTypes2.default.oneOf([\\"option1\\", \\"option2\\"]);
 
-if (typeof exports !== \\"undefined\\") Object.defineProperty(exports, \\"babelPluginFlowReactPropTypes_proptype_A\\", {
-  value: babelPluginFlowReactPropTypes_proptype_A,
-  configurable: true
-});"
+exports.babelPluginFlowReactPropTypes_proptype_A = babelPluginFlowReactPropTypes_proptype_A;"
 `;

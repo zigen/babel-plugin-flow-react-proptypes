@@ -3,6 +3,11 @@
 exports[`typeof 1`] = `
 "'use strict';
 
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.babelPluginFlowReactPropTypes_proptype_JumpToAction = undefined;
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -21,8 +26,5 @@ var babelPluginFlowReactPropTypes_proptype_JumpToAction = {
   },
   index: _propTypes2.default.number.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_JumpToAction', {
-  value: babelPluginFlowReactPropTypes_proptype_JumpToAction,
-  configurable: true
-});"
+exports.babelPluginFlowReactPropTypes_proptype_JumpToAction = babelPluginFlowReactPropTypes_proptype_JumpToAction;"
 `;

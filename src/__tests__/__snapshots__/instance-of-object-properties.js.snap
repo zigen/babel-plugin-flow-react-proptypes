@@ -3,6 +3,11 @@
 exports[`instance-of 1`] = `
 "'use strict';
 
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.babelPluginFlowReactPropTypes_proptype_FactMap = exports.babelPluginFlowReactPropTypes_proptype_Fact = undefined;
+
 var _some_class = require('./some_class');
 
 var _propTypes = require('prop-types');
@@ -21,19 +26,9 @@ var babelPluginFlowReactPropTypes_proptype_Fact = function babelPluginFlowReactP
   return (typeof (Foo.Bar == null ? {} : Foo.Bar) === 'function' ? _propTypes2.default.instanceOf(Foo.Bar == null ? {} : Foo.Bar) : _propTypes2.default.any).apply(this, arguments);
 };
 
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Fact', {
-  value: babelPluginFlowReactPropTypes_proptype_Fact,
-  configurable: true
-});
-
 var babelPluginFlowReactPropTypes_proptype_FactMap = function babelPluginFlowReactPropTypes_proptype_FactMap() {
   return (typeof (Foo.Map == null ? {} : Foo.Map) === 'function' ? _propTypes2.default.instanceOf(Foo.Map == null ? {} : Foo.Map) : _propTypes2.default.any).apply(this, arguments);
 };
-
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_FactMap', {
-  value: babelPluginFlowReactPropTypes_proptype_FactMap,
-  configurable: true
-});
 
 var MyComponent = function (_React$Component) {
   _inherits(MyComponent, _React$Component);
@@ -57,5 +52,7 @@ MyComponent.propTypes = {
   deep: function deep() {
     return (typeof (((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar) === 'function' ? _propTypes2.default.instanceOf(((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
   }
-};"
+};
+exports.babelPluginFlowReactPropTypes_proptype_Fact = babelPluginFlowReactPropTypes_proptype_Fact;
+exports.babelPluginFlowReactPropTypes_proptype_FactMap = babelPluginFlowReactPropTypes_proptype_FactMap;"
 `;

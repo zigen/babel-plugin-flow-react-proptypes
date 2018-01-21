@@ -6,6 +6,7 @@ exports[`exported-intersection-exported-type-alias-unexported-object-literal 1`]
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
+exports.babelPluginFlowReactPropTypes_proptype_U = exports.babelPluginFlowReactPropTypes_proptype_T = undefined;
 
 var _propTypes = require('prop-types');
 
@@ -24,18 +25,10 @@ var React = require('react');
 var babelPluginFlowReactPropTypes_proptype_T = {
   bar: _propTypes2.default.string.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_T', {
-  value: babelPluginFlowReactPropTypes_proptype_T,
-  configurable: true
-});
 var babelPluginFlowReactPropTypes_proptype_U = {
   bar: _propTypes2.default.string.isRequired,
   foo: _propTypes2.default.string.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_U', {
-  value: babelPluginFlowReactPropTypes_proptype_U,
-  configurable: true
-});
 
 var C = function (_React$Component) {
   _inherits(C, _React$Component);
@@ -53,5 +46,7 @@ C.propTypes = {
   bar: _propTypes2.default.string.isRequired,
   foo: _propTypes2.default.string.isRequired
 };
-exports.default = C;"
+exports.default = C;
+exports.babelPluginFlowReactPropTypes_proptype_T = babelPluginFlowReactPropTypes_proptype_T;
+exports.babelPluginFlowReactPropTypes_proptype_U = babelPluginFlowReactPropTypes_proptype_U;"
 `;
