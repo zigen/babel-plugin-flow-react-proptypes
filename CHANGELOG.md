@@ -1,3 +1,14 @@
+## 14.0.0
+
+Switches to ES6 modules for import/export by default.
+
+Switches to `useStatic` by default
+
+```js
+class C extends Component { static propTypes = {} }
+```
+
+
 ## 3.2.0
   - Fix issue 96 type annotations with member expressions #98
 
