@@ -6,7 +6,7 @@ exports[`instance-of 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
-exports.babelPluginFlowReactPropTypes_proptype_FactMap = exports.babelPluginFlowReactPropTypes_proptype_Fact = undefined;
+exports.bpfrpt_proptype_FactMap = exports.bpfrpt_proptype_Fact = undefined;
 
 var _some_class = require('./some_class');
 
@@ -22,11 +22,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var babelPluginFlowReactPropTypes_proptype_Fact = function babelPluginFlowReactPropTypes_proptype_Fact() {
+var bpfrpt_proptype_Fact = function bpfrpt_proptype_Fact() {
   return (typeof (Foo.Bar == null ? {} : Foo.Bar) === 'function' ? _propTypes2.default.instanceOf(Foo.Bar == null ? {} : Foo.Bar) : _propTypes2.default.any).apply(this, arguments);
 };
 
-var babelPluginFlowReactPropTypes_proptype_FactMap = function babelPluginFlowReactPropTypes_proptype_FactMap() {
+var bpfrpt_proptype_FactMap = function bpfrpt_proptype_FactMap() {
   return (typeof (Foo.Map == null ? {} : Foo.Map) === 'function' ? _propTypes2.default.instanceOf(Foo.Map == null ? {} : Foo.Map) : _propTypes2.default.any).apply(this, arguments);
 };
 
@@ -53,6 +53,6 @@ MyComponent.propTypes = {
     return (typeof (((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar) === 'function' ? _propTypes2.default.instanceOf(((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar == null ? {} : ((_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting == null ? {} : (_some_class.SomeClass.deeper == null ? {} : _some_class.SomeClass.deeper).nesting).Bar).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
   }
 };
-exports.babelPluginFlowReactPropTypes_proptype_Fact = babelPluginFlowReactPropTypes_proptype_Fact;
-exports.babelPluginFlowReactPropTypes_proptype_FactMap = babelPluginFlowReactPropTypes_proptype_FactMap;"
+exports.bpfrpt_proptype_Fact = bpfrpt_proptype_Fact;
+exports.bpfrpt_proptype_FactMap = bpfrpt_proptype_FactMap;"
 `;

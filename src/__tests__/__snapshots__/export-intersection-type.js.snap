@@ -6,7 +6,7 @@ exports[`export-intersection-type 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
-exports.babelPluginFlowReactPropTypes_proptype_V = undefined;
+exports.bpfrpt_proptype_V = undefined;
 
 var _propTypes = require('prop-types');
 
@@ -22,7 +22,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 
 var React = require('react');
 
-var babelPluginFlowReactPropTypes_proptype_V = {
+var bpfrpt_proptype_V = {
   foo: _propTypes2.default.string.isRequired,
   bar: _propTypes2.default.string.isRequired
 };
@@ -44,5 +44,5 @@ C.propTypes = {
   bar: _propTypes2.default.string.isRequired
 };
 exports.default = C;
-exports.babelPluginFlowReactPropTypes_proptype_V = babelPluginFlowReactPropTypes_proptype_V;"
+exports.bpfrpt_proptype_V = bpfrpt_proptype_V;"
 `;

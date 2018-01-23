@@ -6,7 +6,7 @@ exports[`typeof 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
-exports.babelPluginFlowReactPropTypes_proptype_JumpToAction = undefined;
+exports.bpfrpt_proptype_JumpToAction = undefined;
 
 var _propTypes = require('prop-types');
 
@@ -18,7 +18,7 @@ var ActionTypes = {
   JUMP_TO: 'react-native/NavigationExperimental/tabs-jumpTo'
 };
 
-var babelPluginFlowReactPropTypes_proptype_JumpToAction = {
+var bpfrpt_proptype_JumpToAction = {
   type: function type(props, propName, componentName) {
     if (!Object.prototype.hasOwnProperty.call(props, propName)) {
       throw new Error('Prop \`' + propName + '\` has type \\\\'any\\\\' or \\\\'mixed\\\\', but was not provided to \`' + componentName + '\`. Pass undefined or any other value.');
@@ -26,5 +26,5 @@ var babelPluginFlowReactPropTypes_proptype_JumpToAction = {
   },
   index: _propTypes2.default.number.isRequired
 };
-exports.babelPluginFlowReactPropTypes_proptype_JumpToAction = babelPluginFlowReactPropTypes_proptype_JumpToAction;"
+exports.bpfrpt_proptype_JumpToAction = bpfrpt_proptype_JumpToAction;"
 `;

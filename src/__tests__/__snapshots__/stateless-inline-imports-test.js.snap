@@ -23,5 +23,5 @@ var C = function C(props) {
   );
 };
 
-C.propTypes = _types.bpfrp_babelPluginFlowReactPropTypes_proptype_T === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_T;"
+C.propTypes = _types.bpfrpt_proptype_T === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_T;"
 `;

@@ -6,7 +6,7 @@ exports[`import-and-loops 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
     value: true
 });
-exports.babelPluginFlowReactPropTypes_proptype_T = undefined;
+exports.bpfrpt_proptype_T = undefined;
 
 var _react = require('react');
 
@@ -20,10 +20,10 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var babelPluginFlowReactPropTypes_proptype_T = {
+var bpfrpt_proptype_T = {
     flag: _propTypes2.default.bool.isRequired,
     list: _propTypes2.default.arrayOf(function () {
-        return (typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType === 'function' ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_ExternalType)).apply(this, arguments);
+        return (typeof _types.bpfrpt_proptype_ExternalType === 'function' ? _types.bpfrpt_proptype_ExternalType : _propTypes2.default.shape(_types.bpfrpt_proptype_ExternalType)).apply(this, arguments);
     }).isRequired
 };
 
@@ -45,7 +45,7 @@ var C = function C(_ref) {
     );
 };
 
-C.propTypes = babelPluginFlowReactPropTypes_proptype_T;
+C.propTypes = bpfrpt_proptype_T;
 exports.default = C;
-exports.babelPluginFlowReactPropTypes_proptype_T = babelPluginFlowReactPropTypes_proptype_T;"
+exports.bpfrpt_proptype_T = bpfrpt_proptype_T;"
 `;

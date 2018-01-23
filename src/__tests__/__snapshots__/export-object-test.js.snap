@@ -6,7 +6,7 @@ exports[`export-object 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
-exports.babelPluginFlowReactPropTypes_proptype_Foo = undefined;
+exports.bpfrpt_proptype_Foo = undefined;
 
 var _propTypes = require('prop-types');
 
@@ -14,11 +14,11 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var babelPluginFlowReactPropTypes_proptype_Foo = {
+var bpfrpt_proptype_Foo = {
   a_string: _propTypes2.default.string.isRequired
 };
 
 
 console.log('test');
-exports.babelPluginFlowReactPropTypes_proptype_Foo = babelPluginFlowReactPropTypes_proptype_Foo;"
+exports.bpfrpt_proptype_Foo = bpfrpt_proptype_Foo;"
 `;

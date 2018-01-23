@@ -6,7 +6,7 @@ exports[`export-intersection-type 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
-exports.babelPluginFlowReactPropTypes_proptype_TOptional = exports.babelPluginFlowReactPropTypes_proptype_T = undefined;
+exports.bpfrpt_proptype_TOptional = exports.bpfrpt_proptype_T = undefined;
 
 var _propTypes = require(\\"prop-types\\");
 
@@ -14,8 +14,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var babelPluginFlowReactPropTypes_proptype_T = _propTypes2.default.string;
-var babelPluginFlowReactPropTypes_proptype_TOptional = _propTypes2.default.string;
-exports.babelPluginFlowReactPropTypes_proptype_T = babelPluginFlowReactPropTypes_proptype_T;
-exports.babelPluginFlowReactPropTypes_proptype_TOptional = babelPluginFlowReactPropTypes_proptype_TOptional;"
+var bpfrpt_proptype_T = _propTypes2.default.string;
+var bpfrpt_proptype_TOptional = _propTypes2.default.string;
+exports.bpfrpt_proptype_T = bpfrpt_proptype_T;
+exports.bpfrpt_proptype_TOptional = bpfrpt_proptype_TOptional;"
 `;

@@ -6,7 +6,7 @@ exports[`union-objects-exact 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
-exports.babelPluginFlowReactPropTypes_proptype_ExactFooProps = undefined;
+exports.bpfrpt_proptype_ExactFooProps = undefined;
 
 var _propTypes = require('prop-types');
 
@@ -22,7 +22,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 
 var React = require('react');
 
-var babelPluginFlowReactPropTypes_proptype_ExactFooProps = {
+var bpfrpt_proptype_ExactFooProps = {
   someprop: _propTypes2.default.oneOfType([_propTypes2.default.shape({
     a: _propTypes2.default.string.isRequired
   }), _propTypes2.default.shape({
@@ -117,5 +117,5 @@ ExactFoo.propTypes = {
     }
   })]).isRequired
 };
-exports.babelPluginFlowReactPropTypes_proptype_ExactFooProps = babelPluginFlowReactPropTypes_proptype_ExactFooProps;"
+exports.bpfrpt_proptype_ExactFooProps = bpfrpt_proptype_ExactFooProps;"
 `;

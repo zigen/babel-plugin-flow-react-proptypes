@@ -29,7 +29,7 @@ var C = function (_React$Component) {
   return C;
 }(React.Component);
 
-C.propTypes = Object.assign({}, _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
+C.propTypes = Object.assign({}, _foo.bpfrpt_proptype_NamedType === _propTypes2.default.any ? {} : _foo.bpfrpt_proptype_NamedType, {
   foo: _propTypes2.default.string.isRequired,
   bar: _propTypes2.default.number.isRequired
 });"

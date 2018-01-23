@@ -34,6 +34,6 @@ C.propTypes = {
   bar: _propTypes2.default.number.isRequired,
   baz: _propTypes2.default.shape(Object.assign({}, {
     foo: _propTypes2.default.number.isRequired
-  }, _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _foo.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType)).isRequired
+  }, _foo.bpfrpt_proptype_NamedType === _propTypes2.default.any ? {} : _foo.bpfrpt_proptype_NamedType)).isRequired
 };"
 `;

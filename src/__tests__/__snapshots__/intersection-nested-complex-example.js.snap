@@ -6,7 +6,7 @@ exports[`intersection-exported-type-alias-unexported-object-literal 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
    value: true
 });
-exports.babelPluginFlowReactPropTypes_proptype_X = undefined;
+exports.bpfrpt_proptype_X = undefined;
 
 var _types = require(\\"./types\\");
 
@@ -24,7 +24,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 
 var React = require('react');
 
-var babelPluginFlowReactPropTypes_proptype_X = Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
+var bpfrpt_proptype_X = Object.assign({}, _types.bpfrpt_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_NamedType, {
    a: _propTypes2.default.string.isRequired
 });
 
@@ -40,7 +40,7 @@ var D = function (_React$Component) {
    return D;
 }(React.Component);
 
-D.propTypes = Object.assign({}, Object.assign({}, _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType, {
+D.propTypes = Object.assign({}, Object.assign({}, _types.bpfrpt_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_NamedType, {
    a: _propTypes2.default.string.isRequired
 }), {
    c: _propTypes2.default.string.isRequired
@@ -48,5 +48,5 @@ D.propTypes = Object.assign({}, Object.assign({}, _types.bpfrp_babelPluginFlowRe
 ;
 
 exports.default = D;
-exports.babelPluginFlowReactPropTypes_proptype_X = babelPluginFlowReactPropTypes_proptype_X;"
+exports.bpfrpt_proptype_X = bpfrpt_proptype_X;"
 `;

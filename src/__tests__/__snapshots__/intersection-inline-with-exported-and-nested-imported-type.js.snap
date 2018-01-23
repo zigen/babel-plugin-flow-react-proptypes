@@ -6,7 +6,7 @@ exports[`intersection inline with exported and nested imported type 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
-exports.babelPluginFlowReactPropTypes_proptype_ExportedType = undefined;
+exports.bpfrpt_proptype_ExportedType = undefined;
 
 var _types = require(\\"./types\\");
 
@@ -22,7 +22,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \\"function\\" && superClass !== null) { throw new TypeError(\\"Super expression must either be null or a function, not \\" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var babelPluginFlowReactPropTypes_proptype_ExportedType = {
+var bpfrpt_proptype_ExportedType = {
   bar: _propTypes2.default.number.isRequired
 };
 
@@ -41,9 +41,9 @@ var MyComponent = function (_React$Component) {
 MyComponent.propTypes = {
   foo: _propTypes2.default.string.isRequired,
   baz: function baz() {
-    return (typeof _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType === \\"function\\" ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired ? _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType.isRequired : _types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType : _propTypes2.default.shape(_types.bpfrp_babelPluginFlowReactPropTypes_proptype_NamedType).isRequired).apply(this, arguments);
+    return (typeof _types.bpfrpt_proptype_NamedType === \\"function\\" ? _types.bpfrpt_proptype_NamedType.isRequired ? _types.bpfrpt_proptype_NamedType.isRequired : _types.bpfrpt_proptype_NamedType : _propTypes2.default.shape(_types.bpfrpt_proptype_NamedType).isRequired).apply(this, arguments);
   },
   bar: _propTypes2.default.number.isRequired
 };
-exports.babelPluginFlowReactPropTypes_proptype_ExportedType = babelPluginFlowReactPropTypes_proptype_ExportedType;"
+exports.bpfrpt_proptype_ExportedType = bpfrpt_proptype_ExportedType;"
 `;

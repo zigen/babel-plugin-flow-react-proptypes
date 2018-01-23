@@ -17,7 +17,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var babelPluginFlowReactPropTypes_proptype_T = {
+var bpfrpt_proptype_T = {
   f: _propTypes2.default.func.isRequired,
   i: _propTypes2.default.number.isRequired,
   x: _propTypes2.default.oneOf(['foo', 'baz']).isRequired
@@ -30,6 +30,6 @@ var C = function C(_ref) {
   _react2.default.createElement('div', null);
 };
 
-C.propTypes = babelPluginFlowReactPropTypes_proptype_T;
+C.propTypes = bpfrpt_proptype_T;
 exports.default = C;"
 `;

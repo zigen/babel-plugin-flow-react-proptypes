@@ -6,7 +6,7 @@ exports[`interesection-two-object-type-literals 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
   value: true
 });
-exports.babelPluginFlowReactPropTypes_proptype_U = undefined;
+exports.bpfrpt_proptype_U = undefined;
 
 var _propTypes = require('prop-types');
 
@@ -22,7 +22,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \\"function
 
 var React = require('react');
 
-var babelPluginFlowReactPropTypes_proptype_U = {
+var bpfrpt_proptype_U = {
   bar: _propTypes2.default.string.isRequired,
   foo: _propTypes2.default.string.isRequired
 };
@@ -44,5 +44,5 @@ C.propTypes = {
   foo: _propTypes2.default.string.isRequired
 };
 exports.default = C;
-exports.babelPluginFlowReactPropTypes_proptype_U = babelPluginFlowReactPropTypes_proptype_U;"
+exports.bpfrpt_proptype_U = bpfrpt_proptype_U;"
 `;
