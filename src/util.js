@@ -21,7 +21,7 @@ export function makeLiteral(value) {
 }
 
 export function getExportNameForType(name) {
-  return `babelPluginFlowReactPropTypes_proptype_${name}`;
+  return `bpfrpt_proptype_${name}`;
 }
 
 export function containsReactElement(node) {
@@ -80,4 +80,3 @@ export function hasReactElementTypeAnnotationReturn(node) {
 
   return false;
 };
-

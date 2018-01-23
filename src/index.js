@@ -83,7 +83,7 @@ module.exports = function flowReactPropTypes(babel) {
 
     if (shouldUseImport()) {
       if (!addedImports[key]) {
-        const local = `bpfrp_${name.replace(/[^a-zA-Z0-9]+/g, '_')}`;
+        const local = name.replace(/[^a-zA-Z0-9]+/g, '_');
         addedImports[key] = local;
 
         let toAdd = null;
