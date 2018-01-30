@@ -1,3 +1,7 @@
+## 15.0.0
+
+Fixes bug with two named type imports from one module. #172
+
 ## 14.0.0
 
 Switches to ES6 modules for import/export by default.
