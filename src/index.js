@@ -79,7 +79,7 @@ module.exports = function flowReactPropTypes(babel) {
   function getFromModule(path, { type = 'default', name, location }) {
     const tid = t.identifier;
     const tstr = t.stringLiteral;
-    const key = `name:${location}`;
+    const key = `name:${location}:${name}`;
 
     if (shouldUseImport()) {
       if (!addedImports[key]) {
@@ -601,6 +601,7 @@ module.exports = function flowReactPropTypes(babel) {
             name: getExportNameForType(typeName),
             location: node.source.value,
           });
+
           importedTypes[typeName].accessNode = accessNode;
         });
       }
