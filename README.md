@@ -158,7 +158,7 @@ To save some bytes in production, you can also only enable it in development mod
 
 ## deadCode
 
-The deadCode option (disabled by default) adds a predicate to the code allowing both your propTypes definitions and potentially the
+The `deadCode` option (disabled by default) adds a predicate to the code allowing both your propTypes definitions and potentially the
 entire 'prop-types' package to be excluded in certain builds. Unlike specifying this plugin in the development env, mentioned above,
 this also works for packages published to npm.
 
@@ -176,6 +176,10 @@ Example of specifying a custom expression:
 ```json
   "plugins": [["flow-react-proptypes", { "deadCode": "__PROD__" }]]
 ```
+
+## useESModules
+
+The `useESModules` option forces this plugin to output ES6 modules, even if the `deadCode` option is enabled. Your bundler will be responsible for removing the dead code.
 
 ## Suppression
 This plugin isn't perfect. You can disable it for an entire file with this directive (including quotes):
