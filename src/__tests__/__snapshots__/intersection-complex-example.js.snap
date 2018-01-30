@@ -35,7 +35,7 @@ var bpfrpt_proptype_X = Object.assign({}, _types.bpfrpt_proptype_NamedType === _
     return (typeof _types.bpfrpt_proptype_NamedType === \\"function\\" ? _types.bpfrpt_proptype_NamedType.isRequired ? _types.bpfrpt_proptype_NamedType.isRequired : _types.bpfrpt_proptype_NamedType : _propTypes2.default.shape(_types.bpfrpt_proptype_NamedType).isRequired).apply(this, arguments);
   },
   b: _propTypes2.default.string.isRequired
-}, _types.bpfrpt_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_NamedType, {
+}, _types.bpfrpt_proptype_DefaultType === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_DefaultType, {
   bar: _propTypes2.default.number.isRequired
 }, {
   foo: _propTypes2.default.string.isRequired
@@ -65,7 +65,7 @@ C.propTypes = {
   })).isRequired,
   quz: _propTypes2.default.shape(Object.assign({}, {
     bar: _propTypes2.default.number.isRequired
-  }, _types.bpfrpt_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_NamedType)).isRequired,
+  }, _types.bpfrpt_proptype_DefaultType === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_DefaultType)).isRequired,
   bar: _propTypes2.default.number.isRequired,
   foo: _propTypes2.default.string.isRequired
 };
@@ -92,7 +92,7 @@ D.propTypes = Object.assign({}, {
     return (typeof _types.bpfrpt_proptype_NamedType === \\"function\\" ? _types.bpfrpt_proptype_NamedType.isRequired ? _types.bpfrpt_proptype_NamedType.isRequired : _types.bpfrpt_proptype_NamedType : _propTypes2.default.shape(_types.bpfrpt_proptype_NamedType).isRequired).apply(this, arguments);
   },
   b: _propTypes2.default.string.isRequired
-}, _types.bpfrpt_proptype_NamedType === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_NamedType, {
+}, _types.bpfrpt_proptype_DefaultType === _propTypes2.default.any ? {} : _types.bpfrpt_proptype_DefaultType, {
   bar: _propTypes2.default.number.isRequired
 }, {
   foo: _propTypes2.default.string.isRequired
