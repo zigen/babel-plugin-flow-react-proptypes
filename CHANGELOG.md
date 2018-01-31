@@ -1,3 +1,16 @@
+## 17.0.0
+
+Adds basic support for interface types.
+
+```js
+export interface Pager {
+    next(number): void,
+    prev(number): void,
+    hasNext: boolean,
+    hasPrev: boolean,
+}
+```
+
 ## 16.0.0
 
 Adds support for:
