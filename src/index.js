@@ -125,6 +125,62 @@ module.exports = function flowReactPropTypes(babel) {
     return t.memberExpression(ptOptional, t.identifier('isRequired'));
   }
 
+  function addExportTypeDecl(path, exportName) {
+    if (!opts.deadCode || shouldUseImport()) {
+      if (!path.parentPath.isProgram()) return;
+      const body = path.parentPath.node.body;
+      const exportAst = t.exportNamedDeclaration(
+        null,
+        [
+          t.exportSpecifier(
+            t.identifier(exportName),
+            t.identifier(exportName)
+          )
+        ],
+      );
+      exportAst[SKIP] = true;
+      body.push(exportAst);
+    }
+    else {
+      // add the variable to the exports
+      const exportAst = t.expressionStatement(t.callExpression(
+        t.memberExpression(t.identifier('Object'), t.identifier('defineProperty')),
+        [
+          t.identifier('exports'),
+          t.stringLiteral(exportName),
+          t.objectExpression([
+            t.objectProperty(t.identifier('value'), t.identifier(exportName)),
+            t.objectProperty(t.identifier('configurable'), t.booleanLiteral(true)),
+          ]),
+        ]
+      ));
+      const exportsDefinedCondition = t.binaryExpression(
+        '!==',
+        t.unaryExpression(
+          'typeof',
+          t.identifier('exports')
+        ),
+        t.stringLiteral('undefined')
+      );
+
+      let ifCond = exportsDefinedCondition;
+      if (opts.deadCode) {
+        const dceConditional = t.unaryExpression('!', getDcePredicate());
+        ifCond = t.logicalExpression(
+          '&&',
+          dceConditional,
+          ifCond,
+        );
+      }
+
+      const conditionalExportsAst = t.ifStatement(
+        ifCond,
+        exportAst
+      );
+      path.insertAfter(conditionalExportsAst);
+    }
+  }
+
   const _templateCache = {};
   function getDcePredicate() {
     // opts.deadCode could be a boolean (true for DEFAULT_DCE), or a string to be
@@ -476,6 +532,20 @@ module.exports = function flowReactPropTypes(babel) {
         if (suppress) return;
         const {node} = path;
 
+        if (node.exportKind === 'type' && node.source && node.source.value) {
+          for (const spec of node.specifiers) {
+            const typeName = spec.local.name;
+            const accessNode = getFromModule(path, {
+              type: 'named',
+              name: getExportNameForType(typeName),
+              location: node.source.value,
+            });
+            addExportTypeDecl(path, getExportNameForType(typeName));
+          }
+
+          return;
+        }
+
 
         if (!node.declaration || node.declaration.type !== 'TypeAlias') {
           return;
@@ -490,76 +560,23 @@ module.exports = function flowReactPropTypes(babel) {
         const propTypesAst = makePropTypesAstForExport(propTypes);
 
         // create a variable for reuse
-        const exportedName = getExportNameForType(name);
-        exportedTypes[name] = exportedName;
+        const exportName = getExportNameForType(name);
+        exportedTypes[name] = exportName;
         const variableDeclarationAst = t.variableDeclaration(
           'var',
           [
             t.variableDeclarator(
-              t.identifier(exportedName),
+              t.identifier(exportName),
               wrapInDceCheck(propTypesAst)
             )
           ]
         );
         path.insertBefore(variableDeclarationAst);
 
-        const exportName = getExportNameForType(name);
+        
         if (!omitRuntimeTypeExport) {
           if (path.node[SKIP]) return;
-
-          if (!opts.deadCode || shouldUseImport()) {
-            if (!path.parentPath.isProgram()) return;
-            const body = path.parentPath.node.body;
-            const exportAst = t.exportNamedDeclaration(
-              null,
-              [
-                t.exportSpecifier(
-                  t.identifier(exportName),
-                  t.identifier(exportName)
-                )
-              ],
-            );
-            exportAst[SKIP] = true;
-            body.push(exportAst);
-          }
-          else {
-            // add the variable to the exports
-            const exportAst = t.expressionStatement(t.callExpression(
-              t.memberExpression(t.identifier('Object'), t.identifier('defineProperty')),
-              [
-                t.identifier('exports'),
-                t.stringLiteral(exportName),
-                t.objectExpression([
-                  t.objectProperty(t.identifier('value'), t.identifier(exportedName)),
-                  t.objectProperty(t.identifier('configurable'), t.booleanLiteral(true)),
-                ]),
-              ]
-            ));
-            const exportsDefinedCondition = t.binaryExpression(
-              '!==',
-              t.unaryExpression(
-                'typeof',
-                t.identifier('exports')
-              ),
-              t.stringLiteral('undefined')
-            );
-
-            let ifCond = exportsDefinedCondition;
-            if (opts.deadCode) {
-              const dceConditional = t.unaryExpression('!', getDcePredicate());
-              ifCond = t.logicalExpression(
-                '&&',
-                dceConditional,
-                ifCond,
-              );
-            }
-
-            const conditionalExportsAst = t.ifStatement(
-              ifCond,
-              exportAst
-            );
-            path.insertAfter(conditionalExportsAst);
-          }
+          addExportTypeDecl(path, exportName);
         }
       },
       ImportDeclaration(path) {
