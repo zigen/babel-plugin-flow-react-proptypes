@@ -115,6 +115,8 @@ import { bpfrp_babelPluginFlowReactPropTypes_proptype_SomeExternalType } from '.
 
 Starting in 14.0.0, we output ES6 import/export statements by default. The `deadCode` option (explained below) will cause it to use common.js modules instead.
 
+The reaason for the high major versions is that any change to the prop type output, including adding new checks that previously produced no output, impact users of this plugin. Check the changelog to see what's changed at each version.
+
 ## Usage
 
 This plugin searches for a React components using type declaration. Works with functional components and ES6 classes. `React.createClass` is not currently supported.
