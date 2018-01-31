@@ -331,14 +331,14 @@ module.exports = function flowReactPropTypes(babel) {
     }
   };
 
-    /**
-     * Visitor for functions.
-     *
-     * Determines if a function is a functional react component and
-     * inserts the proptypes and contexttypes AST via `annotate`.
-     *
-     * @param path
-     */
+  /**
+   * Visitor for functions.
+   *
+   * Determines if a function is a functional react component and
+   * inserts the proptypes and contexttypes AST via `annotate`.
+   *
+   * @param path
+   */
   const functionVisitor = path => {
     if (!isFunctionalReactComponent(path)) {
       return;
@@ -398,7 +398,7 @@ module.exports = function flowReactPropTypes(babel) {
         const directives = path.node.directives;
         if(directives && directives.length)  {
           const directive = directives[0];
-          if (directive.value && directive.value.value == SUPPRESS_STRING) {
+          if (directive.value && directive.value.value === SUPPRESS_STRING) {
             suppress = true;
           }
         }
@@ -410,9 +410,9 @@ module.exports = function flowReactPropTypes(babel) {
           }
         }
       },
-      TypeAlias(path) {
+      "TypeAlias|InterfaceDeclaration"(path) {
         if (suppress) return;
-        $debug('TypeAlias found');
+        $debug('TypeAlias/InterfaceDeclaration found');
 
         const typeAliasName = path.node.id.name;
         if (!typeAliasName) {
@@ -520,14 +520,14 @@ module.exports = function flowReactPropTypes(babel) {
 
       // See issue:
       /**
-         * Processes exported type aliases.
-         *
-         * This function also adds something to the AST directly, instead
-         * of invoking annotate.
-         *
-         * @param path
-         * @constructor
-         */
+       * Processes exported type aliases.
+       *
+       * This function also adds something to the AST directly, instead
+       * of invoking annotate.
+       *
+       * @param path
+       * @constructor
+       */
       ExportNamedDeclaration(path) {
         if (suppress) return;
         const {node} = path;
@@ -546,12 +546,16 @@ module.exports = function flowReactPropTypes(babel) {
           return;
         }
 
-
-        if (!node.declaration || node.declaration.type !== 'TypeAlias') {
-          return;
+        let declarationObject = null;
+        if (!node.declaration) return;
+        if (node.declaration.type === 'TypeAlias') {
+          declarationObject = node.declaration.right;
+        }
+        if (node.declaration.type === 'InterfaceDeclaration') {
+          declarationObject = node.declaration.body;
         }
 
-        const declarationObject = node.declaration.right;
+        if (!declarationObject) return;
 
         const name = node.declaration.id.name;
         const propTypes = convertNodeToPropTypes(declarationObject);
@@ -573,7 +577,6 @@ module.exports = function flowReactPropTypes(babel) {
         );
         path.insertBefore(variableDeclarationAst);
 
-        
         if (!omitRuntimeTypeExport) {
           if (path.node[SKIP]) return;
           addExportTypeDecl(path, exportName);

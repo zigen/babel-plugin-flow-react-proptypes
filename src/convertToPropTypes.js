@@ -89,12 +89,15 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
       for (let i = 0; i < typeParams.length; i++) {
         typeParamMapping[typeParams[i]] = types[i];
       }
-      // console.log(node.right, typeParamMapping);
       return convertGenericToPropTypes(node.right, typeParamMapping, importedTypes, internalTypes);
     };
   }
   else if (node.right) {
     node = node.right;
+  }
+
+  if (node.type === 'InterfaceDeclaration') {
+    node = node.body;
   }
 
   if (node.type === 'ObjectTypeAnnotation') {
@@ -187,7 +190,7 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
       resultPropType = {type: 'any'};
     }
     else if (requiresRuntimeMerge.length === 0) {
-      resultPropType = {'type': 'shape', properties: mergedProperties};
+      resultPropType = {type: 'shape', properties: mergedProperties};
     }
     else {
       // TODO: properties may be a misnomer - that probably means a list of object
