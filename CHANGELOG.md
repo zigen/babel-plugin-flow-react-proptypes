@@ -1,3 +1,11 @@
+## 16.0.0
+
+Adds support for:
+
+```js
+export type { Foo } from './types';
+```
+
 ## 15.0.0
 
 Fixes bug with two named type imports from one module. #172

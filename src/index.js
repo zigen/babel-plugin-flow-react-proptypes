@@ -535,7 +535,7 @@ module.exports = function flowReactPropTypes(babel) {
         if (node.exportKind === 'type' && node.source && node.source.value) {
           for (const spec of node.specifiers) {
             const typeName = spec.local.name;
-            const accessNode = getFromModule(path, {
+            getFromModule(path, {
               type: 'named',
               name: getExportNameForType(typeName),
               location: node.source.value,
