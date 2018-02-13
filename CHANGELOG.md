@@ -1,3 +1,7 @@
+## 17.1.*
+
+Babel 7 compatibility fixes.
+
 ## 17.0.0
 
 Adds basic support for interface types.
