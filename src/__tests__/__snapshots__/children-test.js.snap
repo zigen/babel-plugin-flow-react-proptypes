@@ -22,7 +22,7 @@ function Foo(props) {
 Foo.propTypes = {
   children: _propTypes2.default.node.isRequired,
   children2: _propTypes2.default.arrayOf(function () {
-    return (typeof Element === 'function' ? _propTypes2.default.instanceOf(Element) : _propTypes2.default.any).apply(this, arguments);
+    return (typeof Element === 'function' ? _propTypes2.default.instanceOf(Element).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
   }).isRequired,
   children3: function children3() {
     return (typeof Element === 'function' ? _propTypes2.default.instanceOf(Element).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);

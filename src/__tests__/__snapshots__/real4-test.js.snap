@@ -22,18 +22,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var bpfrpt_proptype_jpopunderPostResult = {
     items: _propTypes2.default.arrayOf(function () {
-        return (typeof _JLCommon.bpfrpt_proptype_Job === 'function' ? _JLCommon.bpfrpt_proptype_Job : _propTypes2.default.shape(_JLCommon.bpfrpt_proptype_Job)).apply(this, arguments);
+        return (typeof _JLCommon.bpfrpt_proptype_Job === 'function' ? _JLCommon.bpfrpt_proptype_Job.isRequired ? _JLCommon.bpfrpt_proptype_Job.isRequired : _JLCommon.bpfrpt_proptype_Job : _propTypes2.default.shape(_JLCommon.bpfrpt_proptype_Job).isRequired).apply(this, arguments);
     }).isRequired,
     adPartners: _propTypes2.default.arrayOf(function () {
-        return (typeof _JLCommon.bpfrpt_proptype_AdPartner === 'function' ? _JLCommon.bpfrpt_proptype_AdPartner : _propTypes2.default.shape(_JLCommon.bpfrpt_proptype_AdPartner)).apply(this, arguments);
+        return (typeof _JLCommon.bpfrpt_proptype_AdPartner === 'function' ? _JLCommon.bpfrpt_proptype_AdPartner.isRequired ? _JLCommon.bpfrpt_proptype_AdPartner.isRequired : _JLCommon.bpfrpt_proptype_AdPartner : _propTypes2.default.shape(_JLCommon.bpfrpt_proptype_AdPartner).isRequired).apply(this, arguments);
     }).isRequired
 };
 var bpfrpt_proptype_searchPostResult = {
     items: _propTypes2.default.arrayOf(function () {
-        return (typeof _JLCommon.bpfrpt_proptype_Job === 'function' ? _JLCommon.bpfrpt_proptype_Job : _propTypes2.default.shape(_JLCommon.bpfrpt_proptype_Job)).apply(this, arguments);
+        return (typeof _JLCommon.bpfrpt_proptype_Job === 'function' ? _JLCommon.bpfrpt_proptype_Job.isRequired ? _JLCommon.bpfrpt_proptype_Job.isRequired : _JLCommon.bpfrpt_proptype_Job : _propTypes2.default.shape(_JLCommon.bpfrpt_proptype_Job).isRequired).apply(this, arguments);
     }).isRequired,
     seoText: _propTypes2.default.arrayOf(function () {
-        return (typeof _JLCommon.bpfrpt_proptype_SeoText === 'function' ? _JLCommon.bpfrpt_proptype_SeoText : _propTypes2.default.shape(_JLCommon.bpfrpt_proptype_SeoText)).apply(this, arguments);
+        return (typeof _JLCommon.bpfrpt_proptype_SeoText === 'function' ? _JLCommon.bpfrpt_proptype_SeoText.isRequired ? _JLCommon.bpfrpt_proptype_SeoText.isRequired : _JLCommon.bpfrpt_proptype_SeoText : _propTypes2.default.shape(_JLCommon.bpfrpt_proptype_SeoText).isRequired).apply(this, arguments);
     }),
     query: function query() {
         return (typeof _jobliftQueryParser.bpfrpt_proptype_SearchQuery === 'function' ? _jobliftQueryParser.bpfrpt_proptype_SearchQuery.isRequired ? _jobliftQueryParser.bpfrpt_proptype_SearchQuery.isRequired : _jobliftQueryParser.bpfrpt_proptype_SearchQuery : _propTypes2.default.shape(_jobliftQueryParser.bpfrpt_proptype_SearchQuery).isRequired).apply(this, arguments);
@@ -46,7 +46,7 @@ var bpfrpt_proptype_searchPostResult = {
         key: _propTypes2.default.number.isRequired,
         amount: _propTypes2.default.number.isRequired,
         translation: _propTypes2.default.string.isRequired
-    })))
+    }).isRequired).isRequired)
 };
 
 // eslint-disable-next-line
@@ -54,7 +54,7 @@ var bpfrpt_proptype_searchPostResult = {
 var bpfrpt_proptype_jobalertMeGetResult = {
     description: _propTypes2.default.string.isRequired,
     jobalerts: _propTypes2.default.arrayOf(function () {
-        return (typeof _JLCommon.bpfrpt_proptype_JobAlert === 'function' ? _JLCommon.bpfrpt_proptype_JobAlert : _propTypes2.default.shape(_JLCommon.bpfrpt_proptype_JobAlert)).apply(this, arguments);
+        return (typeof _JLCommon.bpfrpt_proptype_JobAlert === 'function' ? _JLCommon.bpfrpt_proptype_JobAlert.isRequired ? _JLCommon.bpfrpt_proptype_JobAlert.isRequired : _JLCommon.bpfrpt_proptype_JobAlert : _propTypes2.default.shape(_JLCommon.bpfrpt_proptype_JobAlert).isRequired).apply(this, arguments);
     }).isRequired
 };
 
@@ -69,7 +69,7 @@ var bpfrpt_proptype_joblocationReverseLookupGetResult = {
 var bpfrpt_proptype_joblocationSuggestionGetResult = {
     suggestions: _propTypes2.default.arrayOf(_propTypes2.default.shape({
         value: _propTypes2.default.string.isRequired
-    })).isRequired
+    }).isRequired).isRequired
 };
 
 // api/joblocation-suggestion
@@ -78,7 +78,7 @@ var bpfrpt_proptype_jobsearchSuggestionGetResult = {
     suggestions: _propTypes2.default.arrayOf(_propTypes2.default.shape({
         value: _propTypes2.default.string.isRequired,
         numJobs: _propTypes2.default.number
-    })).isRequired
+    }).isRequired).isRequired
 };
 
 // api/jobsearch-suggestion
@@ -87,13 +87,13 @@ var bpfrpt_proptype_freqSearchSuggestionGetResult = {
     suggestions: _propTypes2.default.arrayOf(_propTypes2.default.shape({
         value: _propTypes2.default.string.isRequired,
         numJobs: _propTypes2.default.number.isRequired
-    })).isRequired
+    }).isRequired).isRequired
 };
 
 // api/jobsearch-suggestion/popular
 
 var bpfrpt_proptype_statisticalDataGetResult = {
-    keys: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
+    keys: _propTypes2.default.arrayOf(_propTypes2.default.string.isRequired).isRequired,
     data: _propTypes2.default.object.isRequired
 };
 
@@ -124,9 +124,9 @@ var bpfrpt_proptype_loginPostResult = {
     lastName: _propTypes2.default.string.isRequired,
     localAccounts: _propTypes2.default.arrayOf(_propTypes2.default.shape({
         email: _propTypes2.default.string.isRequired
-    })).isRequired,
-    socialAccounts: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
-    uniqueEmails: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
+    }).isRequired).isRequired,
+    socialAccounts: _propTypes2.default.arrayOf(_propTypes2.default.object.isRequired).isRequired,
+    uniqueEmails: _propTypes2.default.arrayOf(_propTypes2.default.string.isRequired).isRequired,
     uuid: _propTypes2.default.string.isRequired
 };
 
@@ -137,7 +137,7 @@ var bpfrpt_proptype_directApplyDraftGet = _DirectApply.bpfrpt_proptype_DirectApp
 // api/direct-apply/offer/<jobofferid>/draft
 
 var bpfrpt_proptype_directApplyRecentFilesGet = _propTypes2.default.arrayOf(function () {
-    return (typeof _DirectApply.bpfrpt_proptype_DirectApplyFile === 'function' ? _DirectApply.bpfrpt_proptype_DirectApplyFile : _propTypes2.default.shape(_DirectApply.bpfrpt_proptype_DirectApplyFile)).apply(this, arguments);
+    return (typeof _DirectApply.bpfrpt_proptype_DirectApplyFile === 'function' ? _DirectApply.bpfrpt_proptype_DirectApplyFile.isRequired ? _DirectApply.bpfrpt_proptype_DirectApplyFile.isRequired : _DirectApply.bpfrpt_proptype_DirectApplyFile : _propTypes2.default.shape(_DirectApply.bpfrpt_proptype_DirectApplyFile).isRequired).apply(this, arguments);
 });
 
 // api/direct-apply/files/recent

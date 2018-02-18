@@ -39,11 +39,11 @@ Foo.propTypes = {
     real: _propTypes2.default.number.isRequired,
     imag: _propTypes2.default.number.isRequired
   }).isRequired,
-  manyNumbers: _propTypes2.default.objectOf(_propTypes2.default.number).isRequired,
+  manyNumbers: _propTypes2.default.objectOf(_propTypes2.default.number.isRequired).isRequired,
   manyComplex: _propTypes2.default.objectOf(_propTypes2.default.shape({
     real: _propTypes2.default.number.isRequired,
     imag: _propTypes2.default.number.isRequired
-  })).isRequired
+  }).isRequired).isRequired
 };
 exports.default = Foo;"
 `;

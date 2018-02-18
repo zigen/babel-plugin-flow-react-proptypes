@@ -36,7 +36,7 @@ var ArrayTest = function (_React$Component) {
 }(_react2.default.Component);
 
 ArrayTest.propTypes = {
-  foo: _propTypes2.default.arrayOf(_propTypes2.default.number).isRequired
+  foo: _propTypes2.default.arrayOf(_propTypes2.default.number.isRequired).isRequired
 };
 exports.default = ArrayTest;"
 `;

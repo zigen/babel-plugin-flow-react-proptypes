@@ -45,7 +45,7 @@ Foo.propTypes = {
   a_number: _propTypes2.default.number.isRequired,
   a_boolean: _propTypes2.default.bool.isRequired,
   a_generic_object: _propTypes2.default.object.isRequired,
-  array_of_strings: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
+  array_of_strings: _propTypes2.default.arrayOf(_propTypes2.default.string.isRequired).isRequired,
   instance_of_Bar: function instance_of_Bar() {
     return (typeof Bar === 'function' ? _propTypes2.default.instanceOf(Bar).isRequired : _propTypes2.default.any.isRequired).apply(this, arguments);
   },

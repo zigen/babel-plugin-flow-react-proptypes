@@ -23,7 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var bpfrpt_proptype_T = {
     flag: _propTypes2.default.bool.isRequired,
     list: _propTypes2.default.arrayOf(function () {
-        return (typeof _types.bpfrpt_proptype_ExternalType === 'function' ? _types.bpfrpt_proptype_ExternalType : _propTypes2.default.shape(_types.bpfrpt_proptype_ExternalType)).apply(this, arguments);
+        return (typeof _types.bpfrpt_proptype_ExternalType === 'function' ? _types.bpfrpt_proptype_ExternalType.isRequired ? _types.bpfrpt_proptype_ExternalType.isRequired : _types.bpfrpt_proptype_ExternalType : _propTypes2.default.shape(_types.bpfrpt_proptype_ExternalType).isRequired).apply(this, arguments);
     }).isRequired
 };
 

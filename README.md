@@ -64,7 +64,7 @@ Foo.propTypes = {
   a_number: bpfrp_PropTypes.number.isRequired,
   a_boolean: bpfrp_PropTypes.bool.isRequired,
   a_generic_object: bpfrp_PropTypes.object.isRequired,
-  array_of_strings: bpfrp_PropTypes.arrayOf(bpfrp_PropTypes.string).isRequired,
+  array_of_strings: bpfrp_PropTypes.arrayOf(bpfrp_PropTypes.string.isRequired).isRequired,
   instance_of_Bar: function () {
     return (typeof Bar === 'function' ? bpfrp_PropTypes.instanceOf(Bar).isRequired : bpfrp_PropTypes.any.isRequired).apply(this, arguments);
   },

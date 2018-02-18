@@ -41,7 +41,7 @@ var C = function (_React$Component) {
 }(React.Component);
 
 C.propTypes = {
-  as: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired
+  as: _propTypes2.default.arrayOf(_propTypes2.default.string.isRequired).isRequired
 };
 exports.default = C;"
 `;

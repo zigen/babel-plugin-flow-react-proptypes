@@ -116,6 +116,7 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
       const indexer = node.indexers[0];
       const subnode = indexer.value;
       const subresult = convertToPropTypes(subnode, importedTypes, internalTypes);
+      subresult.isRequired = !subresult.optional;
       resultPropType = {type: 'objectOf', of: subresult};
     }
     else {
@@ -278,7 +279,9 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
         resultPropType = {type: 'node'};
       }
       else if (arrayType) {
-        resultPropType = {type: 'arrayOf', of: convertToPropTypes(arrayType, importedTypes, internalTypes)};
+        const elementType = convertToPropTypes(arrayType, importedTypes, internalTypes);
+        elementType.isRequired = !elementType.optional;
+        resultPropType = {type: 'arrayOf', of: elementType};
       }
     }
     else if (node.type === 'GenericTypeAnnotation' &&
