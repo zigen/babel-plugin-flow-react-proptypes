@@ -347,6 +347,12 @@ function makePropType(data, isExact) {
       [makePropType(data.of)]
     );
   }
+  else if (method === 'objectOf') {
+    node = t.callExpression(
+      t.memberExpression(node, t.identifier('objectOf')),
+      [makePropType(data.of)]
+    );
+  }
   else if (method === 'oneOf') {
     node = t.callExpression(
       t.memberExpression(node, t.identifier('oneOf')),

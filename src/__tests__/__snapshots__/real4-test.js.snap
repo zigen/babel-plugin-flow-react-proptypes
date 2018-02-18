@@ -42,7 +42,11 @@ var bpfrpt_proptype_searchPostResult = {
     total: _propTypes2.default.number.isRequired,
     pages: _propTypes2.default.number.isRequired,
     resultId: _propTypes2.default.string.isRequired,
-    facets: _propTypes2.default.shape({})
+    facets: _propTypes2.default.objectOf(_propTypes2.default.arrayOf(_propTypes2.default.shape({
+        key: _propTypes2.default.number.isRequired,
+        amount: _propTypes2.default.number.isRequired,
+        translation: _propTypes2.default.string.isRequired
+    })))
 };
 
 // eslint-disable-next-line

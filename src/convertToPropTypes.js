@@ -103,25 +103,43 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
   if (node.type === 'ObjectTypeAnnotation') {
     const properties = [];
 
-    // recurse on object properties
-    node.properties.forEach((subnode) => {
-      // result may be from:
-      //  ObjectTypeProperty - {key, value}
-      //  ObjectTypeSpreadProperty - Array<{key, value}>
-      const result = convertToPropTypes(subnode, importedTypes, internalTypes);
-      if (subnode.leadingComments && subnode.leadingComments.length) {
-        result.leadingComments = subnode.leadingComments;
+    if (node.indexers.length > 0) {
+      // indexed object, like `{[name: string]: number}`
+      if (node.indexers.length > 1) {
+        throw new Error(`${PLUGIN_NAME}: Multiple indexers are not supported. Node: ${JSON.stringify(node)}`);
       }
-      if (Array.isArray(result)){
-        result.forEach((prop) => properties.push(prop));
+      if (node.properties.length > 0) {
+        throw new Error(`${PLUGIN_NAME}: Mixed indexers and named properties are not supported. Node: ${JSON.stringify(node)}`);
       }
-      else {
-        properties.push(result);
-      }
-    });
+      // recur on indexer's value type (`number` in the example above)
+      // and emit an `objectOf`
+      const indexer = node.indexers[0];
+      const subnode = indexer.value;
+      const subresult = convertToPropTypes(subnode, importedTypes, internalTypes);
+      resultPropType = {type: 'objectOf', of: subresult};
+    }
+    else {
+      // not an indexed object
+      // recurse on object properties
+      node.properties.forEach((subnode) => {
+        // result may be from:
+        //  ObjectTypeProperty - {key, value}
+        //  ObjectTypeSpreadProperty - Array<{key, value}>
+        const result = convertToPropTypes(subnode, importedTypes, internalTypes);
+        if (subnode.leadingComments && subnode.leadingComments.length) {
+          result.leadingComments = subnode.leadingComments;
+        }
+        if (Array.isArray(result)){
+          result.forEach((prop) => properties.push(prop));
+        }
+        else {
+          properties.push(result);
+        }
+      });
 
-    // return a shape
-    resultPropType = {type: 'shape', properties, isExact: node.exact};
+      // return a shape
+      resultPropType = {type: 'shape', properties, isExact: node.exact};
+    }
   }
   else if (node.type === 'ObjectTypeProperty') {
     const key = getObjectTypePropertyKey(node);
