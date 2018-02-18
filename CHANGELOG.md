@@ -1,3 +1,10 @@
+## 18.0.0
+
+Supports mappings like `{[key: string]: number}` using `PropTypes.objectOf`.
+
+The value inside array types (e.g. `Array<string>` or `string[]`) cannot be
+null, unless they're marked with `?`.
+
 ## 17.1.*
 
 Babel 7 compatibility fixes.
