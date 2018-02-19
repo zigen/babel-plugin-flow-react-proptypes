@@ -1,9 +1,9 @@
 const babel = require('babel-core');
 const content = `
 // @flow
-import type { AdPartner, Job, JobAlert, SeoText } from 'JLCommon';
-import type { DirectApplyDraft, DirectApplyFile } from 'reducer/DirectApply';
-import type { SearchQuery } from 'joblift-query-parser';
+import type { AdPartner, Job, JobAlert, SeoText } from './JLCommon';
+import type { DirectApplyDraft, DirectApplyFile } from './reducer/DirectApply';
+import type { SearchQuery } from './joblift-query-parser';
 
 // eslint-disable-next-line
 export type { SearchQuery };
