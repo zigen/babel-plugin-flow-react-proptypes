@@ -1,3 +1,7 @@
+## 19.0.0
+
+Stops trying to import types from things that look like node_modules (e.g. `from 'foo'`). [#186](https://github.com/brigand/babel-plugin-flow-react-proptypes/pull/186). File an issue if this negatively affects you, and we can consider making it configurable.
+
 ## 18.0.0
 
 Supports mappings like `{[key: string]: number}` using `PropTypes.objectOf`.
