@@ -1,3 +1,16 @@
+## 19.1.0
+
+These previously gave errors:
+
+```js
+type Props = {
+  x: { [k: string]: number, x: string },
+  y: { [k: string]: number, [l: string]: number },
+}
+```
+
+They now fail soft.
+
 ## 19.0.0
 
 Stops trying to import types from things that look like node_modules (e.g. `from 'foo'`). [#186](https://github.com/brigand/babel-plugin-flow-react-proptypes/pull/186). File an issue if this negatively affects you, and we can consider making it configurable.
