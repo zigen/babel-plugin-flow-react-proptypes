@@ -103,14 +103,9 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
   if (node.type === 'ObjectTypeAnnotation') {
     const properties = [];
 
-    if (node.indexers.length > 0) {
+    if (node.indexers.length === 1 && node.properties.length === 0) {
       // indexed object, like `{[name: string]: number}`
-      if (node.indexers.length > 1) {
-        throw new Error(`${PLUGIN_NAME}: Multiple indexers are not supported. Node: ${JSON.stringify(node)}`);
-      }
-      if (node.properties.length > 0) {
-        throw new Error(`${PLUGIN_NAME}: Mixed indexers and named properties are not supported. Node: ${JSON.stringify(node)}`);
-      }
+
       // recur on indexer's value type (`number` in the example above)
       // and emit an `objectOf`
       const indexer = node.indexers[0];
