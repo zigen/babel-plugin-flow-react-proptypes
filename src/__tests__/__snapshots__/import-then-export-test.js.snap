@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`import-then-export 1`] = `
+"import { bpfrpt_proptype_Foo } from './response-form';
+import { bpfrpt_proptype_Bar } from './response-form';
+export { bpfrpt_proptype_Foo };
+export { bpfrpt_proptype_Bar };"
+`;
+
+exports[`import-then-export with deadCode 1`] = `
+"if (!(process.env.NODE_ENV === 'production') && typeof exports !== 'undefined') Object.defineProperty(exports, 'bpfrpt_proptype_Bar', {
+  value: require('./response-form').bpfrpt_proptype_Bar,
+  configurable: true
+});
+if (!(process.env.NODE_ENV === 'production') && typeof exports !== 'undefined') Object.defineProperty(exports, 'bpfrpt_proptype_Foo', {
+  value: require('./response-form').bpfrpt_proptype_Foo,
+  configurable: true
+});"
+`;

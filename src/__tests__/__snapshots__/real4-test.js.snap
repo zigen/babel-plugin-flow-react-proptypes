@@ -6,7 +6,7 @@ exports[`real4 1`] = `
 Object.defineProperty(exports, \\"__esModule\\", {
     value: true
 });
-exports.bpfrpt_proptype_directApplyRecentFilesGet = exports.bpfrpt_proptype_directApplyDraftGet = exports.bpfrpt_proptype_loginPostResult = exports.bpfrpt_proptype_popunderPostResponse = exports.bpfrpt_proptype_jobofferGetResult = exports.bpfrpt_proptype_statisticalDataGetResult = exports.bpfrpt_proptype_freqSearchSuggestionGetResult = exports.bpfrpt_proptype_jobsearchSuggestionGetResult = exports.bpfrpt_proptype_joblocationSuggestionGetResult = exports.bpfrpt_proptype_joblocationReverseLookupGetResult = exports.bpfrpt_proptype_jobalertMeGetResult = exports.bpfrpt_proptype_searchPostResult = exports.bpfrpt_proptype_jpopunderPostResult = undefined;
+exports.bpfrpt_proptype_directApplyRecentFilesGet = exports.bpfrpt_proptype_directApplyDraftGet = exports.bpfrpt_proptype_loginPostResult = exports.bpfrpt_proptype_popunderPostResponse = exports.bpfrpt_proptype_jobofferGetResult = exports.bpfrpt_proptype_statisticalDataGetResult = exports.bpfrpt_proptype_freqSearchSuggestionGetResult = exports.bpfrpt_proptype_jobsearchSuggestionGetResult = exports.bpfrpt_proptype_joblocationSuggestionGetResult = exports.bpfrpt_proptype_joblocationReverseLookupGetResult = exports.bpfrpt_proptype_jobalertMeGetResult = exports.bpfrpt_proptype_searchPostResult = exports.bpfrpt_proptype_jpopunderPostResult = exports.bpfrpt_proptype_SearchQuery = undefined;
 
 var _JLCommon = require('./JLCommon');
 
@@ -143,6 +143,7 @@ var bpfrpt_proptype_directApplyRecentFilesGet = _propTypes2.default.arrayOf(func
 // api/direct-apply/files/recent
 
 
+exports.bpfrpt_proptype_SearchQuery = _jobliftQueryParser.bpfrpt_proptype_SearchQuery;
 exports.bpfrpt_proptype_jpopunderPostResult = bpfrpt_proptype_jpopunderPostResult;
 exports.bpfrpt_proptype_searchPostResult = bpfrpt_proptype_searchPostResult;
 exports.bpfrpt_proptype_jobalertMeGetResult = bpfrpt_proptype_jobalertMeGetResult;

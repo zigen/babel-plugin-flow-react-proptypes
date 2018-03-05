@@ -132,7 +132,11 @@ module.exports = function flowReactPropTypes(babel) {
     return t.memberExpression(ptOptional, t.identifier('isRequired'));
   }
 
-  function addExportTypeDecl(path, exportName) {
+  function addExportTypeDecl(path, exportName, exportValueNode = null) {
+    if (!exportValueNode) {
+      exportValueNode = t.identifier(exportName);
+    }
+  
     if (!opts.deadCode || shouldUseImport()) {
       if (!path.parentPath.isProgram()) return;
       const body = path.parentPath.node.body;
@@ -141,7 +145,7 @@ module.exports = function flowReactPropTypes(babel) {
         [
           t.exportSpecifier(
             t.identifier(exportName),
-            t.identifier(exportName)
+            exportValueNode,
           )
         ],
       );
@@ -156,7 +160,7 @@ module.exports = function flowReactPropTypes(babel) {
           t.identifier('exports'),
           t.stringLiteral(exportName),
           t.objectExpression([
-            t.objectProperty(t.identifier('value'), t.identifier(exportName)),
+            t.objectProperty(t.identifier('value'), exportValueNode),
             t.objectProperty(t.identifier('configurable'), t.booleanLiteral(true)),
           ]),
         ]
@@ -553,6 +557,24 @@ module.exports = function flowReactPropTypes(babel) {
           return;
         }
 
+        if (node.exportKind === 'type' && !node.source && !node.declaration) {
+          for (const spec of node.specifiers) {
+            if (!t.isIdentifier(spec.local)) continue;
+
+            const imported = importedTypes[spec.local.name];
+            if (!imported) continue;
+
+            if (spec.local.name !== spec.exported.name) {
+              // TODO: handle this properly
+              continue;
+            }
+
+            addExportTypeDecl(path, getExportNameForType(spec.local.name), imported.accessNode);
+          }
+
+          return;
+        }
+
         let declarationObject = null;
         if (!node.declaration) return;
         if (node.declaration.type === 'TypeAlias') {
@@ -616,7 +638,7 @@ module.exports = function flowReactPropTypes(babel) {
           // Later, we will check importedTypes to determine if
           // we want to put this as a 'raw' type in our internal
           // representation
-          importedTypes[typeName] = { exportName: getExportNameForType(originalTypeName), accessNode: null };
+          importedTypes[typeName] = { localName: originalTypeName, exportName: getExportNameForType(originalTypeName), accessNode: null };
 
           // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/129
           if (node.source.value === 'react' && typeName === 'ComponentType') {
