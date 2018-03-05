@@ -1,3 +1,16 @@
+## 20.0.0
+
+Adds support for re-exporting types - [#190]
+
+```js
+import type { X } from './X';
+export type { X };
+```
+
+If you try to rename the exports, it'll skip them currently (please contribute!).
+
+[#190]: https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/190
+
 ## 19.1.0
 
 These previously gave errors:
