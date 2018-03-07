@@ -1,3 +1,11 @@
+## 20.1.0
+
+Supports class syntax with no `name`. Minor version because it previously gave an error.
+
+```js
+export const MyComponent = class extends React.Component<Props> {
+```
+
 ## 20.0.0
 
 Adds support for re-exporting types - [#190]
