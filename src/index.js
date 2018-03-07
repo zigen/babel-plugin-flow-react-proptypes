@@ -255,17 +255,20 @@ module.exports = function flowReactPropTypes(babel) {
 
     if (typeof typesOrVar === 'string'){
       valueNode = t.identifier(typesOrVar);
-      let inner = t.assignmentExpression(
-        '=',
-        t.memberExpression(t.identifier(name), t.identifier(attribute)),
-        valueNode,
-      );
 
-      if (attribute === 'propTypes') {
-        inner = wrapInDceCheck(inner);
+      if (name) {
+        let inner = t.assignmentExpression(
+          '=',
+          t.memberExpression(t.identifier(name), t.identifier(attribute)),
+          valueNode,
+        );
+
+        if (attribute === 'propTypes') {
+          inner = wrapInDceCheck(inner);
+        }
+
+        attachPropTypesAST = t.expressionStatement(inner);
       }
-
-      attachPropTypesAST = t.expressionStatement(inner);
     }
     // type was not exported, generate
     else {
@@ -279,13 +282,15 @@ module.exports = function flowReactPropTypes(babel) {
       if (propTypesAST == null) {
         return;
       }
-      attachPropTypesAST = t.expressionStatement(
-        t.assignmentExpression(
-          '=',
-          t.memberExpression(t.identifier(name), t.identifier(attribute)),
-          valueNode
-        )
-      );
+      if (name) {
+        attachPropTypesAST = t.expressionStatement(
+          t.assignmentExpression(
+            '=',
+            t.memberExpression(t.identifier(name), t.identifier(attribute)),
+            valueNode
+          )
+        );
+      }
     }
 
     if (!opts.noStatic && (path.type === 'ClassDeclaration' || path.type === 'ClassExpression')) {
@@ -296,7 +301,7 @@ module.exports = function flowReactPropTypes(babel) {
       newNode.static = true;
       path.node.body.body.push(newNode);
     }
-    else {
+    else if (attachPropTypesAST) {
       path.insertAfter(attachPropTypesAST);
     }
   };
@@ -313,11 +318,13 @@ module.exports = function flowReactPropTypes(babel) {
      * @param contextOrVar - context or exported context variable reference
      */
   const annotate = (path, propsOrVar, contextOrVar = null) => {
-    let name;
+    let name = null;
     let targetPath;
 
     if (!opts.noStatic && (path.type === 'ClassDeclaration' || path.type === 'ClassExpression')) {
-      name = path.node.id.name;
+      if (path.node.id) {
+        name = path.node.id.name;
+      }
       targetPath = path;
     }
     else if (path.type === 'ArrowFunctionExpression' || path.type === 'FunctionExpression') {
