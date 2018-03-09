@@ -1,3 +1,12 @@
+## 21.0.0
+
+Adds support for the following:
+
+```js
+import type {Node} from 'react';
+import {type Node} from 'react':
+```
+
 ## 20.1.0
 
 Supports class syntax with no `name`. Minor version because it previously gave an error.
