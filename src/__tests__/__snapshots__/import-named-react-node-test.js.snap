@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`import-named-react-node 1`] = `
+"'use strict';
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var C = function C(props) {
+  return React.createElement('div', null);
+};
+C.propTypes = {
+  foo: function foo() {
+    return (typeof _propTypes2.default.node === 'function' ? _propTypes2.default.node.isRequired ? _propTypes2.default.node.isRequired : _propTypes2.default.node : _propTypes2.default.shape(_propTypes2.default.node).isRequired).apply(this, arguments);
+  }
+};"
+`;
+
+exports[`import-named-react-node esm 1`] = `
+"
+var C = function C(props) {
+  return React.createElement('div', null);
+};
+C.propTypes = {
+  foo: function foo() {
+    return (typeof PropTypes.node === 'function' ? PropTypes.node.isRequired ? PropTypes.node.isRequired : PropTypes.node : PropTypes.shape(PropTypes.node).isRequired).apply(this, arguments);
+  }
+};
+import PropTypes from 'prop-types';"
+`;

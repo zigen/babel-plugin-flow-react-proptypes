@@ -623,7 +623,7 @@ module.exports = function flowReactPropTypes(babel) {
 
         const {node} = path;
 
-        if (/^@?\w/.test(node.source.value)) return;
+        if (/^@?\w/.test(node.source.value) && node.source.value !== 'react') return;
 
         // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/62
         // if (node.source.value[0] !== '.') {
@@ -649,11 +649,16 @@ module.exports = function flowReactPropTypes(babel) {
 
           // https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/129
           if (node.source.value === 'react' && typeName === 'ComponentType') {
-
             const ptFunc = getFromPropTypesModule(path, 'func');
             importedTypes[typeName].accessNode = ptFunc;
             return;
           }
+          if (node.source.value === 'react' && typeName === 'Node') {
+            const ptFunc = getFromPropTypesModule(path, 'node');
+            importedTypes[typeName].accessNode = ptFunc;
+            return;
+          }
+           
 
           const accessNode = getFromModule(path, {
             type: 'named',
