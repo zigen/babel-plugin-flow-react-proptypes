@@ -1,3 +1,12 @@
+## 22.0.0
+
+[Support class components with intersection type annotations](https://github.com/brigand/babel-plugin-flow-react-proptypes/pull/194)
+
+```js
+type Props = { x: string };
+class C extends React.Component<Props & { y: string }>{}
+```
+
 ## 21.0.0
 
 Adds support for the following:
