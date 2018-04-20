@@ -1,3 +1,9 @@
+## 24.0.0
+
+Handle explicit proptypes and default props [#196]
+
+[#196]: https://github.com/brigand/babel-plugin-flow-react-proptypes/pull/196
+
 ## 23.0.0
 
 [opaque types are now supported][195], and are treated the same as other types, even outside of the file they're defined in.
