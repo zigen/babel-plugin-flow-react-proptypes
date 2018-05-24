@@ -1,3 +1,10 @@
+
+## 24.0.1
+
+Fixes rare error with propTypes spread [#199]
+
+[#199]: https://github.com/brigand/babel-plugin-flow-react-proptypes/pull/199
+
 ## 24.0.0
 
 Handle explicit proptypes and default props [#196]
