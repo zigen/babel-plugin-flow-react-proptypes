@@ -1,4 +1,10 @@
 
+## 24.1.1
+
+Fixes spread of imported type [#205]
+
+[#205]: https://github.com/brigand/babel-plugin-flow-react-proptypes/pull/205
+
 ## 24.1.0
 
 Supports `$ReadOnlyArray` [#203]
