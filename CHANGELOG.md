@@ -1,4 +1,10 @@
 
+## 24.1.2
+
+Fixes deadCode for babel 7 [#154-c1]
+
+[#154-c1]: https://github.com/brigand/babel-plugin-flow-react-proptypes/issues/154#issuecomment-418482060
+
 ## 24.1.1
 
 Fixes spread of imported type [#205]
