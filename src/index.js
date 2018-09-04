@@ -202,7 +202,7 @@ module.exports = function flowReactPropTypes(babel) {
     // cache the template since it's going to be used a lot
     const templateCode = typeof opts.deadCode === 'string' ? opts.deadCode : DEFAULT_DCE;
     if (!_templateCache[templateCode]) {
-      _templateCache[templateCode] = babel.template(templateCode);
+      _templateCache[templateCode] = babel.template(templateCode, { placeholderPattern: false });
     }
 
     // return a ternary
