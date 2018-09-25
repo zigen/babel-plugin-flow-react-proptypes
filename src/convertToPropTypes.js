@@ -309,6 +309,9 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
     else if (node.id.name === 'Function') {
       resultPropType = {type: 'func'};
     }
+    else if (node.id.name === '$ReadOnly') {
+      resultPropType = convertToPropTypes(node.typeParameters.params[0], importedTypes, internalTypes);
+    }
     else {
       resultPropType = {type: 'possible-class', value: node.id};
     }
